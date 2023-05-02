@@ -1,0 +1,152 @@
+.pc-navigation-all{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a{
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        &:hover{
+            color: $maingreen;
+        }
+    }
+}
+.pc-navigation{
+    background: #1a1a1a;
+}
+.pc-cat-head{
+    text-align: center;
+    padding: 48px 0;
+    background: #111111;
+}
+.pc-cat-head-container{
+    max-width: 980px;
+    margin: auto;
+    padding: 0 20px;
+}
+.pch-title{
+    padding: 0 0 5px;
+    margin: 0 0 8px;
+    font-size: 36px;
+    color: $maingreen;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+.pch-desc{
+    font-size: 18px;
+    color: $lightergrey;
+    font-weight: 300;
+
+}
+.pc-cat-cards{
+    padding: 25px 0;
+    background: #252525;
+
+}
+.pc-cat-cards-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+.pc-cat-card{
+    border-bottom: 1px solid $maingreen;
+    width: 32%;
+}
+.pcc-img{
+    width: 100%;
+    height: auto;
+
+}
+.pcc-info{
+    background: #111111;
+
+}
+.pcci-title{
+    padding: 10px 10px 0;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 300;
+
+
+}
+.pcci-desc{
+    padding: 10px 10px 0;
+    font-size: 14px;
+    color: $lightgrey;
+    font-weight: 300;
+}
+.pcci-link{
+    padding: 10px;
+    color: $maingreen;
+    &:hover{
+        color: $maingreen;
+        text-decoration: underline;
+    }
+    font-size: 14px;
+    font-weight: 300;
+
+}
+.pc-navigation-mobile{
+    display: none;
+    background: #1a1a1a;
+    padding: 13px 30px;
+
+}
+.pc-navigation-dropdown-btn{
+    color: $lightergrey;
+    font-size: 16px;
+    i{
+        margin: 0 10px;
+
+    }
+}
+.pc-navigation-dropdown{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    a{
+        color: white;
+        font-size: 16px;
+        &:hover{
+            color: #fff;
+        }
+        padding: 10px 0;
+        border-top: 1px solid #666666;
+    }
+}
+
+@media (max-width:1239px) {
+    .pc-navigation-all{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width:1199px) {
+    .pc-cat-card{
+        width: 49%;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width:767px) {
+    .pc-navigation{
+        display: none;
+    }
+    .pc-navigation-mobile{
+        display: block;
+    }
+}
+
+@media (max-width:575px) {
+    .pc-cat-card{
+        width: 100%;
+    }
+}

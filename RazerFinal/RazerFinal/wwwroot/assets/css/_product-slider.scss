@@ -1,0 +1,145 @@
+.product-slider{
+    padding: 40px 0 40px;
+}
+.product-slider-head{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.ps-mainhead{
+    h2{
+        text-transform: uppercase;
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 700;
+        color: #fff;
+    }
+}
+.ps-subhead{
+    p{
+        line-height: 1.2;
+        font-size: 21px;
+        color: #fff;
+    }
+    a{
+        font-size: 14px;
+        color: #fff;
+        &:hover{
+            text-decoration: underline;
+        }
+        span{
+            color: $maingreen;
+        }
+    }
+}
+.product-slider-items{
+    padding: 20px 0 0 ;
+    height: auto;
+    &:hover{
+        .splide__arrow{
+            display: inline-block;
+        }
+    }
+}
+.product-slider-item{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    min-height: 480px;
+}
+.product-slider-item-img{
+    width: 100%;
+    height: 300px;
+    background: #111111;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+.product-slider-item-info{
+    padding: 16px;
+    width: 100%;
+    height: 180px;
+    background-color: $darkgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.psii-text{
+    display: flex;
+    flex-direction: column;
+
+}
+.psii-title{
+    font-size: 18px;
+    color: #fff;
+    margin: 0 0 15px;
+
+}
+.psii-subdesc{
+    font-size: 14px;
+    color: $lightgrey;
+}
+.psii-buy{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.psii-price{
+    font-size: 14px;
+    color: #fff;
+}
+.psii-buy-btn{
+    text-transform: uppercase;
+    padding: 5px 10px;
+    background-color: $maingreen;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: 5px;
+    &:hover{
+        color: #000;
+    }
+}
+.splide__arrow{
+    display: none;
+    background: transparent;
+    i{
+        color: $maingreen;
+        font-size: 60px;
+    }
+
+}
+.product-slider-item-badge{
+    position: absolute;
+    padding: 5px 24px;
+    background: $maingreen;
+    top: 5%;
+    left: -5%;
+    p{
+        font-size: 16px;
+        color: #000;
+        font-weight: 700;
+    }
+
+}
+.discounted-price{
+    text-decoration: line-through;
+    color: $lightergrey;
+}
+.product-exclusive{
+    background: #ff9c07 !important;
+}
+.product-discount{
+    background: #28aadc !important;
+}
+@media (max-width:1240px) {
+    .splide-slide-blank{
+        display: none;
+    }
+    .product-slider-head{
+        padding: 0 20px;
+    }
+}

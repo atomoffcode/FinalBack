@@ -279,3 +279,4 @@ C:\Users\kml\OneDrive\Desktop\FinalBack\RazerFinal\RazerFinal\obj\Debug\net6.0\r
 C:\Users\kml\OneDrive\Desktop\FinalBack\RazerFinal\RazerFinal\obj\Debug\net6.0\RazerFinal.pdb
 C:\Users\kml\OneDrive\Desktop\FinalBack\RazerFinal\RazerFinal\obj\Debug\net6.0\RazerFinal.genruntimeconfig.cache
 C:\Users\kml\OneDrive\Desktop\FinalBack\RazerFinal\RazerFinal\obj\Debug\net6.0\ref\RazerFinal.dll
+C:\Users\kml\OneDrive\Desktop\FinalBack\RazerFinal\RazerFinal\bin\Debug\net6.0\RazerFinal.staticwebassets.runtime.json
