@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@inject ILayoutService LayoutService
+@{
+
+    List<BasketVM> basketVMs = await LayoutService.GetBasket();
+
+    HeaderVM headerVM = new HeaderVM
+            {
+                BasketVMs = basketVMs
+
+            };
+}
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -50,35 +64,7 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <div class="header-cart">
                     <i class="fa-solid fa-cart-shopping header-cart-btn"></i>
                     <div class="header-cart-dropdown d-none">
-                        <div class="header-cart-basket">
-                            <div class="header-cart-basket-empty d-none" style="color: #888;">Your Cart is empty.</div>
-                            <div class="header-cart-basket-items">
-                                <div class="cart-item">
-                                    <div class="cart-item-img">
-                                        <img src="~/assets/photos/products/blade15.png" alt="">
-                                    </div>
-                                    <h5 class="cart-item-title">
-                                        Razer Blade 15 - QHD 240 Hz - GeForce RTX 4060 - Black
-                                    </h5>
-                                </div>
-                                <div class="cart-item">
-                                    <div class="cart-item-img">
-                                        <img src="~/assets/photos/products/blade15.png" alt="">
-                                    </div>
-                                    <h5 class="cart-item-title">
-                                        Razer Blade 15 - QHD 240 Hz - GeForce RTX 4060 - Black
-                                    </h5>
-                                </div>
-                                <div class="cart-item-lasts">
-                                    <span>2 more items in your cart</span>
-                                </div>
-                                <div class="cart-checkout-btn">
-                                    <div class="add-to-cart-btn">
-                                        CHECKOUT
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @await Html.PartialAsync("_BasketCartPartial",headerVM.BasketVMs)
                         <div class="headar-cart-link header-cart-items">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <a href="">Cart</a>
