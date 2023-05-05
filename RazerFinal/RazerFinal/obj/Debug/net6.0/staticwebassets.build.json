@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jmP+72mBagw/pvC43ovNDktptU60Kb+3aW3iMmY4izc=",
+  "Hash": "8xlcsoBgWc0c4GOq8/NWov2lQ7GP8GPnbuTROKqzFuI=",
   "Source": "RazerFinal",
   "BasePath": "_content/RazerFinal",
   "Mode": "Default",
@@ -780,6 +780,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\photos\\products\\blade15.png"
+    },
+    {
+      "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\products\\blade18.png",
+      "SourceId": "RazerFinal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\",
+      "BasePath": "_content/RazerFinal",
+      "RelativePath": "assets/photos/products/blade18.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\photos\\products\\blade18.png"
     },
     {
       "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\products\\enkipro-lamborghini-b-950x580-desktop.jpg",

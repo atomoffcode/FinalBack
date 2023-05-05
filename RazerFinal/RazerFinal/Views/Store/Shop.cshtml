@@ -1,0 +1,14 @@
+﻿@model StoreVM
+@{
+    ViewData["Title"] = "Shop";
+}
+
+<div class="pc-shop-title">
+    <h1 class="pc-shop-title-text">PC</h1>
+</div>
+<div class="shop">
+    <div class="shop-main" id="shop-main">
+        @await Html.PartialAsync("_ShopMainPartial",Model)
+    </div>
+</div>
+

@@ -8,5 +8,7 @@ namespace RazerFinal.Models
         public string Name { get; set; }
         [StringLength(255)]
         public string? Image { get; set; }
+        public IEnumerable<Product>? Products { get; set; }
+
     }
 }

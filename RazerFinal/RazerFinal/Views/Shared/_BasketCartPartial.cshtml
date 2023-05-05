@@ -4,25 +4,23 @@
     @if (Model.Count > 0 && Model != null)
     {
         <div class="header-cart-basket-items">
-            <div class="cart-item">
-                <div class="cart-item-img">
-                    <img src="~/assets/photos/products/blade15.png" alt="">
+            @foreach (BasketVM basketVM in Model.Take(2))
+            {
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="~/assets/photos/products/@basketVM.Image" alt="">
+                    </div>
+                    <h5 class="cart-item-title">
+                        @basketVM.Title
+                    </h5>
                 </div>
-                <h5 class="cart-item-title">
-                    Razer Blade 15 - QHD 240 Hz - GeForce RTX 4060 - Black
-                </h5>
-            </div>
-            <div class="cart-item">
-                <div class="cart-item-img">
-                    <img src="~/assets/photos/products/blade15.png" alt="">
+            }
+            @if (Model.Count > 2)
+            {
+                <div class="cart-item-lasts">
+                    <span>@(Model.Count - 2) more items in your cart</span>
                 </div>
-                <h5 class="cart-item-title">
-                    Razer Blade 15 - QHD 240 Hz - GeForce RTX 4060 - Black
-                </h5>
-            </div>
-            <div class="cart-item-lasts">
-                <span>2 more items in your cart</span>
-            </div>
+            }
             <div class="cart-checkout-btn">
                 <div class="add-to-cart-btn">
                     CHECKOUT

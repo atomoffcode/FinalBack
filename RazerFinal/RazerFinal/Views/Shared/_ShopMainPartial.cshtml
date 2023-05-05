@@ -1,0 +1,68 @@
+﻿@model StoreVM
+
+<div class="shop-main-filter">
+    <div class="filter-header">
+        <h2>FILTER BY</h2>
+        <i class="fa-solid fa-angle-left shop-main-filter-close-btn"></i>
+    </div>
+    <div class="filter-body">
+            
+        @foreach (CategorySpec cs in Model.SpecCategories)
+        {
+            <div class="filter-item">
+                <div class="filter-item-title">
+                    <span>@cs.Name</span><i class="fa-solid fa-angle-down"></i>
+                </div>
+                <div class="filter-item-dropdown">
+                    @foreach (Specification spec in cs.Specifications)
+                    {
+                        <div class="form-check filter">
+                            <input class="form-check-input" type="checkbox" value="@spec.Id">
+                            <label class="form-check-label">
+                                @spec.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<div class="shop-main-list">
+    <div class="shop-filter">
+        <div class="shop-main-filter-open-btn">
+            <i class="fa-solid fa-filter"></i>
+            Filter By
+        </div>
+        <div class="shop-category-filter filter-select">
+            <select class="form-select ">
+                @foreach (Category category in Model.Categories.OrderBy(c=>c.Id))
+                {
+                    
+                    @if (ViewBag.DefCat == category.Name)
+                    {
+                        <option value="@category.Id" selected>@category.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <span class="shop-product-count">@Model.Products.Count products</span>
+        <div class="shop-sort-by filter-select">
+            <select class="form-select">
+                <option selected hidden>Sort by</option>
+                <option value="1">Newest</option>
+                <option value="2">Oldest</option>
+            </select>
+        </div>
+    </div>
+    <div class="shop-list">
+        @await Html.PartialAsync("_ShopGridPartial",Model.Products)
+        
+    </div>
+</div>
