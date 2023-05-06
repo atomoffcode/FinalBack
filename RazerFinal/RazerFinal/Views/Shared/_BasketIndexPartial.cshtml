@@ -1,0 +1,73 @@
+﻿@model List<BasketVM>
+<div class="cart-total-haeder">
+    <div class="cart-total-header-all">
+        <h1 class="cart-total">Your cart total is US$@(Model != null && Model.Count > 0 ? Model.Sum(m => m.Price + m.ExTax) : "0") </h1>
+        @if (Model != null && Model.Count > 0)
+        {
+            <a href="" class="add-to-cart-btn">Checkout</a>
+        }
+    </div>
+</div>
+<div class="padding-70px"></div>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="cart ">
+        <div class="cart-body">
+            @foreach (BasketVM basketVM in Model)
+            {
+                <div class="cart-element">
+                    <div class="cart-element-details">
+                        <div class="ced-img">
+                            <img src="~/assets/photos/products/@basketVM.Image" alt="">
+                        </div>
+                        <div class="ced-title">
+                            <span>@basketVM.Title</span>
+                            <a asp-controller="product" asp-action="detail" asp-route-Id="@basketVM.Id">Go to details ></a>
+                        </div>
+                    </div>
+                    <div class="cart-element-count">
+                        @if (basketVM.Count > 1)
+                        {
+                            <a asp-controller="basket" asp-action="decreasebasket" asp-route-Id="@basketVM.Id" class="addbasket"><i class="fa-solid fa-minus"></i></a>
+
+                        }
+                        else
+                        {
+                            <a asp-controller="basket" asp-action="decreasebasket" asp-route-Id="@basketVM.Id" class="addbasket"><i class="fa-solid fa-trash-can"></i></a>
+
+                        }
+                        <div class="cart-quantity">@basketVM.Count</div>
+                        <a asp-controller="basket" asp-action="addbasket" asp-route-Id="@basketVM.Id" class="addbasket"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                    <div class="cart-element-price">
+                        US$@basketVM.Price
+                    </div>
+                </div>
+
+            }
+            <div class="cart-total-index">
+                <div class="cart-total-index-all">
+                    <div class="subtotal">
+                        <h5>Subtotal</h5>
+                        <span>US$@(Model.Sum(m => m.Price))</span>
+                    </div>
+                    <div class="tax-fee">
+                        <h5>Tax-Fee</h5>
+                        <span>US$@(Model.Sum(m => m.ExTax))</span>
+                    </div>
+                    <div class="total-all">
+                        <h5>Your Total</h5>
+                        <span>US$@(Model.Sum(m => m.Price + m.ExTax))</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="cart-empty pt-100px pb-100px">
+        <h1 class="padding-70px text-center" style="color:#44d62c; font-weight: 700;">Your cart is empty</h1>
+        <a class="text-center padding-70px" href="#">Do you want to fill it?</a>
+    </div>
+}

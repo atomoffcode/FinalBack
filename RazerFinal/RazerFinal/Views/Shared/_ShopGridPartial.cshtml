@@ -50,9 +50,9 @@
                 <div class="sli-btn">
                     @if (product.Count > 0 && product.Count != null)
                     {
-                        <div class="add-to-cart-btn">
+                        <a asp-controller="basket" asp-action="addbasket" asp-route-Id="@product.Id" class="add-to-cart-btn addbasket">
                             Add to cart
-                        </div>
+                        </a>
                     }
                     else
                     {

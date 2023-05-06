@@ -1,0 +1,11 @@
+﻿@model List<BasketVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="mainbasket">
+    @await Html.PartialAsync("_BasketIndexPartial",Model)
+</div>
+
+

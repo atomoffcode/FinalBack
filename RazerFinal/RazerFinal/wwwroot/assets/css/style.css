@@ -15,9 +15,13 @@ a {
   background: #000000;
   padding: 61px 0 0;
 }
+.cart-empty a:hover {
+    color: #44d62c;
+    text-decoration: underline;
+}
 
 @media (max-width: 767px) {
-  .site-body {
+    .site-body {
     padding: 48px 0 0;
   }
 }
@@ -1325,6 +1329,10 @@ a {
   align-items: center;
   border-radius: 5px;
 }
+    .add-to-cart-btn:hover {
+        color: #000;
+        text-decoration: none;
+    }
 
 .sli-outofstock {
   font-size: 14px;

@@ -2,6 +2,29 @@ $(document).ready(function () {
     $(window).on('beforeunload', function () {
         $.cookies.del('filter');
     });
+    $(document).on('click', '.addbasket', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(e.currentTarget)
+        let url = $(e.currentTarget).attr('href');
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.headercart').html(data)
+                console.log(url)
+                let url2 = "/" + url.split('/')[1] + "/mainbasket"
+                console.log(url2)
+                fetch(url2)
+                    .then(res2 => {
+                        return res2.text()
+                    })
+                    .then(data2 => {
+                        $('.mainbasket').html(data2)
+                    })
+            })            
+
+    })
     $(document).on('change', '.form-select', function () {
         let val = $(this).val()
         fetch(`categorysorting?catId=${val}`)

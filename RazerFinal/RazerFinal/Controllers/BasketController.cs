@@ -22,7 +22,7 @@ namespace RazerFinal.Controllers
         public async Task<IActionResult> Index()
         {
 			string cookie = HttpContext.Request.Cookies["basket"];
-			List<BasketVM> basketVMs = null;
+			List<BasketVM>? basketVMs = null;
 
 			if (!string.IsNullOrEmpty(cookie))
 			{
@@ -44,6 +44,31 @@ namespace RazerFinal.Controllers
 
 
 			return View(basketVMs); 
+        }
+        public async Task<IActionResult> MainBasket()
+        {
+            string cookie = HttpContext.Request.Cookies["basket"];
+            List<BasketVM> basketVMs = null;
+
+            if (!string.IsNullOrEmpty(cookie))
+            {
+                basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookie);
+
+                foreach (BasketVM basketVM in basketVMs)
+                {
+                    Product product = await _context.Products.FirstOrDefaultAsync(p => p.isDeleted == false && p.Id == basketVM.Id);
+
+                    if (product != null)
+                    {
+                        basketVM.Title = product.Title;
+                        basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+                        basketVM.Image = product.MainImage;
+                        basketVM.ExTax = product.ExTax;
+                    }
+                }
+            }
+
+            return PartialView("_BasketIndexPartial", basketVMs);
         }
         public async Task<IActionResult> AddBasket(int? Id)
         {
@@ -140,6 +165,56 @@ namespace RazerFinal.Controllers
             return PartialView("_BasketCartPartial", basketVMs);
 
 
+        }
+        public async Task<IActionResult> DecreaseBasket(int? Id)
+        {
+            if (Id == null) return BadRequest();
+
+            if (!await _context.Products.AnyAsync(p => p.isDeleted == false && p.Id == Id)) return NotFound();
+
+            //Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == Id && p.isDeleted == false);
+
+            //if (product == null) return NotFound();
+
+            string cookie = HttpContext.Request.Cookies["basket"];
+
+            List<BasketVM> basketVMs = null;
+
+
+            if (string.IsNullOrWhiteSpace(cookie))
+            {
+                return BadRequest();
+            }
+            else
+            {
+                basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookie);
+                if (basketVMs.Exists(p => p.Id == Id) && basketVMs.Find(b => b.Id == Id).Count > 1)
+                {
+                    basketVMs.Find(b => b.Id == Id).Count -= 1;
+                }
+                else if (basketVMs.Exists(p => p.Id == Id))
+                {
+                    basketVMs.RemoveAll(p => p.Id == Id);
+                }
+
+            }
+            cookie = JsonConvert.SerializeObject(basketVMs);
+            HttpContext.Response.Cookies.Append("basket", cookie);
+
+            foreach (BasketVM basketVM in basketVMs)
+            {
+                Product product = await _context.Products.FirstOrDefaultAsync(p => p.isDeleted == false && p.Id == basketVM.Id);
+                if (product != null)
+                {
+                    basketVM.Title = product.Title;
+                    basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
+                    basketVM.Image = product.MainImage;
+                    basketVM.ExTax = product.ExTax;
+                }
+
+            }
+
+            return PartialView("_BasketCartPartial", basketVMs);
         }
     }
 }
