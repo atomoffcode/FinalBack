@@ -1,0 +1,43 @@
+﻿@model Specification
+@{
+    ViewData["Title"] = "Detail";
+    int count = 0;
+    int count2 = 0;
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row justify-content-lg-between">
+            <div class="col-lg-3">
+                <h1 class="h3 mb-4 text-gray-800">Specification Page</h1>
+            </div>
+            <div class="col-lg-3">
+                <a asp-area="manage" asp-controller="specification" asp-action="index" class="btn btn-primary">Go To Home</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Spec Name: @Model.Name</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Spec Description: @Model.Description</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Used Products Count: @Model.ProductSpecs.Count</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+

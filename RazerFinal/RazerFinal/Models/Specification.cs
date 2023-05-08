@@ -12,5 +12,6 @@ namespace RazerFinal.Models
         public int? CategorySpecId { get; set; }
 
         public CategorySpec? CategorySpec { get; set; }
+        public List<ProductSpec>? ProductSpecs { get; set; }
     }
 }

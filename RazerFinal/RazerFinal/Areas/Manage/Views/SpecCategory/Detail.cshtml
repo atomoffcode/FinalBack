@@ -1,0 +1,56 @@
+﻿@model CategorySpec
+@{
+    ViewData["Title"] = "Detail";
+    int count = 0;
+    int count2 = 0;
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row justify-content-lg-between">
+            <div class="col-lg-3">
+                <h1 class="h3 mb-4 text-gray-800">Spec Category Page</h1>
+            </div>
+            <div class="col-lg-3">
+                <a asp-area="manage" asp-controller="speccategory" asp-action="index" class="btn btn-primary">Go To Home</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Category Name: @Model.Name</h5>
+            </div>
+        </div>
+    </div>
+    @if (Model.Specifications != null && Model.Specifications.Count() > 0)
+    {
+        <div class="col-lg-12">
+            <h4>Specs List</h4>
+
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Name</th>
+                        <th>Created At</th>
+                        <th>Created By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Specification specification in Model.Specifications)
+                    {
+                        count2++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@specification.Name</td>
+                            <td>@specification.CreatedAt.ToString("dd-MMM-yyyy").ToUpper()</td>
+                            <td>@specification.CreatedBy</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -292,7 +292,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Basket");
+                    b.ToTable("Basket", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Category", b =>
@@ -338,7 +338,7 @@ namespace RazerFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.CategorySpec", b =>
@@ -388,7 +388,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategorySpecs");
+                    b.ToTable("CategorySpecs", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Product", b =>
@@ -465,7 +465,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.ProductImage", b =>
@@ -511,7 +511,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.ProductSpec", b =>
@@ -563,7 +563,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("SpecificationId");
 
-                    b.ToTable("ProductSpecs");
+                    b.ToTable("ProductSpecs", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Specification", b =>
@@ -614,7 +614,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategorySpecId");
 
-                    b.ToTable("Specifications");
+                    b.ToTable("Specifications", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
