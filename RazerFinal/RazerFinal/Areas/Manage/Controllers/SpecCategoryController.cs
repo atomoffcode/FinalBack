@@ -22,6 +22,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         {
             IQueryable<CategorySpec> query = _context.CategorySpecs
                 .Include(c => c.Specifications.Where(p => p.isDeleted == false))
+                .Where(c=>c.isDeleted == false)
                 .OrderByDescending(c => c.Id);
 
 

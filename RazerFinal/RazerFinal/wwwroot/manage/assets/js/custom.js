@@ -15,7 +15,40 @@
     
 
 
-    
+    $('#Spec_ProductId').change(function () {
+        var productId = $(this).val();
+        let url = window.location.href;
+        let url2 = "/" + url.split('/')[1] + '/' + url.split('/')[2] + '/' + url.split('/')[3] + '/' + url.split('/')[4] + `/getcats?productId=${productId}`;
+        console.log(url)
+        console.log(url2)
+        fetch(url2)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('#Spec_CategorySpecId').html(data);
+                let catId = $('#Spec_CategorySpecId').val();
+                let url3 = "/" + url.split('/')[1] + '/' + url.split('/')[2] + '/' + url.split('/')[3] + '/' + url.split('/')[4] + `/getspecs?catspecId=${catId}`;
+                fetch(url3)
+                    .then(res => {
+                        return res.text();
+                    }).then(data => {
+                        $('#Spec_SpecificationId').html(data);
+                    })
+            })
+    });
+    $('#Spec_CategorySpecId').change(function () {
+        var catspecId = $(this).val();
+        let url = window.location.href;
+        let url2 = "/" + url.split('/')[1] + '/' + url.split('/')[2] + '/' + url.split('/')[3] + '/' + url.split('/')[4] + `/getspecs?catspecId=${catspecId}`;
+        console.log(url)
+        console.log(url2)
+        fetch(url2)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('#Spec_SpecificationId').html(data);
+            })
+    });
 
 
 

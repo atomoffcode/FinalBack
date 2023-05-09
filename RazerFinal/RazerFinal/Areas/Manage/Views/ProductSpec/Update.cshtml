@@ -1,0 +1,57 @@
+﻿@model ProductVM
+@{
+    ViewData["Title"] = "Update";
+    SelectList selectListItems = new SelectList(Model.Products, nameof(Product.Id), nameof(Product.Title));
+    SelectList selectListItems1 = new SelectList(Model.CategorySpecs, nameof(CategorySpec.Id), nameof(CategorySpec.Name));
+    SelectList selectListItems2 = new SelectList(Model.Specifications.Where(s=>s.CategorySpecId == Model.Spec.CategorySpecId), nameof(Specification.Id), nameof(Specification.Name));
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row justify-content-between">
+            <div class="col-lg-3">
+                <h1 class="h3 mb-4 text-gray-800">Specification Create Page</h1>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-12 ">
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="form-group parentInput">
+                <label asp-for="@Model.Spec.ProductId"></label>
+                <select class="form-control" asp-for="@Model.Spec.ProductId" asp-items="@selectListItems">
+                </select>
+                <span asp-validation-for="@Model.Spec.ProductId" class="text-danger"></span>
+
+            </div>
+            <div class="form-group parentInput">
+                <label asp-for="@Model.Spec.CategorySpecId"></label>
+                <select class="form-control" asp-for="@Model.Spec.CategorySpecId" asp-items="@selectListItems1">
+                </select>
+                <span asp-validation-for="@Model.Spec.CategorySpecId" class="text-danger"></span>
+
+            </div>
+            <div class="form-group parentInput">
+                <label asp-for="@Model.Spec.SpecificationId"></label>
+                <select class="form-control" asp-for="@Model.Spec.SpecificationId" asp-items="@selectListItems2">
+                </select>
+                <span asp-validation-for="@Model.Spec.SpecificationId" class="text-danger"></span>
+
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

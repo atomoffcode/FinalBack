@@ -1,7 +1,7 @@
 ﻿@model Specification
 @{
-    ViewData["Title"] = "Create";
-    IEnumerable<CategorySpec> categories = ViewBag.Categories;
+    ViewData["Title"] = "Update";
+    IEnumerable<CategorySpec> categories = ViewBag.CatSpecs;
     SelectList selectListItems = new SelectList(categories, nameof(CategorySpec.Id), nameof(CategorySpec.Name));
 }
 

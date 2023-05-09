@@ -1,4 +1,4 @@
-﻿@model PageNatedList<Specification>
+﻿@model PageNatedList<ProductSpec>
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,16 +7,16 @@
     <div class="col-lg-12">
         <div class="row justify-content-between">
             <div class="col-lg-3">
-                <h1 class="h3 mb-4 text-gray-800">Specifications Page</h1>
+                <h1 class="h3 mb-4 text-gray-800">Product Specs Category Page</h1>
             </div>
             <div class="col-lg-2">
-                <a asp-area="manage" asp-controller="specification" asp-action="create" class="btn btn-primary">Create</a>
+                <a asp-area="manage" asp-controller="productspec" asp-action="create" class="btn btn-primary">Create</a>
             </div>
         </div>
     </div>
     <div class="col-lg-12">
         <div class="indexContainer">
-            @await Html.PartialAsync("_SpecIndexPartial",Model)
+            @await Html.PartialAsync("_ProductSpecIndexPartial",Model)
 
         </div>
 
