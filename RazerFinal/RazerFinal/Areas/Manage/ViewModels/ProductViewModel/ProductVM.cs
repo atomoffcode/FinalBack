@@ -1,4 +1,4 @@
-﻿using RazerFinal.Areas.Manage.ViewModels.SpecsViewModel;
+﻿
 using RazerFinal.Models;
 
 namespace RazerFinal.Areas.Manage.ViewModels.ProductViewModel
