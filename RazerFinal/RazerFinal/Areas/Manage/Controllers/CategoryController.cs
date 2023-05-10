@@ -193,6 +193,8 @@ namespace RazerFinal.Areas.Manage.Controllers
                 }
             }
 
+
+
             if (!string.IsNullOrWhiteSpace(category.Image))
             {
                 FileHelper.DeleteFile(category.Image, _env, "assets", "photos" , "category");
@@ -201,6 +203,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
 
             category.isDeleted = true;
+
             category.DeletedBy = "System";
             category.DeletedAt = DateTime.UtcNow.AddHours(4);
 

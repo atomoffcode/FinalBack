@@ -194,11 +194,21 @@ namespace RazerFinal.Areas.Manage.Controllers
                     
                 }
             }
-
+            
 
 
 
             categorySpec.isDeleted = true;
+            List<ProductSpec> productSpecs = await _context.ProductSpecs.Where(p => p.CategorySpecId == categorySpec.Id && p.isDeleted == false).ToListAsync();
+            if (productSpecs != null && productSpecs.Count > 0)
+            {
+                foreach (ProductSpec spec in productSpecs)
+                {
+                    spec.isDeleted = true;
+                    spec.DeletedBy = "System";
+                    spec.DeletedAt = DateTime.UtcNow.AddHours(4);
+                }
+            }
             categorySpec.DeletedBy = "System";
             categorySpec.DeletedAt = DateTime.UtcNow.AddHours(4);
 
@@ -213,59 +223,6 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return PartialView("_SpecCategoryIndexPartial", PageNatedList<CategorySpec>.Create(query, pageIndex = 1, 3, 8));
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteCategory(int? id)
-        //{
-        //    if (id == null) return BadRequest();
-
-        //    Category category = await _context.Categories
-        //        .Include(c => c.Children.Where(ch => ch.isDeleted == false))
-        //        .ThenInclude(ch => ch.Products.Where(p => p.isDeleted == false))
-        //        .Include(c => c.Products.Where(p => p.isDeleted == false))
-        //        .FirstOrDefaultAsync(c => c.isDeleted == false && c.Id == id);
-        //    if (category == null) return NotFound();
-
-        //    if (category.Children != null && category.Children.Count() > 0)
-        //    {
-        //        foreach (Category child in category.Children)
-        //        {
-        //            child.isDeleted = true;
-        //            child.DeletedBy = "System";
-        //            child.DeletedAt = DateTime.UtcNow.AddHours(4);
-
-        //            if (child.Products != null && child.Products.Count() > 0)
-        //            {
-        //                foreach (Product product in child.Products)
-        //                {
-        //                    product.CategoryId = null;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    if (category.Products != null && category.Products.Count() > 0)
-        //    {
-        //        foreach (Product product in category.Products)
-        //        {
-        //            product.CategoryId = null;
-        //        }
-        //    }
-
-        //    if (!string.IsNullOrWhiteSpace(category.Image))
-        //    {
-        //        FileHelper.DeleteFile(category.Image, _env, "assets", "image");
-
-        //    }
-
-
-        //    category.isDeleted = true;
-        //    category.DeletedBy = "System";
-        //    category.DeletedAt = DateTime.UtcNow.AddHours(4);
-
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToAction(nameof(Index));
-        //}
+        
     }
 }

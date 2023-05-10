@@ -1,0 +1,103 @@
+﻿@model ProductDetailVM
+@{
+    ViewData["Title"] = "Detail";
+    int count = 0;
+}
+
+<div class="row">
+    <div>
+        <div>
+            <img style="width:200px;" src="~/assets/photos/products/@Model.Product.MainImage" />
+
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Product Name: @Model.Product.Title</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Product Description: @Model.Product.Description</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Product Category: @Model.Product.Category?.Name</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Product Price: @Model.Product.Price</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Product Discounted Price: @Model.Product.DiscountedPrice</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Product ExTax: @Model.Product.ExTax</h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Products Count: @Model.Product.Count</h5>
+            </div>
+        </div>
+    </div>
+    @if (Model.Product.ProductImages != null && Model.Product.ProductImages.Count > 0)
+    {
+        <div class="imageContainer d-flex">
+            @foreach (ProductImage productImage in Model.Product.ProductImages)
+            {
+                <div>
+                    <div>
+                        <img style="width:100px;" src="~/assets/photos/products/@productImage.Iamge" />
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    }
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Product Spec</th>
+                <th>Spec Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ProductSpec productSpec in Model.ProductSpecs)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@productSpec.CategorySpec.Name</td>
+                    <td>@productSpec.Specification.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+

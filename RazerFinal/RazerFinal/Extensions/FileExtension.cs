@@ -17,7 +17,7 @@
 
             string name = file.FileName.Substring(lastIndex);
 
-            string fileName = $"{DateTime.UtcNow:yyyyMMddHHmmssfff}_{Guid.NewGuid()}{name}";
+            string fileName = $"{Guid.NewGuid()}_{name}";
 
             string fullPath = Path.Combine(env.WebRootPath);
 

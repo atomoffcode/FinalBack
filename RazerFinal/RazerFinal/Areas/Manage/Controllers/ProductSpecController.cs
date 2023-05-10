@@ -5,6 +5,7 @@ using RazerFinal.DataAccessLayer;
 using RazerFinal.Helpers;
 using RazerFinal.Models;
 using Newtonsoft.Json;
+using System.Data;
 
 
 namespace RazerFinal.Areas.Manage.Controllers
@@ -23,6 +24,7 @@ namespace RazerFinal.Areas.Manage.Controllers
                 .Include(s => s.Product)
                 .Include(s => s.CategorySpec)
                 .Include(s => s.Specification)
+                .Where(s => !s.isDeleted)
                 .OrderByDescending(c => c.Id);
 
 
@@ -234,6 +236,33 @@ namespace RazerFinal.Areas.Manage.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest();
+            if (!await _context.ProductSpecs.AnyAsync(p => p.Id == id)) return NotFound();
+            ProductSpec productSpec = await _context.ProductSpecs.FirstOrDefaultAsync(p => p.Id == id);
+            if (productSpec == null) return NotFound();
+
+
+            productSpec.isDeleted = true;
+            productSpec.DeletedBy = "System";
+            productSpec.DeletedAt = DateTime.UtcNow.AddHours(4);
+            await _context.SaveChangesAsync();
+
+
+
+            IQueryable<ProductSpec> query = _context.ProductSpecs
+               .Include(s => s.Product)
+               .Include(s => s.CategorySpec)
+               .Include(s => s.Specification)
+               .Where(s=>!s.isDeleted)
+               .OrderByDescending(c => c.Id);
+
+            int pageIndex;
+            return PartialView("_ProductSpecIndexPartial", PageNatedList<ProductSpec>.Create(query, pageIndex=1, 3, 8));
         }
     }
 }
