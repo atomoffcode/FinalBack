@@ -10,6 +10,8 @@ using System.Data;
 namespace RazerFinal.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
+
     public class CategoryController : Controller
     {
         private readonly AppDbContext _context;

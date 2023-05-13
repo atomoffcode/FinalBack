@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RazerFinal.Models
 {
@@ -12,7 +13,11 @@ namespace RazerFinal.Models
         public string? SurName { get; set; }
         [StringLength(255)]
         public string? ProfileImage { get; set; }
+        public List<Basket>? Baskets { get; set; }
+
 
         public bool IsActive { get; set; }
+        [NotMapped]
+        public IFormFile? ProfileImageFile { get; set; }
     }
 }

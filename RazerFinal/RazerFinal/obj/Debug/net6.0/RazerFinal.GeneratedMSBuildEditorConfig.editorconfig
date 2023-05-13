@@ -16,6 +16,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\kml\OneDrive\Desktop\FinalBack\RazerFinal\RazerFinal
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEFjY291bnRcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Account/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEFjY291bnRcUHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEFjY291bnRcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Category/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXENhdGVnb3J5XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,6 +50,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXERhc2hib2FyZFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/IndexPost/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEluZGV4UG9zdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/IndexPost/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEluZGV4UG9zdFxEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/IndexPost/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEluZGV4UG9zdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/IndexPost/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEluZGV4UG9zdFxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/ProductSpec/Create.cshtml]
@@ -68,8 +96,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFByb2R1Y3RcVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Setting/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNldHRpbmdcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Setting/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNldHRpbmdcVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Shared/_CategoryIndexPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfQ2F0ZWdvcnlJbmRleFBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Shared/_IndexPostIndexPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfSW5kZXhQb3N0SW5kZXhQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Shared/_Layout.cshtml]
@@ -88,12 +128,36 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfUHJvZHVjdFNwZWNJbmRleFBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Shared/_SettingIndexPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfU2V0dGluZ0luZGV4UGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Shared/_SliderIndexPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfU2xpZGVySW5kZXhQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Shared/_SpecCategoryIndexPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfU3BlY0NhdGVnb3J5SW5kZXhQYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Shared/_SpecIndexPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfU3BlY0luZGV4UGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Slider/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Slider/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Slider/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/Slider/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNsaWRlclxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kml/OneDrive/Desktop/FinalBack/RazerFinal/RazerFinal/Areas/Manage/Views/SpecCategory/Create.cshtml]

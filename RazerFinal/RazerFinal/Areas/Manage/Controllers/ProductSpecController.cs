@@ -6,11 +6,12 @@ using RazerFinal.Helpers;
 using RazerFinal.Models;
 using Newtonsoft.Json;
 using System.Data;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace RazerFinal.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class ProductSpecController : Controller
     {
         private readonly AppDbContext _context;

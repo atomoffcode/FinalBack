@@ -1,0 +1,30 @@
+﻿@model ProfileVM
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="card-body px-5 py-5">
+    <h3 class="card-title text-left mb-3">Register</h3>
+    <form method="post" asp-area="manage" asp-controller="account" asp-action="profile">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="CurrentPassword"></label>
+            <input asp-for="CurrentPassword" class="form-control p_input">
+            <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control p_input">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" class="form-control p_input">
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+        </div>
+    </form>
+</div>
+

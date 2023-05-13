@@ -16,6 +16,9 @@ namespace RazerFinal.DataAccessLayer
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductSpec> ProductSpecs { get; set; }
+        public DbSet<IndexPost> IndexPosts { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Setting> Settings { get; set; }
 
 
 

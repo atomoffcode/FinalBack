@@ -11,6 +11,7 @@ using System.Data;
 namespace RazerFinal.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class ProductController : Controller
     {
         private readonly AppDbContext _context;

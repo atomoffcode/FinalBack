@@ -1,0 +1,52 @@
+﻿@model PageNatedList<Setting>
+@{
+    int count = 0;
+}
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Key</th>
+            <th>Value</th>
+            <th>Image?</th>
+            <th>Setting</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Setting setting in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+
+                <td>@setting.Key</td>
+                <td>@setting.Value</td>
+                <td>@(setting.Image != null ? "Yes" : "No")</td>
+                <td>
+                    <a asp-area="manage" asp-controller="setting" asp-action="Update" asp-route-id="@setting.Id" class="btn btn-warning">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="col-lg-12">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.HasPrev)
+            {
+                <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a></li>
+            }
+            @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-pageIndex="@i">@i</a></li>
+
+            }
+            @if (Model.HasNext)
+            {
+                <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="setting" asp-action="index" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a></li>
+            }
+        </ul>
+    </nav>
+</div>

@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RazerFinal.DataAccessLayer;
 using RazerFinal.Helpers;
 using RazerFinal.Models;
+using System.Data;
 
 namespace RazerFinal.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class SpecificationController : Controller
     {
         private readonly AppDbContext _context;

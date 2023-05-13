@@ -1,11 +1,19 @@
-﻿
+﻿@inject UserManager<AppUser> userManager
+@{
+    AppUser appUser = null;
+    if (User.Identity.IsAuthenticated)
+    {
+         appUser = await userManager.FindByNameAsync(User.Identity.Name);
+    }
+
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>Razer Admin Panel</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="~/manage/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/manage/assets/vendors/css/vendor.bundle.base.css">
@@ -84,6 +92,30 @@
                         <span class="menu-title">Product Specs</span>
                     </a>
                 </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="manage" asp-controller="indexpost" asp-action="index">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
+                        <span class="menu-title">Landing Page Posts</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="manage" asp-controller="slider" asp-action="index">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
+                        <span class="menu-title">Sliders</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="manage" asp-controller="setting" asp-action="index">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
+                        <span class="menu-title">Settings</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 
@@ -103,14 +135,25 @@
                             <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
                                 <div class="navbar-profile">
                                     <img class="img-xs rounded-circle" src="~/manage/assets/images/faces/face15.jpg" alt="">
-                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">@(appUser!=null?$"{appUser.Name} {appUser.SurName}" : "Anonymous")</p>
                                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                                 <h6 class="p-3 mb-0">Profile</h6>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
+                                <a asp-area="manage" asp-controller="account" asp-action="profile" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Settings</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a asp-area="manage" asp-controller="account" asp-action="logout" class="dropdown-item preview-item">
                                     <div class="preview-thumbnail">
                                         <div class="preview-icon bg-dark rounded-circle">
                                             <i class="mdi mdi-logout text-danger"></i>
@@ -120,7 +163,6 @@
                                         <p class="preview-subject mb-1">Log out</p>
                                     </div>
                                 </a>
-                                <div class="dropdown-divider"></div>
                             </div>
                         </li>
                     </ul>

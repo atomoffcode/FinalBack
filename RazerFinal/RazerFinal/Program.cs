@@ -29,7 +29,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.User.RequireUniqueEmail = true;
 
     options.Lockout.AllowedForNewUsers = false;
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(241);
     options.Lockout.MaxFailedAccessAttempts = 3;
 
 

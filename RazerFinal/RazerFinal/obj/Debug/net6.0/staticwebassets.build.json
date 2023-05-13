@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "SeNB/PR54Ms1HGYi7qCg/OO0zJSpwu8lPG9Sd5xm6BI=",
+  "Hash": "6EmVPdWh5lczN/n+3BpWcK3M+BhETLBupPlNcAM/q/c=",
   "Source": "RazerFinal",
   "BasePath": "_content/RazerFinal",
   "Mode": "Default",
@@ -457,6 +457,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\store.js"
+    },
+    {
+      "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\category\\1ca9c8f2-4a55-461b-83f6-f25efb420246_.jpg",
+      "SourceId": "RazerFinal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\",
+      "BasePath": "_content/RazerFinal",
+      "RelativePath": "assets/photos/category/1ca9c8f2-4a55-461b-83f6-f25efb420246_.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\photos\\category\\1ca9c8f2-4a55-461b-83f6-f25efb420246_.jpg"
     },
     {
       "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\category\\razer-basilisk-v3-pro_90x150.png",
