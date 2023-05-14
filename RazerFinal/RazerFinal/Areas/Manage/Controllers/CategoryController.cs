@@ -164,10 +164,10 @@ namespace RazerFinal.Areas.Manage.Controllers
                 }
 
                 dbCategory.Image = await category.File.CreateFileAsync(_env, "assets", "photos", "category");
-                dbCategory.Name = category.Name.Trim();
             }
 
-            
+
+            dbCategory.Name = category.Name.Trim();
             dbCategory.UpdatedAt = DateTime.UtcNow.AddHours(4);
             dbCategory.UpdatedBy = "System";
 

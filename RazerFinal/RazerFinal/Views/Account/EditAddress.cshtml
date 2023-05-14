@@ -1,0 +1,79 @@
+﻿@model Address
+@{
+    ViewData["Title"] = "EditAddress";
+}
+
+
+<div class="account pb-100px">
+    <div class="address-add ">
+        <div class="address-add-all">
+            <a href="#" class="address-add-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+            <h1 class="address-add-header">Add Address</h1>
+            <div class="address-add-inner">
+                <form id="login" asp-controller="account" asp-action="editaddress" class="login-form">
+                    <div class="form-input">
+                        <label asp-for="PhoneNumber" class="d-none" for="">Phone Number</label>
+                        <input asp-for="PhoneNumber" placeholder="Phone Number">
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-input">
+                        <label asp-for="User.Email" class="d-none" for="">Email Address</label>
+                        <input asp-for="User.Email" placeholder="Email Address">
+                        <span asp-validation-for="User.Email" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=User.Name class="d-none" for="">Name</label>
+                        <input asp-for="User.Name" placeholder="Name">
+                        <span asp-validation-for="User.Name" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=User.SurName class="d-none" for="">Last Name</label>
+                        <input asp-for="User.SurName" placeholder="Last Name">
+                        <span asp-validation-for="User.SurName" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=Country class="d-none" for="">Country</label>
+                        <select asp-for="Country" asp-items="ViewBag.EnumList">
+                        </select>
+                        <span asp-validation-for="Country" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-input">
+                        <label asp-for="City" class="d-none" for="">City</label>
+                        <input asp-for="City" placeholder="City">
+                        <span asp-validation-for="City" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=PostalCode class="d-none" for="">Postal Code</label>
+                        <input asp-for="PostalCode" placeholder="postal code">
+                        <span asp-validation-for="PostalCode" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=DirectAddress class="d-none" for="">Address</label>
+                        <input asp-for="DirectAddress" placeholder="Address Line">
+                        <span asp-validation-for="DirectAddress" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-check">
+
+                        <input asp-for="IsMain" class="form-check-input">
+                        <label asp-for="IsMain" class="form-check-label" style="color:#999999;">Make it default address</label>
+                        <span asp-validation-for="IsMain" class="text-danger"></span>
+
+                    </div>
+
+                    <input type="submit" class="add-to-cart-btn login-btn" value="Add Address">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

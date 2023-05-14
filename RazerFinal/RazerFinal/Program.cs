@@ -4,6 +4,7 @@ using RazerFinal.DataAccessLayer;
 using RazerFinal.Interfaces;
 using RazerFinal.Models;
 using RazerFinal.Services;
+using RazerFinal.ViewModels;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,7 +42,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
 builder.Services.AddHttpContextAccessor();
 
-//builder.Services.Configure<SmtpSetting>(builder.Configuration.GetSection("SmtpSetting"));
+builder.Services.Configure<SmtpSetting>(builder.Configuration.GetSection("SmtpSetting"));
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 
 

@@ -2,6 +2,43 @@ $(document).ready(function () {
     $(window).on('beforeunload', function () {
         $.cookies.del('filter');
     });
+    //$(document).on('click', '.aremove', function (e) {
+    //    e.preventDefault();
+    //    e.stopPropagation();
+    //    console.log(e.currentTarget)
+    //    let url = $(e.currentTarget).attr('href');
+    //    fetch(url)
+    //        .then(res => {
+    //            return res.text();
+    //        }).then(data => {
+    //            $('.address-list').html(data)
+    //        })
+
+    //})
+    //$('#pfpchanger').submit(function (e) {
+    //    e.preventDefault(); // Prevent the default form submission
+
+    //    var formAction = $(this).attr('action');
+    //    console.log("Form Action: " + formAction);
+
+    //    // Perform any other desired actions
+
+    //    // You can use fetch() here to make an AJAX request if needed
+    //    var formData = new FormData(this);
+    //    fetch(formAction, {
+    //        method: 'POST',
+    //        body: formData
+    //    })
+    //        .then(res => {
+    //            // Handle the response from the server
+    //            return res.text();
+
+    //        }).then(data => {
+    //            $('.pfpchanger').html(data)
+    //        }).catch(error => {
+    //            // Handle any errors that occur during the fetch request
+    //        });
+    //});
     $(document).on('click', '.addbasket', function (e) {
         e.preventDefault();
         e.stopPropagation();

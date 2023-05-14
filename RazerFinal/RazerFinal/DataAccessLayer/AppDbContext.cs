@@ -19,6 +19,9 @@ namespace RazerFinal.DataAccessLayer
         public DbSet<IndexPost> IndexPosts { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
 
 

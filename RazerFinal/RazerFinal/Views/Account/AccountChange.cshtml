@@ -1,0 +1,51 @@
+﻿@model AccountVM
+@{
+    ViewData["Title"] = "AccountChange";
+}
+
+<div class="account">
+    <div class="account-personal">
+        <div class="ap-inner">
+            <div class="api-login">
+                <h2 class="api-header">
+                    Parsonal information
+                </h2>
+                <form id="register" asp-action="accountchange" asp-controller="account" class="login-form pb-35px">
+                    <div class="form-input">
+                        <label asp-for=Name class="" for="">Name</label>
+                        <input asp-for=Name placeholder="Name">
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=SurName class="" for="">Last Name</label>
+                        <input asp-for=SurName placeholder="Last Name">
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=UserName class="" for="">Razer ID (username)</label>
+                        <input asp-for=UserName placeholder="Razer ID (username)">
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=Email class="" for="">Email Address</label>
+                        <input asp-for=Email placeholder="Email Address">
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=CurrentPassword class="" for="">Password</label>
+                        <input asp-for=CurrentPassword placeholder="Password">
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=Password class="" for="">Password</label>
+                        <input asp-for=Password placeholder="Password">
+                    </div>
+                    <div class="form-input">
+                        <label asp-for=ConfirmPassword class="" for="">Password</label>
+                        <input asp-for=ConfirmPassword placeholder="Password">
+                    </div>
+                    <button type="submit" class="add-to-cart-btn login-btn">save changes</button>
+                </form>
+            </div>
+            <div class="api-picture pfpchanger">
+                @await Html.PartialAsync("_ProfileImagePartial",Model)
+            </div>
+        </div>
+    </div>
+</div>
+

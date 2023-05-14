@@ -1916,6 +1916,8 @@ a {
   background: transparent;
   border: 1px solid #555555;
   padding: 5px 60px 5px 15px;
+  color: #999999;
+
 }
 .form-input input::-moz-placeholder {
   color: #999999;

@@ -1,0 +1,36 @@
+﻿@model ProfileVM
+@if (Model.Addresses != null && Model.Addresses.Count > 0)
+{
+    @foreach (Address address in Model.Addresses.OrderByDescending(a=>a.IsMain))
+    {
+        <div class="address-item">
+            <ul>
+                <li class="ai-name">@address.User.Name @address.User.SurName</li>
+                <li>@address.Country</li>
+                <li>@address.City</li>
+                <li>@address.DirectAddress</li>
+                <li>@address.PhoneNumber</li>
+            </ul>
+            @if (address.IsMain)
+            {
+                <span class="default-address">
+                    Default Address
+                </span>
+            }
+            else
+            {
+                <span class="default-address" style="opacity:0; cursor:default;" > Default Address</span>
+            }
+            
+            
+            <div class="address-tools">
+                <a asp-controller="account" asp-action="editaddress" asp-route-id="@address.Id" class="at-edit">Edit</a>
+                <a asp-action="deleteaddress" asp-controller="account" asp-route-id="@address.Id" class="at-remove aremove">Remove</a>
+            </div>
+        </div>
+    }
+}
+<a href="#" class="address-item-adder">
+    <i class="fa-solid fa-plus"></i>
+    <span>Add Address</span>
+</a>

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RazerFinal.DataAccessLayer;
 using RazerFinal.Interfaces;
@@ -11,24 +12,27 @@ namespace RazerFinal.Services
     {
         private readonly AppDbContext _context;
         private readonly IHttpContextAccessor _httpcontextAccessor;
+        private readonly UserManager<AppUser> _userManager;
 
-        public LayoutService(AppDbContext context, IHttpContextAccessor httpcontextAccessor)
+
+        public LayoutService(AppDbContext context, IHttpContextAccessor httpcontextAccessor, UserManager<AppUser> userManager)
         {
             _context = context;
             _httpcontextAccessor = httpcontextAccessor;
+            _userManager = userManager;
         }
         public async Task<List<BasketVM>> GetBasket()
         {
-            //AppUser appUser = null;
+            AppUser appUser = null;
             List<Basket> baskets = null;
 
-            //if (_httpcontextAccessor.HttpContext.User.Identity.IsAuthenticated && _httpcontextAccessor.HttpContext.User.IsInRole("Member"))
-            //{
-            //    appUser = await _userManager.Users
-            //        .Include(u => u.Baskets.Where(b => b.isDeleted == false)).ThenInclude(b => b.Product)
-            //        .FirstOrDefaultAsync(u => u.UserName == _httpcontextAccessor.HttpContext.User.Identity.Name);
-            //    baskets = appUser.Baskets;
-            //}
+            if (_httpcontextAccessor.HttpContext.User.Identity.IsAuthenticated && _httpcontextAccessor.HttpContext.User.IsInRole("Member"))
+            {
+                appUser = await _userManager.Users
+                    .Include(u => u.Baskets.Where(b => b.isDeleted == false)).ThenInclude(b => b.Product)
+                    .FirstOrDefaultAsync(u => u.UserName == _httpcontextAccessor.HttpContext.User.Identity.Name);
+                baskets = appUser.Baskets;
+            }
 
 
 
@@ -80,6 +84,17 @@ namespace RazerFinal.Services
                 return basketVMs;
             }
             return new List<BasketVM>();
+        }
+
+        public async Task<AppUser> GetUser()
+        {
+            AppUser user = null;
+            if (_httpcontextAccessor.HttpContext.User.Identity.IsAuthenticated && _httpcontextAccessor.HttpContext.User.IsInRole("Member"))
+            {
+                user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == _httpcontextAccessor.HttpContext.User.Identity.Name);
+            }
+
+            return user;
         }
     }
 }

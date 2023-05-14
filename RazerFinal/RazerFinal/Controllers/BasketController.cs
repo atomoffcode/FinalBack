@@ -108,42 +108,42 @@ namespace RazerFinal.Controllers
 
             }
 
-            //if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
-            //{
-            //    AppUser appUser = await _userManager.Users
-            //        .Include(u => u.Baskets.Where(b => b.isDeleted == false))
-            //        .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+            if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            {
+                AppUser appUser = await _userManager.Users
+                    .Include(u => u.Baskets.Where(b => b.isDeleted == false))
+                    .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
-            //    if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
-            //    {
-            //        if (appUser.Baskets.Any(b => b.ProductId == Id))
-            //        {
-            //            appUser.Baskets.FirstOrDefault(b => b.ProductId == Id).Count = basketVMs.FirstOrDefault(b => b.Id == Id).Count;
-            //        }
-            //        else
-            //        {
-            //            Basket basket = new Basket
-            //            {
-            //                ProductId = Id,
-            //                Count = 1
-            //            };
-            //            appUser.Baskets.Add(basket);
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    if (appUser.Baskets.Any(b => b.ProductId == Id))
+                    {
+                        appUser.Baskets.FirstOrDefault(b => b.ProductId == Id).Count = basketVMs.FirstOrDefault(b => b.Id == Id).Count;
+                    }
+                    else
+                    {
+                        Basket basket = new Basket
+                        {
+                            ProductId = Id,
+                            Count = 1
+                        };
+                        appUser.Baskets.Add(basket);
 
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Basket basket = new Basket
-            //        {
-            //            ProductId = Id,
-            //            Count = 1
-            //        };
+                    }
+                }
+                else
+                {
+                    Basket basket = new Basket
+                    {
+                        ProductId = Id,
+                        Count = 1
+                    };
 
-            //        appUser.Baskets.Add(basket);
-            //    }
+                    appUser.Baskets.Add(basket);
+                }
 
-            //    await _context.SaveChangesAsync();
-            //}
+                await _context.SaveChangesAsync();
+            }
 
 
             cookie = JsonConvert.SerializeObject(basketVMs);

@@ -1,0 +1,19 @@
+﻿@model ProfileVM
+@{
+    ViewData["Title"] = "Addresses";
+}
+
+<div class="account pb-100px">
+    <div class="address-all">
+        <h2 class="address-header">
+            Address Book
+        </h2>
+        <div class="address-list">
+            
+            @await Html.PartialAsync("_AddressListPartial",Model)
+        </div>
+    </div>
+    <div class="address-add d-none">
+        @await Html.PartialAsync("_AddAddressPartial",Model.Address)
+    </div>
+</div>

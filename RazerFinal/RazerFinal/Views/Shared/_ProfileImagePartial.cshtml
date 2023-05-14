@@ -1,0 +1,11 @@
+﻿@model AccountVM
+<h2 class="api-header">
+    Profile picture
+</h2>
+<form id="pfpchanger" asp-controller="account" asp-action="changepfp" style="flex-wrap: wrap;" enctype="multipart/form-data">
+    <input asp-for="ProfileImageFile" style="width: 50%;">
+    <span asp-validation-for="ProfileImageFile" class="text-danger w-50"></span>
+    <img src="~/assets/photos/profile/@(!string.IsNullOrWhiteSpace(Model.ProfileImage)?Model.ProfileImage:"header-cart-profile-picture.png")" alt="" style="width: 200px; margin: 10px 0;">
+    <button type="submit" class="add-to-cart-btn login-btn changepfp">save profile picture</button>
+
+</form>

@@ -1,0 +1,26 @@
+﻿@model ProfileVM
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="account">
+    <div class="account-header" style="background-image: url('@Url.Content("~/assets/photos/profile/bg_artboard.png")');">
+        <div class="account-header-content">
+            <img src="~/assets/photos/profile/@(!string.IsNullOrWhiteSpace(Model.AccountVM.ProfileImage)?Model.AccountVM.ProfileImage:"header-cart-profile-picture.png")" alt="" class="account-profile-picture">
+            <span class="account-profile-razerid">@Model.AccountVM.UserName</span>
+        </div>
+    </div>
+    <div class="account-all">
+        <div class="account-links">
+            <div class="account-link">
+                <h4>Manage Addresses Methods</h4>
+                <a asp-controller="account" asp-action="addresses">manage</a>
+            </div>
+            <div class="account-link">
+                <h4>Manage Your Profile</h4>
+                <a asp-controller="account" asp-action="accountchange" >View profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+
