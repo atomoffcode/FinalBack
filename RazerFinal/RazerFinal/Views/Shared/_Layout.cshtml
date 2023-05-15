@@ -72,7 +72,7 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                         </div>
                         <div class="header-cart-orders header-cart-items">
                             <i class="fa-solid fa-box"></i>
-                            <a href="">Orders</a>
+                            <a asp-controller="order" asp-action="index">Orders</a>
                         </div>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
                         {

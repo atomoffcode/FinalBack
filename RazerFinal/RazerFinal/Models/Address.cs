@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RazerFinal.Models
 {
@@ -19,5 +20,7 @@ namespace RazerFinal.Models
         [Phone]
         public string? PhoneNumber { get; set; }
         public bool IsMain { get; set; }
+        [NotMapped]
+        public string? FullAddress => $"{User.Name} {User.SurName}, {Country}, {City} , {DirectAddress}";
     }
 }

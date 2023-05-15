@@ -1,0 +1,72 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="account">
+    <div class="orders">
+        <div class="orders-all">
+            <div class="orders-header">
+                <h1>Your Orders</h1>
+            </div>
+            @if (Model != null && Model.Count > 0)
+            {
+                <div class="orders-list">
+                    @foreach (Order order in Model)
+                    {
+                        <div class="order">
+                            <table class="order-desc">
+                                <tbody>
+                                <td class="order-no">@order.No</td>
+                                <td class="order-date">@order.CreatedAt.ToString("dd/mm/yyyy")</td>
+                                <td class="order-name">@order.Name @order.SurName</td>
+                                <td class="order-address">@order.Country , @order.City , @order.DirectAddress , @order.PostalCode</td>
+                                <td class="order-items"><a href="#" class="order-items-btn">@order.OrderItems.Count</a></td>
+                                <td class="order-price">@order.OrderItems.Sum(o=>o.Price)</td>
+                                <td class="order-status">@order.Status.ToString()</td>
+                                </tbody>
+                            </table>
+                            <table class="order-detail d-none">
+                                <tbody>
+                                    @foreach (OrderItem item in order.OrderItems)
+                                    {
+                                        <tr>
+                                            <td class="order-item-pic">
+                                                <img src="~/assets/photos/products/@item.Product.MainImage" alt="">
+                                            </td>
+                                            <td class="order-item-title">
+                                                <a asp-action="detail" asp-controller="product">@item.Product.Title</a>
+                                            </td>
+                                            <td class="order-item-price">
+                                                US$@item.Price
+                                            </td>
+                                            <td class="order-item-quantity">
+                                                @item.Count
+                                            </td>
+                                            <td class="order-item-total">
+                                                US$@(item.Price * item.Count)
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+
+
+                </div>
+            }
+            else
+            {
+                <div class="orders-empty">
+                    <p>You dont have any order</p>
+                    <p>Lets Shop then</p>
+                    <a asp-controller="store" asp-action="shop">Shop what's new</a>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>

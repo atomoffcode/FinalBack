@@ -4,7 +4,7 @@
         <h1 class="cart-total">Your cart total is US$@(Model != null && Model.Count > 0 ? Model.Sum(m => m.Price + m.ExTax) : "0") </h1>
         @if (Model != null && Model.Count > 0)
         {
-            <a href="" class="add-to-cart-btn">Checkout</a>
+            <a asp-controller="order" asp-action="checkout" class="add-to-cart-btn">Checkout</a>
         }
     </div>
 </div>
@@ -12,7 +12,7 @@
 @if (Model != null && Model.Count > 0)
 {
     <div class="cart ">
-        <div class="cart-body">
+        <div class="cart-body mb-100px">
             @foreach (BasketVM basketVM in Model)
             {
                 <div class="cart-element">

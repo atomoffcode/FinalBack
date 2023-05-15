@@ -1,5 +1,8 @@
 ﻿using MailKit.Search;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using RazerFinal.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RazerFinal.Models
 {
@@ -10,7 +13,7 @@ namespace RazerFinal.Models
         public int No { get; set; }
         [StringLength(500)]
         public string? Comment { get; set; }
-        public OrderByType Status { get; set; }
+        public OrderType Status { get; set; }
         [StringLength(100)]
         public string? Name { get; set; }
         [StringLength(100)]
@@ -33,5 +36,8 @@ namespace RazerFinal.Models
         [StringLength(100)]
         public string? DirectAddress { get; set; }
         public List<OrderItem>? OrderItems { get; set; }
+        public bool CustomAddress { get; set; }
+        public int? SingleAddressId { get; set; }
+        public Address? SingleAddress { get; set; }
     }
 }

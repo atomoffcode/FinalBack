@@ -21,11 +21,11 @@
                     <span>@(Model.Count - 2) more items in your cart</span>
                 </div>
             }
-            <div class="cart-checkout-btn">
+            <a asp-controller="basket" asp-action="index" class="cart-checkout-btn">
                 <div class="add-to-cart-btn">
                     CHECKOUT
                 </div>
-            </div>
+            </a>
         </div>
     }
     else

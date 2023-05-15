@@ -2,6 +2,16 @@ $(document).ready(function () {
     $(window).on('beforeunload', function () {
         $.cookies.del('filter');
     });
+    $(document).on('change', '.customadd', function () {
+        if ($('.customadd').is(":checked")) {
+            console.log("checked")
+            $('.existaddresses').addClass('d-none');
+            $('.customaddress').removeClass('d-none');
+        } else {
+            $('.existaddresses').removeClass('d-none');
+            $('.customaddress').addClass('d-none');
+        }
+    })
     //$(document).on('click', '.aremove', function (e) {
     //    e.preventDefault();
     //    e.stopPropagation();

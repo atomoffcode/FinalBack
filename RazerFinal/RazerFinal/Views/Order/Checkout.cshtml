@@ -1,0 +1,34 @@
+﻿@model OrderVM
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="account pb-100px">
+    <div class="address-add ">
+        <div class="address-add-all">
+            <h1 class="address-add-header">Checkout</h1>
+            <div class="address-add-inner">
+                <div class="cart-total-index">
+                    <div class="cart-total-index-all">
+                        <div class="subtotal">
+                            <h5>Subtotal</h5>
+                            <span>US$@(Model.Baskets.Sum(m => m.Price))</span>
+                        </div>
+                        <div class="tax-fee">
+                            <h5>Tax-Fee</h5>
+                            <span>US$@(Model.Baskets.Sum(m => m.ExTax))</span>
+                        </div>
+                        <div class="total-all">
+                            <h5>Your Total</h5>
+                            <span>US$@(Model.Baskets.Sum(m => m.Price + m.ExTax))</span>
+                        </div>
+                    </div>
+                </div>
+
+                @await Html.PartialAsync("_OrderAddressPartial",Model.Order)
+            </div>
+        </div>
+    </div>
+</div>
+
+

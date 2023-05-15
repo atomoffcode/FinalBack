@@ -5,7 +5,7 @@
         Pending,
         Accepted,
         Rejected,
-        Courier,
+        OnRoad,
         Delivered
     }
 }

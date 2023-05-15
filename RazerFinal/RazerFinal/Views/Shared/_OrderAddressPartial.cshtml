@@ -1,0 +1,70 @@
+﻿@model Order
+<form id="login" asp-controller="order" asp-action="checkout" class="login-form">
+    <div class="form-check">
+
+        <input asp-for="CustomAddress" class=" customadd">
+        <label asp-for="CustomAddress" class="form-check-label" style="color:#999999;">Custom Address?</label>
+        <span asp-validation-for="CustomAddress" class="text-danger"></span>
+
+    </div>
+    <div class="form-input existaddresses">
+        <label asp-for=SingleAddressId class="d-none" for="">Address</label>
+        <select asp-for="SingleAddressId" asp-items="ViewBag.Addresses">
+        </select>
+        <span asp-validation-for="SingleAddressId" class="text-danger"></span>
+
+    </div>
+    <div class="customaddress d-none">
+        <div class="form-input">
+            <label asp-for="PhoneNumber" class="d-none" for="">Phone Number</label>
+            <input asp-for="PhoneNumber" placeholder="Phone Number">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-input">
+            <label asp-for="User.Email" class="d-none" for="">Email Address</label>
+            <input asp-for="User.Email" placeholder="Email Address">
+            <span asp-validation-for="User.Email" class="text-danger"></span>
+
+        </div>
+        <div class="form-input">
+            <label asp-for=User.Name class="d-none" for="">Name</label>
+            <input asp-for="User.Name" placeholder="Name">
+            <span asp-validation-for="User.Name" class="text-danger"></span>
+
+        </div>
+        <div class="form-input">
+            <label asp-for=User.SurName class="d-none" for="">Last Name</label>
+            <input asp-for="User.SurName" placeholder="Last Name">
+            <span asp-validation-for="User.SurName" class="text-danger"></span>
+
+        </div>
+        <div class="form-input">
+            <label asp-for=Country class="d-none" for="">Country</label>
+            <select asp-for="Country" asp-items="ViewBag.EnumList">
+            </select>
+            <span asp-validation-for="Country" class="text-danger"></span>
+
+        </div>
+        <div class="form-input">
+            <label asp-for="City" class="d-none" for="">City</label>
+            <input asp-for="City" placeholder="City">
+            <span asp-validation-for="City" class="text-danger"></span>
+
+        </div>
+        <div class="form-input">
+            <label asp-for=PostalCode class="d-none" for="">Postal Code</label>
+            <input asp-for="PostalCode" placeholder="postal code">
+            <span asp-validation-for="PostalCode" class="text-danger"></span>
+
+        </div>
+        <div class="form-input">
+            <label asp-for=DirectAddress class="d-none" for="">Address</label>
+            <input asp-for="DirectAddress" placeholder="Address Line">
+            <span asp-validation-for="DirectAddress" class="text-danger"></span>
+
+        </div>
+    </div>
+    
+
+    <input type="submit" class="add-to-cart-btn login-btn" value="Checkout">
+</form>

@@ -547,6 +547,9 @@ namespace RazerFinal.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<bool>("CustomAddress")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
@@ -576,6 +579,9 @@ namespace RazerFinal.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int?>("SingleAddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("State")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -601,6 +607,8 @@ namespace RazerFinal.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SingleAddressId");
 
                     b.HasIndex("UserId");
 
@@ -1057,9 +1065,15 @@ namespace RazerFinal.Migrations
 
             modelBuilder.Entity("RazerFinal.Models.Order", b =>
                 {
+                    b.HasOne("RazerFinal.Models.Address", "SingleAddress")
+                        .WithMany()
+                        .HasForeignKey("SingleAddressId");
+
                     b.HasOne("RazerFinal.Models.AppUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("SingleAddress");
 
                     b.Navigation("User");
                 });
