@@ -2,6 +2,34 @@ $(document).ready(function () {
     $(window).on('beforeunload', function () {
         $.cookies.del('filter');
     });
+    $(document).on('click', '.removecompare', function (e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+        console.log(e.currentTarget)
+        let url = $(e.currentTarget).attr('href');
+        fetch(url)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.compareindex').html(data)
+            })
+
+    })
+    $(document).on('change', '.addcompare', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        let url = window.location.href
+        let val = $(e.currentTarget).attr('data-value');
+        let url2 =`/compare/checkcompare?id=${val}`
+        console.log(url2);
+        fetch(url2)
+            .then(res => {
+                return res.text();
+            }).then(data => {
+                $('.comparecart').html(data)
+            })
+    })
     $(document).on('change', '.customadd', function () {
         if ($('.customadd').is(":checked")) {
             console.log("checked")

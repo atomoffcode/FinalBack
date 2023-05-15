@@ -28,7 +28,17 @@ namespace RazerFinal.Controllers
 
         public async Task<IActionResult> Shop(int catId = 0)
         {
-
+            string cookie0 = HttpContext.Request.Cookies["compare"];
+            if (!string.IsNullOrWhiteSpace(cookie0))
+            {
+                List<Compare> compares = null;
+                compares = JsonConvert.DeserializeObject<List<Compare>>(cookie0);
+                ViewBag.Compares = compares;
+            }
+            else
+            {
+                ViewBag.Compares = null;
+            }
             
             ViewBag.DefCat = "";
             List<Product> products = null;

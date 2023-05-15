@@ -14,6 +14,8 @@ namespace RazerFinal.Models
         [StringLength(255)]
         public string? ProfileImage { get; set; }
         public List<Basket>? Baskets { get; set; }
+        public List<Compare>? Compares { get; set; }
+
         public List<Address>? Addresses { get; set; }
         public List<Order>? Orders { get; set; }
 

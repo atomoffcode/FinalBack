@@ -2594,7 +2594,73 @@ a {
   color: #44D62C;
   margin-bottom: 10px;
 }
+.form-check-input-2 {
+    --bs-form-check-bg: var(--bs-body-bg);
+    width: 1em;
+    height: 1em;
+    margin-top: 0.25em;
+    vertical-align: top;
+    background-color: var(--bs-form-check-bg);
+    background-image: var(--bs-form-check-bg-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    print-color-adjust: exact;
+}
 
+    .form-check-input-2[type=checkbox] {
+        border-radius: 0.25em;
+    }
+
+    .form-check-input-2[type=radio] {
+        border-radius: 50%;
+    }
+
+    .form-check-input-2:active {
+        filter: brightness(90%);
+    }
+
+    .form-check-input-2:focus {
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    .form-check-input-2:checked {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+        .form-check-input-2:checked[type=checkbox] {
+            --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+        }
+
+        .form-check-input-2:checked[type=radio] {
+            --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+        }
+
+    .form-check-input-2[type=checkbox]:indeterminate {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+    }
+
+    .form-check-input-2:disabled {
+        pointer-events: none;
+        filter: none;
+        opacity: 0.5;
+    }
+
+        .form-check-input-2[disabled] ~ .form-check-label, .form-check-input-2:disabled ~ .form-check-label {
+            cursor: default;
+            opacity: 0.5;
+        }
 @media (max-width: 991px) {
   .address-list {
     grid-template-columns: 33% 33% 33%;
@@ -2639,4 +2705,5 @@ a {
     display: inline-block;
     margin-bottom: 20px;
   }
+
 }/*# sourceMappingURL=style.css.map */

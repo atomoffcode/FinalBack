@@ -464,6 +464,65 @@ namespace RazerFinal.Migrations
                     b.ToTable("CategorySpecs");
                 });
 
+            modelBuilder.Entity("RazerFinal.Models.Compare", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Compares");
+                });
+
             modelBuilder.Entity("RazerFinal.Models.IndexPost", b =>
                 {
                     b.Property<int>("Id")
@@ -1052,6 +1111,21 @@ namespace RazerFinal.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("RazerFinal.Models.Compare", b =>
+                {
+                    b.HasOne("RazerFinal.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("RazerFinal.Models.AppUser", "User")
+                        .WithMany("Compares")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("RazerFinal.Models.IndexPost", b =>
                 {
                     b.HasOne("RazerFinal.Models.Product", "Product")
@@ -1154,6 +1228,8 @@ namespace RazerFinal.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("Baskets");
+
+                    b.Navigation("Compares");
 
                     b.Navigation("Orders");
                 });

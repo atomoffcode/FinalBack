@@ -1,0 +1,93 @@
+﻿@model CompareVM
+<div class="compare-products">
+    <div class="compare-products-all">
+        @foreach (Compare item in Model.Compares.OrderBy(c => c.Product.Id))
+        {
+            <div class="shop-list-item">
+                <div class="sli-top">
+                    <div class="sli-badge badge-orange d-none">
+                        Gift with purchase
+                    </div>
+                    <a asp-controller="compare" asp-action="removecompare" asp-route-id="@item.Id" class="compare-close-btn removecompare">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+                    <a href="">
+                        <img src="~/assets/photos/products/@item.Product.MainImage" alt="">
+
+                    </a>
+                    <div class="compare-btn d-none">
+                        <div class="form-check filter">
+                            <input class="form-check-input" type="checkbox" value="">
+                            <label class="form-check-label">
+                                Compare
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="sli-bottom">
+                    <div class="sli-desc">
+                        <a href="" class="sli-title">
+                            @item.Product.Title
+                        </a>
+                        <div class="sli-details d-none">
+                            <ul>
+                                <li>Intel Core i7-13800H</li>
+                                <li>Intel Core i7-13800H</li>
+                                <li>Intel Core i7-13800H</li>
+                                <li>Intel Core i7-13800H</li>
+                                <li>Intel Core i7-13800H</li>
+                            </ul>
+                        </div>
+                        <a href="" class="sli-link">View details ></a>
+                    </div>
+                    <div class="sli-price-btn">
+                        <div class="sli-price">
+                            US$@(item.Product.DiscountedPrice > 0 ? item.Product.DiscountedPrice : item.Product.Price)
+                        </div>
+                        <div class="sli-btn">
+                            @if (item.Product.Count > 0)
+                            {
+                                <a asp-controller="basket" asp-action="addbasket" asp-route-id="@item.Product.Id" class="add-to-cart-btn addbasket">
+                                    Add to cart
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="sli-outofstock d-none">Out of Stock</span>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@if (Model.CategorySpecs != null && Model.CategorySpecs.Count >0)
+{
+    <div class="compare-specs">
+        <div class="compare-specs-all">
+            <table>
+                <tbody>
+                    @foreach (CategorySpec category in Model.CategorySpecs)
+                    {
+                        <tr>
+                            <th>@category.Name</th>
+                            @foreach (Compare item in Model.Compares)
+                            {
+                                <td>@(!string.IsNullOrWhiteSpace(item.Product.Specifications.FirstOrDefault(c => c.CategorySpecId == category.Id)?.Specification.Name) ? item.Product.Specifications.FirstOrDefault(c => c.CategorySpecId == category.Id)?.Specification.Name : "Unknown")</td>
+
+                            }
+                        </tr>
+                    }
+                    @*<tr>
+                <th>OS</th>
+                <td class="td-half-width">Windows 11 Home</td>
+                <td class="td-one-width">Windows 11 Home</td>
+                </tr>*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

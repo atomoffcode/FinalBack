@@ -1,4 +1,7 @@
 ﻿@model List<Product>
+@{
+    List<Compare> compares = ViewBag.Compares;
+}
 @foreach (Product product in Model)
 {
     <div class="shop-list-item">
@@ -12,7 +15,22 @@
             </a>
             <div class="compare-btn">
                 <div class="form-check filter">
-                    <input class="form-check-input" type="checkbox" value="">
+                    @if (compares != null && compares.Count > 0)
+                    {
+                        if (compares.Any(c=>c.Id == product.Id))
+                        {
+                            <input class="form-check-input-2 addcompare" type="checkbox" checked value="" data-value="@product.Id">
+                        }
+                        else{
+
+                            <input class="form-check-input-2 addcompare" type="checkbox" value="" data-value="@product.Id">
+                        }
+                    }
+                    else
+                    {
+                        <input class="form-check-input-2 addcompare" type="checkbox" value="" data-value="@product.Id">
+                    }
+
                     <label class="form-check-label">
                         Compare
                     </label>

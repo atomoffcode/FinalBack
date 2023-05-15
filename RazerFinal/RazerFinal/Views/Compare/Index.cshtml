@@ -1,0 +1,24 @@
+﻿@model CompareVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="compare pb-100px">
+    <div class="compare-header">
+        <div class="compare-header-all">
+            <h1>compare</h1>
+        </div>
+    </div>
+    <div class="compareindex">
+        @if (Model.Compares != null && Model.Compares.Count > 0)
+        {
+            @await Html.PartialAsync("_CompareIndexPartial",Model)
+        }
+    </div>
+    <div class="cart-empty  pt-100px pb-100px">
+        <h1 class="padding-70px text-center" style="color:#44d62c; font-weight: 700;">Get some items to compare</h1>
+        <a asp-controller="store" asp-action="shop" class="text-center padding-70px">Go Shop</a>
+    </div>
+    
+</div>
+
