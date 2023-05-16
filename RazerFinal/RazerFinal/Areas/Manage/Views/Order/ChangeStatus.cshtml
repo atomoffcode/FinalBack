@@ -1,0 +1,31 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "ChangeStatus";
+    IEnumerable<OrderType> orderTypes = ViewBag.Statuses;
+    SelectList selectListItems = new SelectList(orderTypes, nameof(OrderType));
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row justify-content-between">
+            <div class="col-lg-3">
+                <h1 class="h3 mb-4 text-gray-800">Status Update Page</h1>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-12 ">
+        <form method="post" asp-controller="Order" asp-action="ChangeStatus">
+
+            <div class="form-group parentInput">
+                <label>Status</label>
+                <select class="form-control" asp-for="Status" asp-items="@selectListItems">
+                </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+

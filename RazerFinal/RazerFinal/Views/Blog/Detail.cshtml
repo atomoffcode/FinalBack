@@ -1,0 +1,78 @@
+﻿@model BlogVM
+@{
+    ViewData["Title"] = "Detail";
+}
+
+
+<div class="blog">
+    <div class="blog-detail">
+        <h1 class="blog-title">
+            @Model.Blog.Title
+
+        </h1>
+        <ul class="blog-mini-details">
+            <li>@Model.Blog.CreatedAt.ToString("dd/mm/yyyy")</li>
+            <li>@Model.Blog.Comments.Count comments</li>
+        </ul>
+        <div class="blog-pic" style="background-image: url('@Url.Content($"~/assets/photos/blogs/{Model.Blog.Image}")');"></div>
+        <div class="blog-description">
+            <div class="blog-desc-left">
+                <img src="~/assets/photos/profile/header-cart-profile-picture.png" alt="" class="blog-poster-img">
+            </div>
+            <div class="blog-desc-right">
+                @Html.Raw(Model.Blog.MainDescription)
+                @*<a class="poster-razerid">
+                    dekades
+                </a>
+                <img src="assets/photos/icons/34a57149-816b-4ee1-945f-270a6bf9cc60.jpg" alt="">
+                <p>
+                    Experience pure, polished precision with our first ever glass gaming mouse mat - the Razer Atlas.
+
+                    Built to last with premium tempered glass, stay in the zone with an ultra-smooth, micro-etched
+
+                    surface designed for quicker, quieter, and more consistent glides: https://rzr.to/atlas
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio minus ipsum eos, autem amet nihil sint dignissimos mollitia impedit molestias atque animi explicabo quas odio iste accusantium expedita dolorem! Magnam, quas expedita vitae eum officia, et consectetur ad voluptas libero autem dolorem blanditiis quo ullam quidem excepturi fuga accusamus deleniti ex debitis totam praesentium laborum fugit. Numquam labore placeat voluptate perspiciatis nisi, optio, quo, beatae dicta illo soluta odio. Ducimus molestias voluptatum, inventore voluptates magnam ipsam excepturi nesciunt doloribus! Placeat laboriosam possimus earum provident! Possimus doloribus obcaecati, voluptas perferendis unde aut non autem sequi voluptate accusantium, ea maiores? Similique, quis!
+                </p>*@
+
+            </div>
+        </div>
+    </div>
+    <div class="blog-replies">
+        <h3 class="rep-count">
+            @Model.Blog.Comments.Count comments
+        </h3>
+        <div class="blogcomments indexContainer">
+            @await Html.PartialAsync("_CommentIndexPartial" , Model.Blog.Comments)
+        </div>
+        @*<div class="reply">
+            <div class="reply-left">
+                <img src="~/assets/photos/profile/header-cart-profile-picture.png" alt="" class="blog-poster-img">
+
+            </div>
+            <div class="reply-right">
+                <div class="rr-top">
+                    <a class="poster-razerid">
+                        dekades
+                    </a>
+                    <span>22/22/2222</span>
+                </div>
+                <div class="rr-bottom">
+                    <p>
+                        Experience pure, polished precision with our first ever glass gaming mouse mat - the Razer Atlas.
+
+                        Built to last with premium tempered glass, stay in the zone with an ultra-smooth, micro-etched
+
+                        surface designed for quicker, quieter, and more consistent glides: https://rzr.to/atlas
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio minus ipsum eos, autem amet nihil sint dignissimos mollitia impedit molestias atque animi explicabo quas odio iste accusantium expedita dolorem! Magnam, quas expedita vitae eum officia, et consectetur ad voluptas libero autem dolorem blanditiis quo ullam quidem excepturi fuga accusamus deleniti ex debitis totam praesentium laborum fugit. Numquam labore placeat voluptate perspiciatis nisi, optio, quo, beatae dicta illo soluta odio. Ducimus molestias voluptatum, inventore voluptates magnam ipsam excepturi nesciunt doloribus! Placeat laboriosam possimus earum provident! Possimus doloribus obcaecati, voluptas perferendis unde aut non autem sequi voluptate accusantium, ea maiores? Similique, quis!
+                    </p>
+                </div>
+
+            </div>
+        </div>*@
+        <div class="reply-poster">
+            @await Html.PartialAsync("_CommentReplyPartial" , new Comment{BlogId = Model.Blog.Id})
+            
+        </div>
+    </div>
+</div>
+

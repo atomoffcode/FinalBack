@@ -1,0 +1,26 @@
+﻿@model List<Comment>
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (Comment comment in Model)
+    {
+        <div class="reply" style="justify-items: left;">
+            <div class="reply-left">
+                <img src="~/assets/photos/profile/@(!string.IsNullOrWhiteSpace(comment.User?.ProfileImage) ? comment.User.ProfileImage : "header-cart-profile-picture.png")" alt="" class="blog-poster-img">
+
+            </div>
+            <div class="reply-right w-100">
+                <div class="rr-top" style="display:flex; justify-content:space-between; width:100%;">
+                    <a class="poster-razerid">
+                        @comment.User?.UserName
+                    </a>
+                    <span>@comment.CreatedAt.ToString("dd/mm/yyyy")</span>
+                </div>
+                <div class="rr-bottom">
+                    <p>@Html.Raw(comment.Text)</p>
+                </div>
+
+            </div>
+        </div>
+    }
+    
+}

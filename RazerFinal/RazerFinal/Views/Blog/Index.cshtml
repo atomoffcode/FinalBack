@@ -1,0 +1,76 @@
+﻿@model PageNatedList<Blog>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="blog">
+    <div class="blog-all">
+        <div class="blog-section">
+            <h3 class="blog-section-header">Featured</h3>
+            <div class="blog-section-items">
+                @foreach (Blog blog in Model)
+                {
+                    <div class="blog-item">
+                        <a asp-controller="blog" asp-action="detail" asp-route-id="@blog.Id">
+
+                        </a>
+                        <div class="post-pic" style="background: url('./assets/photos/blogs/@blog.Image')">
+                        </div>
+                        <div class="post-details">
+                            <h3 class="post-title">@blog.Title</h3>
+                            <div class="post-social-details">
+                                <img class="poster-img" src="/RazerFront/assets/photos/profile/header-cart-profile-picture.png" alt="" />
+                                <div class="post-date">@blog.CreatedAt.ToString("dd/mm/yyyy")</div>
+                                <div class="post-comment-count">
+                                    <i class="fa-solid fa-comment"></i>
+                                    <span>@(blog.Comments?.Count == null && blog.Comments?.Count < 1 ? "0" : blog.Comments?.Count)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                @*<div class="blog-item">
+                    <a href="">
+
+                    </a>
+                    <div class="post-pic" style="background: url('./assets/photos/icons/b7c47d3a-bcf5-431d-9e68-d36f39f56f00_thumb.jpg')">
+                    </div>
+                    <div class="post-details">
+                        <h3 class="post-title">RAZER ATLAS | Pure Polished Precision</h3>
+                        <div class="post-social-details">
+                            <img class="poster-img" src="/RazerFront/assets/photos/profile/c0c539da-7912-4d22-8a9a-95314dff15a3.png" alt=""></img>
+                            <div class="post-date">11/11/2011</div>
+                            <div class="post-comment-count">
+                                <i class="fa-solid fa-comment"></i>
+                                <span>123</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            <div class="col-lg-12">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @if (Model.HasPrev)
+                        {
+                            <li class="page-item"><a class="page-link" style="background: black; color: #44D62C; border:1px solid #44D62C;" asp-area="manage" asp-controller="blog" asp-action="index" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a></li>
+                        }
+                        @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                        {
+                            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                                <a class="page-link" style="@(i==Model.PageIndex ? "background: #44D62C; color: black; border:1px solid #44D62C;":"background: black; color: #44D62C; border:1px solid #44D62C;")" asp-area="blog" asp-controller="category" asp-action="index" asp-route-pageIndex="@i">@i</a>
+                            </li>
+
+                        }
+                        @if (Model.HasNext)
+                        {
+                            <li class="page-item"><a class="page-link" style="background: black; color: #44D62C; border:1px solid #44D62C;" asp-area="manage" asp-controller="blog" asp-action="index" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a></li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+

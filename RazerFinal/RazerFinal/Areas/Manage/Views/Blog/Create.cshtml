@@ -1,0 +1,73 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row justify-content-between">
+            <div class="col-lg-3">
+                <h1 class="h3 mb-4 text-gray-800">Blog Create Page</h1>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-12 ">
+        <style>
+            .ck-editor__editable {
+                color: black;
+            }
+        </style>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="SecondDescription"></label>
+            <input asp-for="SecondDescription" class="form-control" />
+            <span asp-validation-for="SecondDescription" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="MainDescription"></label>
+                <textarea asp-for="MainDescription" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="File"></label>
+                <input asp-for="File" accept="image/jpeg" class="form-control-file">
+                <span asp-validation-for="File" class="text-danger"></span>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#MainDescription'), {
+                toolbar: {
+                    items: [
+                        'undo', 'redo',
+                        '|', 'heading',
+                        '|', 'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor',
+                        '|', 'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
+                        '|', 'blockQuote', 'codeBlock',
+                        '|', 'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent'
+                    ],
+                    shouldNotGroupWhenFull: false
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}
+

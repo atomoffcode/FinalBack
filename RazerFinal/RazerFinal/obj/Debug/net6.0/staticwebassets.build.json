@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BMMc3SOuuqxK7K436st5xP5c7gwIHFvpTdr/sIMXnYs=",
+  "Hash": "DjqQ9j3InnFhHcrFIqMNsf/Pb6+siBItCUgDfYLsPk8=",
   "Source": "RazerFinal",
   "BasePath": "_content/RazerFinal",
   "Mode": "Default",
@@ -457,6 +457,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\store.js"
+    },
+    {
+      "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\blogs\\fafdb6b6-530d-4840-96ea-7b92b7560448_.jpg",
+      "SourceId": "RazerFinal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\",
+      "BasePath": "_content/RazerFinal",
+      "RelativePath": "assets/photos/blogs/fafdb6b6-530d-4840-96ea-7b92b7560448_.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\photos\\blogs\\fafdb6b6-530d-4840-96ea-7b92b7560448_.jpg"
     },
     {
       "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\category\\1ca9c8f2-4a55-461b-83f6-f25efb420246_.jpg",

@@ -116,6 +116,30 @@
                         <span class="menu-title">Settings</span>
                     </a>
                 </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="manage" asp-controller="blog" asp-action="index">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
+                        <span class="menu-title">Blogs</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="manage" asp-controller="order" asp-action="index">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
+                        <span class="menu-title">Orders</span>
+                    </a>
+                </li>
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="manage" asp-controller="user" asp-action="index">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-table-large"></i>
+                        </span>
+                        <span class="menu-title">Users</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 
@@ -207,6 +231,7 @@
     <!-- Custom js for this page -->
     <script src="~/manage/assets/js/dashboard.js"></script>
     <script src="~/manage/assets/js/custom.js"></script>
+    @RenderSection("Scripts",false)
     <!-- End custom js for this page -->
 </body>
 </html>

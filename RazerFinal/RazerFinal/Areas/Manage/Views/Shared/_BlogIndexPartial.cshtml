@@ -1,0 +1,53 @@
+﻿@model PageNatedList<Blog>
+@{
+    int count = 0;
+}
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Title</th>
+            <th>Created At</th>
+            <th>Created By</th>
+            <th>Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Blog blog in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@(blog.Title.Length > 15 ? blog.Title.Substring(0, 15) : blog.Title) ...</td>
+                <td>@blog.CreatedAt.ToString("dd-MMM-yyyy").ToUpper()</td>
+                <td>@blog.CreatedBy</td>
+                <td>
+                    <a asp-area="manage" asp-controller="blog" asp-action="Detail" asp-route-id="@blog.Id" class="btn btn-primary">Detail</a>
+                    <a asp-area="manage" asp-controller="blog" asp-action="Update" asp-route-id="@blog.Id" class="btn btn-warning">Update</a>
+                    <a asp-area="manage" asp-controller="blog" asp-action="Delete" asp-route-id="@blog.Id" class="btn btn-danger deleteBtn">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="col-lg-12">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.HasPrev)
+            {
+                <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="blog" asp-action="index" asp-route-pageIndex="@(Model.PageIndex - 1)">Previous</a></li>
+            }
+            @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")"><a class="page-link" asp-area="manage" asp-controller="blog" asp-action="index" asp-route-pageIndex="@i">@i</a></li>
+
+            }
+            @if (Model.HasNext)
+            {
+                <li class="page-item"><a class="page-link" asp-area="manage" asp-controller="blog" asp-action="index" asp-route-pageIndex="@(Model.PageIndex + 1)">Next</a></li>
+            }
+        </ul>
+    </nav>
+</div>

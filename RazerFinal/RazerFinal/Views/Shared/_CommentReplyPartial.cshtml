@@ -1,0 +1,27 @@
+﻿@model Comment
+@if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+{
+    
+    <form method="post" asp-controller="blog" asp-action="addcomment" asp-route-blogId="@Model.BlogId">
+        <h3 class="rp-header">
+            Reply
+        </h3>
+        <div class="rp-body">
+            <div class="form-group">
+                <textarea asp-for="Text" class="form-control" rows="3"></textarea>
+            </div>
+
+        </div>
+        <div class="rp-post-btn">
+            <button type="submit" class="add-to-cart-btn">
+                post
+            </button>
+        </div>
+    </form>
+}
+else
+{
+    <h3 class="rp-header">
+        Login to Comment
+    </h3>
+}
