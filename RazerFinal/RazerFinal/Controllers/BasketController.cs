@@ -198,6 +198,26 @@ namespace RazerFinal.Controllers
                 }
 
             }
+            if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            {
+                AppUser appUser = await _userManager.Users
+                    .Include(u => u.Baskets.Where(b => b.isDeleted == false))
+                    .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+
+                if (appUser.Baskets != null && appUser.Baskets.Count() > 0)
+                {
+                    if (appUser.Baskets.Exists(b => b.ProductId == Id) && appUser.Baskets.Find(b=>b.ProductId == Id).Count > 1)
+                    {
+                        appUser.Baskets.Find(b=>b.Id == Id).Count -= 1;
+                    }
+                    else if (appUser.Baskets.Exists(p => p.ProductId == Id))
+                    {
+                        appUser.Baskets.RemoveAll(p => p.ProductId == Id);
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+            }
             cookie = JsonConvert.SerializeObject(basketVMs);
             HttpContext.Response.Cookies.Append("basket", cookie);
 

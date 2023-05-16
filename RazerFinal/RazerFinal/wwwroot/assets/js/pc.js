@@ -87,6 +87,7 @@ $(document).ready(function () {
                 return res.text();
             }).then(data => {
                 $('.headercart').html(data)
+                $('.header-cart-basket').html(data)
                 console.log(url)
                 let url2 = "/" + url.split('/')[1] + "/mainbasket"
                 console.log(url2)

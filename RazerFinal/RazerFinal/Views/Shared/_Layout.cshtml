@@ -166,8 +166,9 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                         <i class="fa-solid fa-cart-shopping header-cart-btn" style="color: #888888;"></i>
                         <div class="header-cart-dropdown d-none">
                             <div class="header-cart-basket">
-                                <div class="header-cart-basket-empty" style="color: #888;">Your Cart is empty.</div>
-                                <div class="header-cart-basket-items"></div>
+                                @await Html.PartialAsync("_BasketCartPartial",headerVM.BasketVMs)
+                                @*<div class="header-cart-basket-empty" style="color: #888;">Your Cart is empty.</div>
+                                <div class="header-cart-basket-items"></div>*@
                             </div>
                             <div class="headar-cart-link header-cart-items">
                                 <i class="fa-solid fa-cart-shopping"></i>
