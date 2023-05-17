@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Crypto;
 using RazerFinal.DataAccessLayer;
 using RazerFinal.Enums;
 using RazerFinal.Extensions;
@@ -81,36 +82,173 @@ namespace RazerFinal.Controllers
                 return RedirectToAction(nameof(Profile));
             }
 
-            //string token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
-            //string url = Url.Action("EmailConfirm", "Account", new { id = appUser.Id, token = token }, HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+            string url = Url.Action("EmailConfirm", "Account", new { id = appUser.Id, token = token }, HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
 
             //string templateFullPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "_EmailConfirm.cshtml");
             //string templateContent = await System.IO.File.ReadAllTextAsync(templateFullPath);
             //templateContent = templateContent.Replace("{{email}}", $"{appUser.Name} {appUser.SurName}");
             //templateContent = templateContent.Replace("{{url}}", "url");
 
-            //MimeMessage mimeMessage = new MimeMessage();
-            //mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
-            //mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
-            //mimeMessage.Subject = "Email Confirmation";
-            //mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
-            //{
-            //    Text = templateContent
-            //};
+            MimeMessage mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
+            mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
+            mimeMessage.Subject = "Email Confirmation";
+            mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
+            {
+                Text = $"Please Click here to Confirm your Email {url}"
+            };
 
 
-            //using (SmtpClient smtpClient = new SmtpClient())
-            //{
-            //    await smtpClient.ConnectAsync(_smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
-            //    await smtpClient.AuthenticateAsync(_smtpSetting.Email, _smtpSetting.Password);
-            //    await smtpClient.SendAsync(mimeMessage);
-            //    await smtpClient.DisconnectAsync(true);
-            //    smtpClient.Dispose();
-            //}
+            using (SmtpClient smtpClient = new SmtpClient())
+            {
+                await smtpClient.ConnectAsync(_smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(_smtpSetting.Email, _smtpSetting.Password);
+                await smtpClient.SendAsync(mimeMessage);
+                await smtpClient.DisconnectAsync(true);
+                smtpClient.Dispose();
+            }
 
 
             return RedirectToAction("Login");
         }
+        [HttpGet]
+        public async Task<IActionResult> ForgotPassword()
+        {
+
+
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM forgotPasswordVM)
+        {
+            if (string.IsNullOrWhiteSpace(forgotPasswordVM.Email))
+            {
+                ModelState.AddModelError("", "Please enter your Email address");
+                return View(forgotPasswordVM);
+            }
+            if(!await _userManager.Users.AnyAsync(u=>u.NormalizedEmail == forgotPasswordVM.Email.ToUpperInvariant()))
+            {
+                ModelState.AddModelError("", "The Email you entered is not registered!!!");
+                return View(forgotPasswordVM);
+            }
+            AppUser appUser = await _userManager.FindByEmailAsync(forgotPasswordVM.Email);
+
+            if (appUser == null)
+            {
+                ModelState.AddModelError("", "The Email you entered is not registered!!!");
+                return View(forgotPasswordVM);
+            }
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+            string url = Url.Action("ResetPassword", "Account", new { id = appUser.Id, token = token }, HttpContext.Request.Scheme, HttpContext.Request.Host.ToString());
+
+            MimeMessage mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
+            mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
+            mimeMessage.Subject = "Reset Password";
+            mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
+            {
+                Text = $"Please Click here to Reset your Password {url}"
+            };
+
+
+            using (SmtpClient smtpClient = new SmtpClient())
+            {
+                await smtpClient.ConnectAsync(_smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(_smtpSetting.Email, _smtpSetting.Password);
+                await smtpClient.SendAsync(mimeMessage);
+                await smtpClient.DisconnectAsync(true);
+                smtpClient.Dispose();
+            }
+
+            return RedirectToAction(nameof(EmailSent));
+        }
+        [HttpGet]
+        public async Task<IActionResult> EmailSent()
+        {
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> PasswordSet()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword(string? id, string? token)
+        {
+            if(string.IsNullOrWhiteSpace(id)) return BadRequest();
+            if(!await _userManager.Users.AnyAsync(u=>u.Id == id)) return BadRequest();
+            if(string.IsNullOrWhiteSpace(token)) return BadRequest();
+            
+            AppUser appUser = await _userManager.Users.Include(u=>u.Tokens).FirstOrDefaultAsync(u=>u.Id == id);
+
+            if(appUser == null) return NotFound();
+
+            if (appUser.Tokens != null && appUser.Tokens.Count > 0)
+            {
+                if (appUser.Tokens.Any(t => t.Token == token)) return BadRequest();
+            }
+
+
+            PasswordVM passwordVM = new PasswordVM
+            {
+                Id = id,
+                Token = token
+            };
+
+            return View(passwordVM);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(string? id, string? token, PasswordVM passwordVM)
+        {
+            if (string.IsNullOrWhiteSpace(id)) return BadRequest();
+            if (!await _userManager.Users.AnyAsync(u => u.Id == id)) return BadRequest();
+            if (string.IsNullOrWhiteSpace(token)) return BadRequest();
+            AppUser appUser = await _userManager.Users.Include(u => u.Tokens).FirstOrDefaultAsync(u => u.Id == id);
+
+            if (appUser == null) return BadRequest();
+
+            if (appUser.Tokens != null && appUser.Tokens.Count > 0)
+            {
+                if (appUser.Tokens.Any(t => t.Token == token)) return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(passwordVM);
+            }
+
+            
+
+
+            IdentityResult identityResult = await _userManager.ResetPasswordAsync(appUser, token, passwordVM.Password);
+
+            if (!identityResult.Succeeded)
+            {
+                foreach (IdentityError identityError in identityResult.Errors)
+                {
+                    ModelState.AddModelError("", identityError.Description);
+                }
+                return View(passwordVM);
+            }
+
+            UserToken userToken = new UserToken
+            {
+                User = appUser,
+                Token = token,
+            };
+
+            await _context.UserTokens.AddAsync(userToken);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(PasswordSet));
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> EmailConfirm(string? id, string? token)
         {
@@ -315,7 +453,7 @@ namespace RazerFinal.Controllers
                 {
                     ModelState.AddModelError("", identityError.Description);
                 }
-                return RedirectToAction(nameof(Profile));
+                return View(accountVM);
             }
 
             if (!string.IsNullOrWhiteSpace(accountVM.CurrentPassword))
@@ -335,7 +473,7 @@ namespace RazerFinal.Controllers
                     {
                         ModelState.AddModelError("", identityError.Description);
                     }
-                    return RedirectToAction(nameof(Profile));
+                    return View(accountVM);
                 }
             }
 

@@ -11,33 +11,47 @@
                     Parsonal information
                 </h2>
                 <form id="register" asp-action="accountchange" asp-controller="account" class="login-form pb-35px">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-input">
                         <label asp-for=Name class="" for="">Name</label>
                         <input asp-for=Name placeholder="Name">
+                        <span asp-validation-for=Name class="text-danger"></span>
                     </div>
                     <div class="form-input">
                         <label asp-for=SurName class="" for="">Last Name</label>
                         <input asp-for=SurName placeholder="Last Name">
+                        <span asp-validation-for=SurName class="text-danger"></span>
+
                     </div>
                     <div class="form-input">
                         <label asp-for=UserName class="" for="">Razer ID (username)</label>
                         <input asp-for=UserName placeholder="Razer ID (username)">
+                        <span asp-validation-for=UserName class="text-danger"></span>
+
                     </div>
                     <div class="form-input">
                         <label asp-for=Email class="" for="">Email Address</label>
                         <input asp-for=Email placeholder="Email Address">
+                        <span asp-validation-for=Email class="text-danger"></span>
+
                     </div>
                     <div class="form-input">
-                        <label asp-for=CurrentPassword class="" for="">Password</label>
-                        <input asp-for=CurrentPassword placeholder="Password">
+                        <label asp-for=CurrentPassword class="" for="">CurrentPassword</label>
+                        <input asp-for=CurrentPassword placeholder="CurrentPassword">
+                        <span asp-validation-for=CurrentPassword class="text-danger"></span>
+
                     </div>
                     <div class="form-input">
                         <label asp-for=Password class="" for="">Password</label>
                         <input asp-for=Password placeholder="Password">
+                        <span asp-validation-for=Password class="text-danger"></span>
+
                     </div>
                     <div class="form-input">
-                        <label asp-for=ConfirmPassword class="" for="">Password</label>
-                        <input asp-for=ConfirmPassword placeholder="Password">
+                        <label asp-for=ConfirmPassword class="" for="">ConfirmPassword</label>
+                        <input asp-for=ConfirmPassword placeholder="ConfirmPassword">
+                        <span asp-validation-for=ConfirmPassword class="text-danger"></span>
+
                     </div>
                     <button type="submit" class="add-to-cart-btn login-btn">save changes</button>
                 </form>

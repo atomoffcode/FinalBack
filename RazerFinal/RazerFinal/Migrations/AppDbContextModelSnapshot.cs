@@ -220,7 +220,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.AppUser", b =>
@@ -365,7 +365,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Basket");
+                    b.ToTable("Basket", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Blog", b =>
@@ -419,7 +419,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Category", b =>
@@ -465,7 +465,7 @@ namespace RazerFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.CategorySpec", b =>
@@ -515,7 +515,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategorySpecs");
+                    b.ToTable("CategorySpecs", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Comment", b =>
@@ -574,7 +574,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Compare", b =>
@@ -633,7 +633,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Compares");
+                    b.ToTable("Compares", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.IndexPost", b =>
@@ -689,7 +689,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("IndexPosts");
+                    b.ToTable("IndexPosts", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Order", b =>
@@ -784,7 +784,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.OrderItem", b =>
@@ -837,7 +837,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Product", b =>
@@ -914,7 +914,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.ProductImage", b =>
@@ -960,7 +960,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.ProductSpec", b =>
@@ -1012,7 +1012,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("SpecificationId");
 
-                    b.ToTable("ProductSpecs");
+                    b.ToTable("ProductSpecs", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Setting", b =>
@@ -1037,7 +1037,7 @@ namespace RazerFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Slider", b =>
@@ -1088,7 +1088,7 @@ namespace RazerFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sliders");
+                    b.ToTable("Sliders", (string)null);
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Specification", b =>
@@ -1139,7 +1139,52 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategorySpecId");
 
-                    b.ToTable("Specifications");
+                    b.ToTable("Specifications", (string)null);
+                });
+
+            modelBuilder.Entity("RazerFinal.Models.UserToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1360,6 +1405,15 @@ namespace RazerFinal.Migrations
                     b.Navigation("CategorySpec");
                 });
 
+            modelBuilder.Entity("RazerFinal.Models.UserToken", b =>
+                {
+                    b.HasOne("RazerFinal.Models.AppUser", "User")
+                        .WithMany("Tokens")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("RazerFinal.Models.AppUser", b =>
                 {
                     b.Navigation("Addresses");
@@ -1371,6 +1425,8 @@ namespace RazerFinal.Migrations
                     b.Navigation("Compares");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("Tokens");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Blog", b =>

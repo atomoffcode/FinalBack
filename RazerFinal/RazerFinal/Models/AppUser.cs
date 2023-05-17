@@ -18,7 +18,8 @@ namespace RazerFinal.Models
 
         public List<Address>? Addresses { get; set; }
         public List<Order>? Orders { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<Comment>? Comments { get; set; }
+        public List<UserToken>? Tokens { get; set; } 
 
         public bool IsActive { get; set; }
         [NotMapped]

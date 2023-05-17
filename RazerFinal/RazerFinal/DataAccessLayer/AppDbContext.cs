@@ -25,6 +25,7 @@ namespace RazerFinal.DataAccessLayer
         public DbSet<Compare> Compares { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<UserToken> UserTokens { get; set; }
 
 
 
