@@ -1,11 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MimeKit;
 using RazerFinal.Areas.Manage.ViewModels.AccountViewModels;
 using RazerFinal.Helpers;
 using RazerFinal.Models;
+using RazerFinal.ViewModels;
+using RazerFinal.ViewModels.AccountViewModels;
 using System.Data;
+using System.Security.Policy;
 
 namespace RazerFinal.Areas.Manage.Controllers
 {
@@ -15,12 +21,57 @@ namespace RazerFinal.Areas.Manage.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public UserController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly SmtpSetting _smtpSetting;
+
+        public UserController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<SmtpSetting> smtpSetting)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _smtpSetting = smtpSetting.Value;
         }
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword(string? id)
+        {
+            if (id == null) return BadRequest();
+            if (!await _userManager.Users.AnyAsync(u => u.Id == id)) return NotFound();
 
+            AppUser appUser = await _userManager.FindByIdAsync(id);
+
+            if (appUser == null) return NotFound();
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+            string password = PasswordGenerator.GenerateRandomPassword(12);
+            IdentityResult identityResult = await _userManager.ResetPasswordAsync(appUser, token, password);
+            while (!identityResult.Succeeded)
+            {
+                token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+                password = PasswordGenerator.GenerateRandomPassword(12);
+                identityResult = await _userManager.ResetPasswordAsync(appUser, token, password);
+            }
+
+            MimeMessage mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
+            mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
+            mimeMessage.Subject = "Reset Password";
+            mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Plain)
+            {
+                Text = $"Your {appUser.UserName} account password reseted, your new password:{password}"
+            };
+
+
+            using (SmtpClient smtpClient = new SmtpClient())
+            {
+                await smtpClient.ConnectAsync(_smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(_smtpSetting.Email, _smtpSetting.Password);
+                await smtpClient.SendAsync(mimeMessage);
+                await smtpClient.DisconnectAsync(true);
+                smtpClient.Dispose();
+            }
+
+            
+
+            return RedirectToAction(nameof(Index));
+        }
         public async Task<IActionResult> Index(int pageIndex = 1)
         {
             List<AppUser> appUsers = await _userManager.Users.Where(u => u.UserName != User.Identity.Name).ToListAsync();

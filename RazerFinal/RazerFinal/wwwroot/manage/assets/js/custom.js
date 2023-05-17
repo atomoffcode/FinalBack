@@ -49,15 +49,41 @@
             })
     });
 
+    $(document).on('click', '.resetBtn', function (e) {
+        e.preventDefault();
+        let url = $(this).attr('href');
+        console.log(url)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You cant go back from this process!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let url2 = "/manage/user"
+                fetch(url)
+                    .then(res => res.text())
 
+
+                Swal.fire(
+                    'Password reseted!',
+                    'Reseted password sent to user email.',
+                    'success'
+                )
+            }
+        })
+    })
 
     $(document).on('click', '.deleteBtn', function (e) {
         e.preventDefault();
         let url = $(this).attr('href');
         console.log(url)
         Swal.fire({
-            title: 'Silmek istediyine eminsen?',
-            text: "Bu prosesden geri qayida bilmeyessiniz!",
+            title: 'Are you sure to delete?',
+            text: "You cant go back from this process!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
