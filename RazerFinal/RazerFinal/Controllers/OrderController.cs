@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MimeKit;
 using RazerFinal.DataAccessLayer;
 using RazerFinal.Enums;
 using RazerFinal.Models;
+using RazerFinal.ViewModels;
 using RazerFinal.ViewModels.OrderViewModels;
 using System.Data;
+using System.Security.Policy;
 
 namespace RazerFinal.Controllers
 {
@@ -16,11 +21,14 @@ namespace RazerFinal.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly AppDbContext _context;
+        private readonly SmtpSetting _smtpSetting;
 
-        public OrderController(UserManager<AppUser> userManager, AppDbContext context)
+
+        public OrderController(UserManager<AppUser> userManager, AppDbContext context, IOptions<SmtpSetting> smtpSetting)
         {
             _userManager = userManager;
             _context = context;
+            _smtpSetting = smtpSetting.Value;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -30,9 +38,13 @@ namespace RazerFinal.Controllers
                 return RedirectToAction("Login","Account");
             }
 
-            
+            AppUser appUser = await _userManager.Users.Include(u=>u.Orders.Where(o=>!o.isDeleted)).ThenInclude(o=>o.OrderItems.Where(o=>!o.isDeleted)).ThenInclude(o=>o.Product).FirstOrDefaultAsync(u=>u.NormalizedUserName == User.Identity.Name.ToUpperInvariant());
 
-            List<Order> orders = await _context.Orders.Where(o=>!o.isDeleted).Include(o=>o.OrderItems.Where(o=>!o.isDeleted)).ThenInclude(o=>o.Product).ToListAsync();
+            if (appUser == null) return NotFound();
+
+           
+
+            List<Order> orders = appUser.Orders;
             return View(orders);
         }
 
@@ -65,13 +77,22 @@ namespace RazerFinal.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            if (appUser.Addresses == null || appUser.Addresses.Count <= 0)
-            {
-                return RedirectToAction("profile", "account");
-            }
+            //if (appUser.Addresses == null || appUser.Addresses.Count <= 0)
+            //{
+            //    return RedirectToAction("profile", "account");
+            //}
 
-            SelectList selectList = new SelectList(appUser.Addresses, nameof(Address.Id), nameof(Address.FullAddress));
-            ViewBag.Addresses = selectList;
+            if (appUser.Addresses != null && appUser.Addresses.Count > 0)
+            {
+                SelectList selectList = new SelectList(appUser.Addresses, nameof(Address.Id), nameof(Address.FullAddress));
+                ViewBag.Addresses = selectList;
+
+            }
+            else
+            {
+                ViewBag.Addresses = null;
+
+            }
             var enumValues = Enum.GetValues(typeof(Countries)).Cast<Countries>()
                         .Select(e => new SelectListItem
                         {
@@ -98,10 +119,10 @@ namespace RazerFinal.Controllers
                     Name = appUser.Name,
                     SurName = appUser.SurName,
                     Email = appUser.Email,
-                    Country = appUser.Addresses.First().Country,
-                    City = appUser.Addresses.First().City,
-                    State = appUser.Addresses.First().State,
-                    PostalCode = appUser.Addresses.First().PostalCode
+                    Country = (appUser.Addresses != null && appUser.Addresses.Count > 0 ? appUser.Addresses.First().Country: null),
+                    City = (appUser.Addresses != null && appUser.Addresses.Count > 0 ? appUser.Addresses.First().City : null),
+                    State = (appUser.Addresses != null && appUser.Addresses.Count > 0 ? appUser.Addresses.First().State : null),
+                    PostalCode = (appUser.Addresses != null && appUser.Addresses.Count > 0 ? appUser.Addresses.First().PostalCode : null)
                 },
                 Baskets = baskets,
             };
@@ -182,6 +203,25 @@ namespace RazerFinal.Controllers
                 };
 
                 order.OrderItems.Add(orderItem);
+            }
+
+            MimeMessage mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(MailboxAddress.Parse(_smtpSetting.Email));
+            mimeMessage.To.Add(MailboxAddress.Parse(appUser.Email));
+            mimeMessage.Subject = "Purschase receipt";
+            mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            {
+                Text = $"<ul >\r\n                                Your Receipt\r\n                                <li >No: {order.No}</li>\r\n                                <li >Date: {order.CreatedAt.ToString("dd/mm/yyyy")}</li>\r\n                                <li >Address: {order.Country} , {order.City}, {order.DirectAddress}, {order.PostalCode}</li>\r\n                                <li >Quantity{order.OrderItems.Count}</li>\r\n                                <li >Total Price:US${order.OrderItems.Sum(o => o.Price)}</li>\r\n                                <li >{order.Status.ToString()}</li>\r\n                                \r\n                            </ul>"
+
+            };
+
+            using (SmtpClient smtpClient = new SmtpClient())
+            {
+                await smtpClient.ConnectAsync(_smtpSetting.Host, _smtpSetting.Port, MailKit.Security.SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(_smtpSetting.Email, _smtpSetting.Password);
+                await smtpClient.SendAsync(mimeMessage);
+                await smtpClient.DisconnectAsync(true);
+                smtpClient.Dispose();
             }
 
             HttpContext.Response.Cookies.Append("basket", "");

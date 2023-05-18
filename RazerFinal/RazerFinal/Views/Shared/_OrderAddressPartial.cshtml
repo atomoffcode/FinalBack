@@ -7,13 +7,16 @@
         <span asp-validation-for="CustomAddress" class="text-danger"></span>
 
     </div>
-    <div class="form-input existaddresses">
-        <label asp-for=SingleAddressId class="d-none" for="">Address</label>
-        <select asp-for="SingleAddressId" asp-items="ViewBag.Addresses">
-        </select>
-        <span asp-validation-for="SingleAddressId" class="text-danger"></span>
+    @if (ViewBag.Addresses !=null)
+    {
+        <div class="form-input existaddresses">
+            <label asp-for=SingleAddressId class="d-none" for="">Address</label>
+            <select asp-for="SingleAddressId" asp-items="ViewBag.Addresses">
+            </select>
+            <span asp-validation-for="SingleAddressId" class="text-danger"></span>
 
-    </div>
+        </div>
+    }
     <div class="customaddress d-none">
         <div class="form-input">
             <label asp-for="PhoneNumber" class="d-none" for="">Phone Number</label>
