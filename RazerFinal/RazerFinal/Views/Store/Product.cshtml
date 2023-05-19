@@ -1,0 +1,140 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Product";
+}
+
+<div class="detail">
+    <div class="detail-all">
+        <div class="detail-top">
+            @if (Model.ProductImages != null && Model.ProductImages.Count > 0)
+            {
+                <div class="detail-img ">
+                    <section id="main-carousel" class="splide" aria-label="Basic Structure Example">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                @foreach (ProductImage item in Model.ProductImages)
+                                {
+                                    <li class="splide__slide">
+                                        <img src="~/assets/photos/products/@item.Iamge" alt="">
+
+                                    </li>
+                                }
+                                
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section id="thumbnail-carousel"
+                             class="splide"
+                             aria-label="The carousel with thumbnails. Selecting a thumbnail will change the Beautiful Gallery carousel.">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                @foreach (ProductImage item in Model.ProductImages)
+                                {
+                                    <li class="splide__slide detail-pic">
+                                        <img src="~/assets/photos/products/@item.Iamge" alt="">
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+                <div class="detail-img-mobile">
+                    <section class="splide glide-product-detail" aria-label="Basic Structure Example">
+                        <div class="splide__arrows">
+                            <button class="splide__arrow splide__arrow--prev">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </button>
+                            <button class="splide__arrow splide__arrow--next">
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                        </div>
+                        <ul class="splide__pagination"></ul>
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                @foreach (ProductImage item in Model.ProductImages)
+                                {
+                                    <li class="splide__slide">
+                                        <img src="~/assets/photos/products/@item.Iamge" alt="">
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            }
+            <div class="detail-desc">
+                <div class="dd-desc">
+                    <h2>@Model.Title</h2>
+                    <h3>
+                        @Model.Description
+                    </h3>
+                    <span>US$@Model.DiscountedPrice</span>
+                </div>
+                <div class="dd-spec">
+                    <div class="sli-details">
+                        <ul>
+                            @foreach (ProductSpec ps in Model.Specifications.Where(s=>s.CategorySpec.IsMain))
+                            {
+                                <li>@ps.Specification.Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="dd-btn">
+                    <div class="add-to-cart-btn">
+                        Add to cart
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-bottom">
+            <div class="detail-specs">
+                <h2 class="detail-specs-header">tech specs</h2>
+                <div class="detail-specs-content">
+                    <table>
+                        <tbody>
+                            
+                                @foreach (ProductSpec ps in Model.Specifications)
+                                {
+                                <tr>
+                                    <th>
+                                        @ps.CategorySpec.Name
+                                    </th>
+                                    <td>
+                                        @ps.Specification.Description
+                                    </td>
+                                </tr>
+
+                                }
+                            
+                            <tr>
+                                <th>
+                                    form factor
+                                </th>
+                                <td>
+                                    Right-handed
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    connectivity
+                                </th>
+                                <td>
+                                    <ul>
+                                        <li>Razer™ HyperSpeed Wireless</li>
+                                        <li>Bluetooth</li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

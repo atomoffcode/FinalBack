@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using RazerFinal.Areas.Manage.ViewModels.ProductViewModel;
 using RazerFinal.DataAccessLayer;
 using RazerFinal.Helpers;
 using RazerFinal.Models;
@@ -21,12 +22,58 @@ namespace RazerFinal.Controllers
             _context = context;
             _userManager = userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Product(int? id)
         {
-            return View();
+            if (id == null) return BadRequest();
+
+            if (!await _context.Products.AnyAsync(p => p.Id == id)) return NotFound();
+
+            Product product = await _context.Products
+                .Include(p=>p.ProductImages.Where(p=>p.isDeleted == false))
+                .Include(p => p.Specifications.Where(s => s.isDeleted == false))
+                .ThenInclude(s => s.Specification)
+                .ThenInclude(s => s.CategorySpec)
+                .Where(p => p.isDeleted == false).OrderBy(p => p.CreatedAt)
+                .FirstOrDefaultAsync(p=>p.Id == id);
+
+            if(product == null) return NotFound();
+
+            return View(product);
+        }
+        public async Task<IActionResult> Index()
+        {
+
+            StoreIndexVM storeIndexVM = new StoreIndexVM();
+            List<Product> products = await _context.Products.Where(p=>!p.isDeleted).ToListAsync();
+
+            List<Category> categories = await _context.Categories.Where(c=>!c.isDeleted).ToListAsync();
+
+            List<Product> newProducts = products.OrderByDescending(c=>c.CreatedAt).Take(6).ToList();
+
+            List<Product> discountedProducts = products.Where(c=>c.DiscountedPrice < c.Price).Take(6).ToList();
+
+            List<Product> exclusiveProducts = new List<Product>();
+
+            Product product = null;
+            foreach (Category item in categories)
+            {
+                product = products.Where(p => p.CategoryId == item.Id).MaxBy(p => p.Price);
+                if (product != null) { exclusiveProducts.Add(product); }
+                
+            }
+
+            List<Slider> sliders = await _context.Sliders.Where(s=>!s.isDeleted).ToListAsync();
+
+            storeIndexVM.Sliders = sliders;
+            storeIndexVM.ExlusiveProducts = exclusiveProducts;
+            storeIndexVM.DiscountedProducsts = discountedProducts;
+            storeIndexVM.NewProducts = newProducts;
+            storeIndexVM.Categories = categories;
+
+            return View(storeIndexVM);
         }
 
-        public async Task<IActionResult> Shop(int catId = 0)
+        public async Task<IActionResult> Shop(int catId = 0,int sortId = 0)
         {
             string cookie0 = HttpContext.Request.Cookies["compare"];
             if (!string.IsNullOrWhiteSpace(cookie0))
@@ -45,14 +92,31 @@ namespace RazerFinal.Controllers
             StoreVM storeVM = new StoreVM();
             IEnumerable<Category> categories = await _context.Categories.Include(c => c.Products.Where(p => p.isDeleted == false)).Where(c => c.isDeleted == false).ToListAsync();
 
-            
 
-            int firstcat = categories.MinBy(c => c.Id).Id;
-            string firstcatname = categories.MinBy(c => c.Id).Name;
-            string cookie = JsonConvert.SerializeObject(firstcatname);
-            HttpContext.Response.Cookies.Append("cat", cookie);
+            string? cookiecat = HttpContext.Request.Cookies["cat"];
+            int? firstcat;
+            string? firstcatname;
+            string? cookie;
+            if (string.IsNullOrWhiteSpace(cookiecat))
+            {
+                 firstcat = categories.MinBy(c => c.Id).Id;
+                 firstcatname = categories.MinBy(c => c.Id).Name;
+                 cookie = JsonConvert.SerializeObject(firstcatname);
+                HttpContext.Response.Cookies.Append("cat", cookie);
+            }
+            else
+            {
+                cookie = HttpContext.Request.Cookies["cat"];
+                firstcatname = JsonConvert.DeserializeObject<string>(cookie);
+                if (string.IsNullOrWhiteSpace(firstcatname)) return BadRequest();
+                if (!categories.Any(c => c.Name.ToLower() == firstcatname.ToLower())) return NotFound();
+                firstcat = categories.FirstOrDefault(c => c.Name.ToLower() == firstcatname.ToLower()).Id;
+                ViewBag.DefCat = firstcatname;
+
+            }
+            
             IEnumerable<CategorySpec> categorySpecs = null;
-            if (catId == null)
+            if (catId == null || sortId == null)
             {
                 return BadRequest();
             }
@@ -72,18 +136,43 @@ namespace RazerFinal.Controllers
                 }
             }
 
-
-            products = await _context.Products
+            if (sortId != 0)
+            {
+                if (sortId == 1)
+                {
+                    products = await _context.Products
+                .Include(p => p.Specifications.Where(s => s.isDeleted == false && s.CategorySpec.IsMain == true))
+                .ThenInclude(s => s.Specification)
+                .ThenInclude(s => s.CategorySpec)
+                .Where(p => p.isDeleted == false && p.CategoryId == firstcat).OrderBy(p => p.CreatedAt).ToListAsync();
+                }
+                else if (sortId == 2)
+                {
+                    products = await _context.Products
+                .Include(p => p.Specifications.Where(s => s.isDeleted == false && s.CategorySpec.IsMain == true))
+                .ThenInclude(s => s.Specification)
+                .ThenInclude(s => s.CategorySpec)
+                .Where(p => p.isDeleted == false && p.CategoryId == firstcat).OrderByDescending(p => p.CreatedAt).ToListAsync();
+                }
+                else if (sortId > 2 || sortId < 0)
+                {
+                    return BadRequest();
+                }
+            }else if(sortId == 0)
+            {
+                products = await _context.Products
                 .Include(p => p.Specifications.Where(s => s.isDeleted == false && s.CategorySpec.IsMain == true))
                 .ThenInclude(s => s.Specification)
                 .ThenInclude(s => s.CategorySpec)
                 .Where(p => p.isDeleted == false && p.CategoryId == firstcat).ToListAsync();
+            }
+            
 
             categorySpecs = await _context.CategorySpecs.Include(cs => cs.Specifications.Where(s => s.isDeleted == false)).Where(cs => !cs.isDeleted).Where(cs => cs.isDeleted == false && cs.CategoryId == firstcat).ToListAsync();
 
+            
 
-
-
+            
 
             double maxprice = _context.Products.Max(p => p.Price);
             double minprice = _context.Products.Min(p => p.Price);

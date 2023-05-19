@@ -106,7 +106,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             }
             if (product.DiscountedPrice == null)
             {
-                ModelState.AddModelError("DiscountedPrice", "Discounted Price is necessary!");
+                ModelState.AddModelError("DiscountedPrice", "DiscountedPrice is necessary!");
                 return View(product);
             }
             if (product.DiscountedPrice > product.Price)
@@ -287,7 +287,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             }
             if (product.DiscountedPrice == null)
             {
-                ModelState.AddModelError("DiscountedPrice", "Discounted Price is necessary!");
+                ModelState.AddModelError("DiscountedPrice", "DiscountedPrice is necessary!");
                 return View(product);
             }
             if (product.DiscountedPrice > product.Price)
@@ -380,6 +380,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             }
 
             dbproduct.Title = product.Title;
+            dbproduct.BasicInfo = product.BasicInfo;
             dbproduct.Description = product.Description;
             dbproduct.Price = product.Price;
             dbproduct.DiscountedPrice = product.DiscountedPrice;

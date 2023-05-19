@@ -17,7 +17,7 @@
                 <div class="form-check filter">
                     @if (compares != null && compares.Count > 0)
                     {
-                        if (compares.Any(c=>c.Id == product.Id))
+                        if (compares.Any(c=>c.ProductId == product.Id))
                         {
                             <input class="form-check-input-2 addcompare" type="checkbox" checked value="" data-value="@product.Id">
                         }

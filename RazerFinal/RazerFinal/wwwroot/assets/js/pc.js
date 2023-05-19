@@ -16,6 +16,19 @@ $(document).ready(function () {
             })
 
     })
+    $(document).on('change', '.sortingId', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        let val = $(this).val();
+        let url2 = `/store/shop?sortId=${val}`
+        console.log(url2);
+        fetch(url2)
+            .then(res => {
+            return res.text();
+            }).then(data => {
+                $('body').html(data)
+            })
+    })
     $(document).on('change', '.addcompare', function (e) {
         e.preventDefault();
         e.stopPropagation();
