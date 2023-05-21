@@ -46,6 +46,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(categorySpec);
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
         {
 
@@ -55,6 +56,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(CategorySpec categorySpec)
         {
             ViewBag.MainCategories = await _context.Categories.Where(c => c.isDeleted == false).ToListAsync();
@@ -66,19 +68,19 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.CategorySpecs.AnyAsync(c => c.isDeleted == false && c.Name.ToLower() == categorySpec.Name.Trim().ToLower()))
             {
-                ModelState.AddModelError("Name", $"{categorySpec.Name} add categoryartiq movcuddur!");
+                ModelState.AddModelError("Name", $"{categorySpec.Name} named SpecCategory already exist!");
                 return View(categorySpec);
             }
 
             
                 if (categorySpec.CategoryId == null)
                 {
-                    ModelState.AddModelError("CategoryId", "CategoryId mutleq secilmelidir!");
+                    ModelState.AddModelError("CategoryId", "CategoryId is necessary!");
                     return View(categorySpec);
                 }
                 if (!await _context.Categories.AnyAsync(c => c.isDeleted == false && c.Id == categorySpec.CategoryId ))
                 {
-                    ModelState.AddModelError("CategoryId", "CategoryId duzgun secilmelidir!");
+                    ModelState.AddModelError("CategoryId", "CategoryId must be right!");
                     return View(categorySpec);
                 }
 
@@ -103,6 +105,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return BadRequest();
@@ -119,6 +122,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id, CategorySpec categorySpec)
         {
             ViewBag.MainCategories = await _context.Categories.Where(c => c.isDeleted == false).ToListAsync();
@@ -136,7 +140,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.CategorySpecs.AnyAsync(c => c.isDeleted == false && c.Name.ToLower() == categorySpec.Name.Trim().ToLower() && c.Id != categorySpec.Id))
             {
-                ModelState.AddModelError("Name", $"{categorySpec.Name} add SpecCategory-si artiq movcuddur!");
+                ModelState.AddModelError("Name", $"{categorySpec.Name} named SpecCategory already exist!");
                 return View(categorySpec);
             }
 
@@ -147,12 +151,12 @@ namespace RazerFinal.Areas.Manage.Controllers
                 {
                     if (categorySpec.CategoryId == null)
                     {
-                        ModelState.AddModelError("CategoryId", "CategoryId mutleq secilmelidir!");
+                        ModelState.AddModelError("CategoryId", "CategoryId is necessary!");
                         return View(categorySpec);
                     }
                     if (!await _context.Categories.AnyAsync(c => c.isDeleted == false && c.Id == categorySpec.CategoryId))
                     {
-                        ModelState.AddModelError("CategoryId", "CategoryId duzgun secilmelidir!");
+                        ModelState.AddModelError("CategoryId", "CategoryId must be right!");
                         return View(categorySpec);
                     }
 
@@ -174,6 +178,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
 

@@ -11,7 +11,7 @@
                     <a asp-controller="compare" asp-action="removecompare" asp-route-id="@item.Id" class="compare-close-btn removecompare">
                         <i class="fa-solid fa-xmark"></i>
                     </a>
-                    <a href="">
+                    <a asp-controller="store" asp-action="product" asp-route-id="@item.Product.Id">
                         <img src="~/assets/photos/products/@item.Product.MainImage" alt="">
 
                     </a>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="sli-bottom">
                     <div class="sli-desc">
-                        <a href="" class="sli-title">
+                        <a asp-controller="store" asp-action="product" asp-route-id="@item.Product.Id" class="sli-title">
                             @item.Product.Title
                         </a>
                         <div class="sli-details d-none">
@@ -38,7 +38,7 @@
                                 <li>Intel Core i7-13800H</li>
                             </ul>
                         </div>
-                        <a href="" class="sli-link">View details ></a>
+                        <a asp-controller="store" asp-action="product" asp-route-id="@item.Product.Id" class="sli-link">View details ></a>
                     </div>
                     <div class="sli-price-btn">
                         <div class="sli-price">

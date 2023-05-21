@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $(window).on('beforeunload', function () {
-        $.cookies.del('filter');
+        $.removeCookie('filter');
+        $.removeCookie('cat');
     });
     $(document).on('click', '.removecompare', function (e) {
 
@@ -26,7 +27,7 @@ $(document).ready(function () {
             .then(res => {
             return res.text();
             }).then(data => {
-                $('body').html(data)
+                $('html').html(data)
             })
     })
     $(document).on('change', '.addcompare', function (e) {
@@ -139,11 +140,11 @@ $(document).ready(function () {
         $('.pndb-up').toggleClass('d-none');
         $('.pc-navigation-dropdown').toggleClass('d-none');
     })
-    $(document).on('click', '.filter-item-title', function () {
-        console.log('opened');
-        $(this).next().toggleClass('filter-opened');
-        $(this).toggleClass('angle-twisted');
-    })
+    //$(document).on('click', '.filter-item-title', function () {
+    //    console.log('opened');
+    //    $(this).next().toggleClass('filter-opened');
+    //    $(this).toggleClass('angle-twisted');
+    //})
 
 
 

@@ -23,7 +23,7 @@ namespace RazerFinal.Controllers
 
         public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            IQueryable<Blog> blogs = _context.Blogs.Where(b => b.isDeleted == false);
+            IQueryable<Blog> blogs = _context.Blogs.Include(b=>b.Comments.Where(c=>!c.isDeleted)).Where(b => b.isDeleted == false);
 
             
 

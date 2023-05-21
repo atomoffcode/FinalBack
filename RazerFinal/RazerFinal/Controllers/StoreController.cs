@@ -275,7 +275,7 @@ namespace RazerFinal.Controllers
             cookie = HttpContext.Request.Cookies["cat"];
             string catname = JsonConvert.DeserializeObject<string>(cookie);
             List<Product> dbproducts = await _context.Products
-                    .Include(p => p.Specifications.Where(s => s.isDeleted == false && s.CategorySpec.IsMain == true))
+                    .Include(p => p.Specifications.Where(s => s.isDeleted == false))
                     .ThenInclude(s => s.Specification)
                     .ThenInclude(s => s.CategorySpec)
                     .Where(p => p.isDeleted == false && p.Category.Name == catname).ToListAsync();

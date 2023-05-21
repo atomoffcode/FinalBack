@@ -5,9 +5,9 @@
 
             @foreach (Category item in Model.Categories)
             {
-                <a asp-controller="store" asp-action="shop" asp-route-catId="@item.Id"><img src="~/assets/photos/category/@item.Image" alt=""><span>@item.Name</span></a>
+                <a asp-controller="store" asp-action="shop" asp-route-catId="@item.Id"><img src="~/assets/photos/category/@item.Image" alt="" style="max-height:75px; max-width: 100px; width:auto;"><span>@item.Name</span></a>
             }
-            
+
             @*<a href=""><img src="~/assets/photos/category/razer-blade-16_200x150.png" alt=""><span>Laptops</span></a>
             <a href=""><img src="~/assets/photos/category/razer-blade-16_200x150.png" alt=""><span>Laptops</span></a>
             <a href=""><img src="~/assets/photos/category/razer-blade-16_200x150.png" alt=""><span>Laptops</span></a>
@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-@if(Model.NewProducts != null && Model.NewProducts.Count > 0)
+@if (Model.NewProducts != null && Model.NewProducts.Count > 0)
 {
     <div class="product-slider">
         <div class="product-slider-head">
@@ -73,7 +73,7 @@
                         <li class="splide__slide splide-slide-blank"></li>
                         @foreach (Product item in Model.NewProducts)
                         {
-                            
+
                             <li class="splide__slide">
                                 <div class="product-slider-item">
                                     <a class="product-slider-item-img" href="" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
@@ -96,8 +96,8 @@
                             </li>
 
                         }
-                        
-                        
+
+
                     </ul>
                 </div>
             </section>
@@ -118,19 +118,23 @@
         <ul class="splide__pagination"></ul>
         <div class="splide__track">
             <ul class="splide__list">
-                <li class="splide__slide">
-                    <div class="product-glider-item">
-                        <div class="product-glider-item-img" style="background: url('./assets/photos/sliders/1920x400-\(11\).jpg');"></div>
-                        <div class="product-glider-item-content">
-                            <div class="pgic-container">
-                                <h2 class="pgic-mainhead">UNLEASH A NEW AGE OF TECHNOLOGY</h2>
-                                <p class="pgic-subhead">Experience The Revolution</p>
-                                <a class="pgic-link" href="">Shop Now ></a>
+                @foreach (Slider item in Model.Sliders.Take(2))
+                {
+                    <li class="splide__slide">
+                        <div class="product-glider-item">
+                            <div class="product-glider-item-img" style="background: url('@Url.Content($"~/assets/photos/sliders/{item.Image}")')"></div>
+                            <div class="product-glider-item-content">
+                                <div class="pgic-container">
+                                    <h2 class="pgic-mainhead">@item.MainHead</h2>
+                                    <p class="pgic-subhead">@item.SubHead</p>
+                                    <a class="pgic-link" asp-controller="store" asp-action="shop" >Shop Now ></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li class="splide__slide">
+                    </li>
+
+                }
+                @*<li class="splide__slide">
                     <div class="product-glider-item">
                         <div class="product-glider-item-img" style="background: url('./assets/photos/sliders/1920x400-\(9\).jpg');"></div>
                         <div class="product-glider-item-content">
@@ -141,23 +145,14 @@
                             </div>
                         </div>
                     </div>
-                </li>
-                <li class="splide__slide">
-                    <div class="product-glider-item">
-                        <div class="product-glider-item-img" style="background: url('./assets/photos/sliders/esportsevergreen-catbnr-desktop-400px.jpg');"></div>
-                        <div class="product-glider-item-content">
-                            <div class="pgic-container">
-                                <h2 class="pgic-mainhead">GEAR UP FOR GLORY</h2>
-                                <p class="pgic-subhead">Esports Showdown Specials</p>
-                                <a class="pgic-link" href="">Shop Exclusive Deals ></a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                </li>*@
             </ul>
         </div>
     </section>
 </div>
+
+
+
 <div class="store-navigation-text">
     <div class="smnt-mainhead">
         <span>ONLY AT RAZER.COM</span>
@@ -166,195 +161,93 @@
         <h1>DISCOVER EXCLUSIVE GEAR AND SERVICES FOUND NOWHERE ELSE</h1>
     </div>
 </div>
-<div class="product-slider">
-    <div class="product-slider-head">
-        <div class="ps-mainhead">
-            <h2>RAZER EXCLUSIVES</h2>
-        </div>
-        <div class="ps-subhead d-flex justify-content-between align-items-center">
-            <p>Explore unique products only available at our official online store</p>
-            <a href="">View All <span>></span></a>
-        </div>
-    </div>
-    <div class="product-slider-items">
-        <section class="splide splide-product2" aria-label="Basic Structure Example">
-            <div class="splide__arrows">
-                <button class="splide__arrow splide__arrow--prev">
-                    <i class="fa-solid fa-angle-left"></i>
-                </button>
-                <button class="splide__arrow splide__arrow--next">
-                    <i class="fa-solid fa-angle-right"></i>
-                </button>
-            </div>
 
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide splide-slide-blank"></li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">US$149.99</div>
-                                    <a href="" class="psii-buy-btn">
-                                        BUY
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-exclusive">
-                                <p>EXCLUSIVE</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+
+
+
+@if (Model.ExlusiveProducts != null && Model.ExlusiveProducts.Count > 0)
+{
+    <div class="product-slider">
+        <div class="product-slider-head">
+            <div class="ps-mainhead">
+                <h2>RAZER EXCLUSIVES</h2>
             </div>
-        </section>
+            <div class="ps-subhead d-flex justify-content-between align-items-center">
+                <p>Explore unique products only available at our official online store</p>
+                <a asp-controller="store" asp-action="shop">View All <span>></span></a>
+            </div>
+        </div>
+        <div class="product-slider-items">
+            <section class="splide splide-product2" aria-label="Basic Structure Example">
+                <div class="splide__arrows">
+                    <button class="splide__arrow splide__arrow--prev">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <button class="splide__arrow splide__arrow--next">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide splide-slide-blank"></li>
+                        @foreach (Product item in Model.ExlusiveProducts)
+                        {
+
+                            <li class="splide__slide">
+                                <div class="product-slider-item">
+                                    <a class="product-slider-item-img" href="" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
+                                    <div class="product-slider-item-info">
+                                        <div class="psii-text">
+                                            <h3 class="psii-title">@item.Title</h3>
+                                            <p class="psii-subdesc">@item.BasicInfo</p>
+                                        </div>
+                                        <div class="psii-buy">
+                                            <div class="psii-price">US$@item.DiscountedPrice</div>
+                                            <a asp-controller="store" asp-action="product" asp-route-id="@item.Id" class="psii-buy-btn">
+                                                BUY
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-slider-item-badge product-exclusive">
+                                        <p>EXCLUSIVE</p>
+                                    </div>
+                                </div>
+                            </li>
+
+                        }
+                        @*<li class="splide__slide">
+                            <div class="product-slider-item">
+                                <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
+                                <div class="product-slider-item-info">
+                                    <div class="psii-text">
+                                        <h3 class="psii-title">Razer Stream Controller X</h3>
+                                        <p class="psii-subdesc">All-in-one Controller for Streaming</p>
+                                    </div>
+                                    <div class="psii-buy">
+                                        <div class="psii-price">US$149.99</div>
+                                        <a href="" class="psii-buy-btn">
+                                            BUY
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-slider-item-badge product-exclusive">
+                                    <p>EXCLUSIVE</p>
+                                </div>
+                            </div>
+                        </li>*@
+                    </ul>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
+}
+
+
+
+
+
+
 <div class="product-glider">
     <section class="splide glide-product2" aria-label="Basic Structure Example">
         <div class="splide__arrows">
@@ -368,259 +261,114 @@
         <ul class="splide__pagination"></ul>
         <div class="splide__track">
             <ul class="splide__list">
-                <li class="splide__slide">
-                    <div class="product-glider-item">
-                        <div class="product-glider-item-img" style="background: url('./assets/photos/sliders/1920x400-\(11\).jpg');"></div>
-                        <div class="product-glider-item-content">
-                            <div class="pgic-container">
-                                <h2 class="pgic-mainhead">UNLEASH A NEW AGE OF TECHNOLOGY</h2>
-                                <p class="pgic-subhead">Experience The Revolution</p>
-                                <a class="pgic-link" href="">Shop Now ></a>
+                @foreach (Slider item in Model.Sliders.Skip(2).Take(2))
+                {
+                    <li class="splide__slide">
+                        <div class="product-glider-item">
+                            <div class="product-glider-item-img" style="background: url('@Url.Content($"~/assets/photos/sliders/{item.Image}")')"></div>
+                            <div class="product-glider-item-content">
+                                <div class="pgic-container">
+                                    <h2 class="pgic-mainhead">@item.MainHead</h2>
+                                    <p class="pgic-subhead">@item.SubHead</p>
+                                    <a class="pgic-link" asp-controller="store" asp-action="shop">Shop Now ></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li class="splide__slide">
-                    <div class="product-glider-item">
-                        <div class="product-glider-item-img" style="background: url('./assets/photos/sliders/1920x400-\(9\).jpg');"></div>
-                        <div class="product-glider-item-content">
-                            <div class="pgic-container">
-                                <h2 class="pgic-mainhead">Get $10 off your next purchase when you join RazerStore Rewards.</h2>
-                                <!-- <p class="pgic-subhead">Experience The Revolution</p> -->
-                                <a class="pgic-link" href="">Join Now ></a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="splide__slide">
-                    <div class="product-glider-item">
-                        <div class="product-glider-item-img" style="background: url('./assets/photos/sliders/esportsevergreen-catbnr-desktop-400px.jpg');"></div>
-                        <div class="product-glider-item-content">
-                            <div class="pgic-container">
-                                <h2 class="pgic-mainhead">GEAR UP FOR GLORY</h2>
-                                <p class="pgic-subhead">Esports Showdown Specials</p>
-                                <a class="pgic-link" href="">Shop Exclusive Deals ></a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+
+                }
             </ul>
         </div>
     </section>
 </div>
-<div class="product-slider">
-    <div class="product-slider-head">
-        <div class="ps-mainhead">
-            <h2>RAZER LAST CHANCE</h2>
-        </div>
-        <div class="ps-subhead d-flex justify-content-between align-items-center">
-            <p>A curated selection of our classic gear—exclusively priced with full warranty</p>
-            <a href="">View All <span>></span></a>
-        </div>
-    </div>
-    <div class="product-slider-items">
-        <section class="splide splide-product3" aria-label="Basic Structure Example">
-            <div class="splide__arrows">
-                <button class="splide__arrow splide__arrow--prev">
-                    <i class="fa-solid fa-angle-left"></i>
-                </button>
-                <button class="splide__arrow splide__arrow--next">
-                    <i class="fa-solid fa-angle-right"></i>
-                </button>
-            </div>
 
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide splide-slide-blank"></li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="product-slider-item">
-                            <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
-                            <div class="product-slider-item-info">
-                                <div class="psii-text">
-                                    <h3 class="psii-title">Razer Stream Controller X</h3>
-                                    <p class="psii-subdesc">All-in-one Controller for Streaming</p>
-                                </div>
-                                <div class="psii-buy">
-                                    <div class="psii-price">
-                                        <p>US$149.99</p>
-                                        <p class="discounted-price">US$149.99</p>
-                                    </div>
-                                    <a href="" class="psii-buy-btn">
-                                        Pre Order
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-slider-item-badge product-discount">
-                                <p>23% OFF</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+
+
+
+@if (Model.DiscountedProducsts != null && Model.DiscountedProducsts.Count > 0)
+{
+    <div class="product-slider">
+        <div class="product-slider-head">
+            <div class="ps-mainhead">
+                <h2>RAZER LAST CHANCE</h2>
             </div>
-        </section>
+            <div class="ps-subhead d-flex justify-content-between align-items-center">
+                <p>A curated selection of our classic gear—exclusively priced with full warranty</p>
+                <a asp-controller="store" asp-action="shop">View All <span>></span></a>
+            </div>
+        </div>
+        <div class="product-slider-items">
+            <section class="splide splide-product3" aria-label="Basic Structure Example">
+                <div class="splide__arrows">
+                    <button class="splide__arrow splide__arrow--prev">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <button class="splide__arrow splide__arrow--next">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide splide-slide-blank"></li>
+                        @foreach (Product item in Model.DiscountedProducsts)
+                        {
+
+                           
+                            <li class="splide__slide">
+                                <div class="product-slider-item">
+                                    <a class="product-slider-item-img" href="" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
+                                    <div class="product-slider-item-info">
+                                        <div class="psii-text">
+                                            <h3 class="psii-title">@item.Title</h3>
+                                            <p class="psii-subdesc">@item.BasicInfo</p>
+                                        </div>
+                                        <div class="psii-buy">
+                                            <div class="psii-price">
+                                                <p>US$@item.DiscountedPrice</p>
+                                                <p class="discounted-price">US$@item.Price</p>
+                                            </div>
+                                            <a asp-controller="store" asp-action="product" asp-route-id="@item.Id" class="psii-buy-btn">
+                                                BUY
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-slider-item-badge product-discount">
+                                        <p>@(Math.Floor(100 - (item.DiscountedPrice / item.Price * 100)))% OFF</p>
+                                    </div>
+                                </div>
+                            </li>
+
+                        }
+                        @*<li class="splide__slide">
+                            <div class="product-slider-item">
+                                <a class="product-slider-item-img" href="" style="background-image: url('./assets/photos/products/https___hybrismediaprod.blob.core.windows.net_sys-master-phoenix-images-container_hac_h60_9502641487902_stream-controller-x-2-500x500.png');"></a>
+                                <div class="product-slider-item-info">
+                                    <div class="psii-text">
+                                        <h3 class="psii-title">Razer Stream Controller X</h3>
+                                        <p class="psii-subdesc">All-in-one Controller for Streaming</p>
+                                    </div>
+                                    <div class="psii-buy">
+                                        <div class="psii-price">
+                                            <p>US$149.99</p>
+                                            <p class="discounted-price">US$149.99</p>
+                                        </div>
+                                        <a href="" class="psii-buy-btn">
+                                            Pre Order
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-slider-item-badge product-discount">
+                                    <p>23% OFF</p>
+                                </div>
+                            </div>
+                        </li>*@
+                    </ul>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
+}
 <div class="multipanels">
     <div class="multipanel-components">
         <h2 class="multipanel-header">WHY BUY FROM RAZER.COM</h2>

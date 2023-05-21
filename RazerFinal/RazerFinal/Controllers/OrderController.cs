@@ -69,14 +69,18 @@ namespace RazerFinal.Controllers
             AppUser appUser = await _userManager.Users
                 .Include(u => u.Baskets.Where(b => b.isDeleted == false))
                 .ThenInclude(b => b.Product)
-                .Include(u => u.Addresses.Where(a => a.IsMain && a.isDeleted == false))
+                .Include(u => u.Addresses.Where(a => a.isDeleted == false))
                 .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
             if (appUser.Baskets == null || appUser.Baskets.Count <= 0)
             {
                 return RedirectToAction("Index", "Home");
             }
-
+            if (appUser.Baskets.Any(b=>b.Product.Count < 1 || b.Product.Count == null))
+            {
+                int prId = appUser.Baskets.FirstOrDefault(p => p.Product.Count < 1 || p.Product.Count == null).Product.Id;
+                return RedirectToAction("Product", "Store", new { id = prId});
+            }
             //if (appUser.Addresses == null || appUser.Addresses.Count <= 0)
             //{
             //    return RedirectToAction("profile", "account");
@@ -84,7 +88,9 @@ namespace RazerFinal.Controllers
 
             if (appUser.Addresses != null && appUser.Addresses.Count > 0)
             {
-                SelectList selectList = new SelectList(appUser.Addresses, nameof(Address.Id), nameof(Address.FullAddress));
+                List<Address> addresses = appUser.Addresses.Where(a=>a.isDeleted == false).OrderByDescending(c=>c.IsMain).ToList();
+
+                SelectList selectList = new SelectList(addresses, nameof(Address.Id), nameof(Address.FullAddress));
                 ViewBag.Addresses = selectList;
 
             }
@@ -191,6 +197,16 @@ namespace RazerFinal.Controllers
             order.OrderItems = new List<OrderItem>();
             foreach (Basket basket in appUser.Baskets)
             {
+                if (basket.Count > basket.Product.Count)
+                {
+                    basket.Product.Count = 0;
+                }
+                else
+                {
+                    basket.Product.Count -= basket.Count;
+
+                }
+
                 basket.isDeleted = true;
 
                 OrderItem orderItem = new OrderItem

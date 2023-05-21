@@ -1,142 +1,78 @@
-﻿@model List<Product>
+﻿@model List<IndexPost>
 @{
     ViewData["Title"] = "Index";
 }
+@foreach (IndexPost item in Model.Take(2))
+{
+    <div class="product-item">
+        <div class="gallery-item full-width" style="background-image: url('@Url.Content($"~/assets/photos/sliders/{item.Image}")');">
+            @if (item.ProductId != null && item.ProductId > 0)
+            {
+                <a asp-controller="store" asp-action="product" asp-route-id="@item.ProductId" class="gallery-item-learnmore"></a>
+            }
+            else
+            {
+                <a asp-action="shop" asp-controller="store" class="gallery-item-learnmore"></a>
 
-<div class="product-item">
-    <div class="gallery-item full-width" style="background-image: url('./assets/photos/products/razer-blade-16-homepage-desktop.jpg');">
-        <a href="" class="gallery-item-learnmore"></a>
-        <div class="gallery-item-content-holder">
-            <div class="info-content">
-                <h2 class="mainhead">New Razer Blade 16</h2>
-                <h3 class="subhead">Bigger. Better. Still the best. </h3>
-                <div class="info-content-links">
-                    <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                    <a href=""><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
+            }
+            <div class="gallery-item-content-holder">
+                <div class="info-content">
+                    <h2 class="mainhead">@item.MainHead</h2>
+                    <h3 class="subhead">@item.SubHead </h3>
+                    <div class="info-content-links">
+                        @if (item.ProductId != null && item.ProductId > 0)
+                        {
+                            <a asp-controller="store" asp-action="product" asp-route-id="@item.ProductId"><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
+                            <a asp-controller="store" asp-action="product" asp-route-id="@item.ProductId"><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
+                        }
+                        else
+                        {
+                            <a asp-action="shop" asp-controller="store"><span>Shop Now</span><i class="fa-solid fa-angle-right"></i></a>
+                            
+                        }
+                        </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="product-item">
-    <div class="gallery-item full-width" style="background-image: url('./assets/photos/products/stream-controller-x-homepage-desktop.jpg');">
-        <a href="" class="gallery-item-learnmore"></a>
-        <div class="gallery-item-content-holder">
-            <div class="info-content">
-                <h2 class="mainhead">Razer Stream Controller X</h2>
-                <h3 class="subhead">Instant Control. Infinite Creativity</h3>
-                <div class="info-content-links">
-                    <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                    <a href=""><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="product-item">
-    <div class="gallery-item full-width" style="background-image: url('./assets/photos/products/razer-blade-18-homepage-desktop.jpg');">
-        <a href="" class="gallery-item-learnmore"></a>
-        <div class="gallery-item-content-holder">
-            <div class="info-content">
-                <h2 class="mainhead">New Razer Blade 18</h2>
-                <h3 class="subhead">The Ultimate Desktop Replacement</h3>
-                <div class="info-content-links">
-                    <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                    <a href=""><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+}
 <div class="highlights">
-    <div class="product-item">
-        <div class="gallery-item half-width" style="background-image: url('./assets/photos/products/new-age-technology-campaign-b-950x580-desktop.jpg');">
-            <a href="" class="gallery-item-learnmore"></a>
-            <div class="gallery-item-content-holder">
-                <div class="info-content">
-                    <h2 class="mainhead">UNLEASH A NEW AGE OF TECHNOLOGY</h2>
-                    <h3 class="subhead">EXPERIENCE THE REVOLUTION</h3>
-                    <div class="info-content-links">
-                        <a href=""><span>Shop Now</span><i class="fa-solid fa-angle-right"></i></a>
+    @foreach (IndexPost item in Model.Skip(2).Take(4))
+    {
+        <div class="product-item">
+            <div class="gallery-item half-width" style="background-image: url('@Url.Content($"~/assets/photos/sliders/{item.Image}")');">
+                
+                @if (item.ProductId != null && item.ProductId > 0)
+                {
+                    <a asp-controller="store" asp-action="product" asp-route-id="@item.ProductId" class="gallery-item-learnmore"></a>
+                }
+                else
+                {
+                    <a asp-action="shop" asp-controller="store" class="gallery-item-learnmore"></a>
+
+                }
+                <div class="gallery-item-content-holder">
+                    <div class="info-content">
+                        <h2 class="mainhead">@item.MainHead</h2>
+                        <h3 class="subhead">@item.SubHead</h3>
+                        <div class="info-content-links">
+                            @if (item.ProductId != null && item.ProductId > 0)
+                            {
+                                <a asp-controller="store" asp-action="product" asp-route-id="@item.ProductId"><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
+                                <a asp-controller="store" asp-action="product" asp-route-id="@item.ProductId"><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
+                            }
+                            else
+                            {
+                                <a asp-action="shop" asp-controller="store"><span>Shop Now</span><i class="fa-solid fa-angle-right"></i></a>
+
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="product-item">
-        <div class="gallery-item half-width" style="background-image: url('./assets/photos/products/enkipro-lamborghini-b-950x580-desktop.jpg');">
-            <a href="" class="gallery-item-learnmore"></a>
-            <div class="gallery-item-content-holder">
-                <div class="info-content">
-                    <h2 class="mainhead">RAZER ENKI PRO</h2>
-                    <h3 class="subhead">AUTOMOBILI LAMBORGHINI EDITION</h3>
-                    <div class="info-content-links">
-                        <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                        <a href=""><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="product-item">
-        <div class="gallery-item half-width" style="background-image: url('./assets/photos/products/razer-blade-15-2023-b-950x580-desktop.jpg');">
-            <a href="" class="gallery-item-learnmore"></a>
-            <div class="gallery-item-content-holder">
-                <div class="info-content">
-                    <h2 class="mainhead">NEW RAZER BLADE 15</h2>
-                    <h3 class="subhead">PORTABLE. POWERFUL. PERFECTION.</h3>
-                    <div class="info-content-links">
-                        <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                        <a href=""><span>Shop All Models</span><i class="fa-solid fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="product-item">
-        <div class="gallery-item half-width" style="background-image: url('./assets/photos/products/razer-basilisk-v3-x-hyperspeed-b-950x580-desktop.jpg');">
-            <a href="" class="gallery-item-learnmore"></a>
-            <div class="gallery-item-content-holder">
-                <div class="info-content">
-                    <h2 class="mainhead">RAZER BASILISK V3 X HYPERSPEED</h2>
-                    <h3 class="subhead">ADVANCED CUSTOMIZABILITY. UNLEASHED.</h3>
-                    <div class="info-content-links">
-                        <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                        <a href=""><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="product-item">
-        <div class="gallery-item half-width" style="background-image: url('./assets/photos/products/razer-edge-b-950x580-desktop.jpg');">
-            <a href="" class="gallery-item-learnmore"></a>
-            <div class="gallery-item-content-holder">
-                <div class="info-content">
-                    <h2 class="mainhead">RAZER EDGE</h2>
-                    <h3 class="subhead">THE ULTIMATE ANDROID GAMING HANDHELD</h3>
-                    <div class="info-content-links">
-                        <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                        <a href=""><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="product-item">
-        <div class="gallery-item half-width" style="background-image: url('./assets/photos/products/razer-meta-quest-2-vr-b-950x580-desktop.jpg');">
-            <a href="" class="gallery-item-learnmore"></a>
-            <div class="gallery-item-content-holder">
-                <div class="info-content">
-                    <h2 class="mainhead">RAZER VR ACCESSORIES</h2>
-                    <h3 class="subhead">AUTHORIZED FOR META QUEST 2</h3>
-                    <div class="info-content-links">
-                        <a href=""><span>Learn More</span><i class="fa-solid fa-angle-right"></i></a>
-                        <a href=""><span>Buy</span><i class="fa-solid fa-angle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    }
 </div>
 

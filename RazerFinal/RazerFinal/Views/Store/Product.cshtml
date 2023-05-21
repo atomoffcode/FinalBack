@@ -71,7 +71,18 @@
                     <h3>
                         @Model.Description
                     </h3>
-                    <span>US$@Model.DiscountedPrice</span>
+                    @if (Model.DiscountedPrice != Model.Price)
+                    {
+                        <span>US$@Model.DiscountedPrice</span>
+
+
+                        <span style="text-decoration:line-through;display:inline-block;margin-left:5px;opacity:0.5;">US$@Model.Price</span>
+                    }
+                    else
+                    {
+                        <span>US$@Model.Price</span>
+
+                    }
                 </div>
                 <div class="dd-spec">
                     <div class="sli-details">
@@ -84,9 +95,18 @@
                     </div>
                 </div>
                 <div class="dd-btn">
-                    <div class="add-to-cart-btn">
-                        Add to cart
-                    </div>
+                    @if (Model.Count > 0)
+                    {
+                        <a asp-controller="basket" asp-action="addbasket" asp-route-Id="@Model.Id" class="add-to-cart-btn">
+                            Add to cart
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="add-to-cart-btn">
+                            Out of Stock
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -104,31 +124,13 @@
                                         @ps.CategorySpec.Name
                                     </th>
                                     <td>
-                                        @ps.Specification.Description
+                                        @(string.IsNullOrWhiteSpace(ps.Specification.Description) ? ps.Specification.Name : ps.Specification.Description)
                                     </td>
                                 </tr>
 
                                 }
                             
-                            <tr>
-                                <th>
-                                    form factor
-                                </th>
-                                <td>
-                                    Right-handed
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    connectivity
-                                </th>
-                                <td>
-                                    <ul>
-                                        <li>Razer™ HyperSpeed Wireless</li>
-                                        <li>Bluetooth</li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            
 
                         </tbody>
                     </table>

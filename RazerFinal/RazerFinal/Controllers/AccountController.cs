@@ -603,7 +603,6 @@ namespace RazerFinal.Controllers
 
             appUser.Addresses.Add(address);
             await _context.SaveChangesAsync();
-            string username;
             return RedirectToAction(nameof(Addresses));
         }
         [HttpGet]

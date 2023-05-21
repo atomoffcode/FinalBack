@@ -10,6 +10,7 @@ using System.Data;
 namespace RazerFinal.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "SuperAdmin")]
     public class SettingController : Controller
     {
         private readonly AppDbContext _context;
@@ -85,9 +86,9 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (setting.File != null)
             {
-                if (setting.File.CheckFileContentType("image/jpeg"))
+                if (setting.File.CheckFileContentType("image/jpeg") && setting.File.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG format");
+                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG/PNG format");
                     return View();
                 }
                 if (setting.File.CheckFileLenght(3000))

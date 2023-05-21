@@ -8,7 +8,7 @@ namespace RazerFinal.Models
         public int Id { get; set; }
         [StringLength(255)]
         public string? Key { get; set; }
-        [StringLength(1000)]
+        [StringLength(10000)]
         public string? Value { get; set; }
         [StringLength(255)]
         public string? Image { get; set; }

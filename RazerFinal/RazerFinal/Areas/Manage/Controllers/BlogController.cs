@@ -10,7 +10,7 @@ using System.Data;
 namespace RazerFinal.Areas.Manage.Controllers
 {
     [Area("Manage")]
-
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class BlogController : Controller
     {
         private readonly AppDbContext _context;
@@ -49,7 +49,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest();
@@ -76,7 +76,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return BadRequest();
@@ -91,7 +91,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id, Blog blog)
         {
 
@@ -115,27 +115,27 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.Blogs.AnyAsync(c => c.isDeleted == false && c.Title.ToLower() == blog.Title.Trim().ToLower() && c.Id != id))
             {
-                ModelState.AddModelError("Title", $"{blog.Title} Adda Title Artiq movcuddur!");
+                ModelState.AddModelError("Title", $"{blog.Title} named title already exist!");
                 return View(blog);
             }
 
             if (blog.MainDescription.Length < 5)
             {
-                ModelState.AddModelError("MainDescription", "Main Descriptionda en azi 50 simvoldan ibaret cumleler omalidir");
+                ModelState.AddModelError("MainDescription", "In Main Description must be at least 50 chars!");
                 return View();
             }
 
 
             if (blog.File != null && blog.File.Length > 0)
             {
-                if (blog.File?.ContentType != "image/jpeg")
+                if (blog.File?.ContentType != "image/jpeg" && blog.File?.ContentType != "image/png")
                 {
-                    ModelState.AddModelError("File", "Uygun Type Deyil, Yalniz JPEG/JPG type ola biler!");
+                    ModelState.AddModelError("File", "File type must be JPEG/JPG/PNG!");
                     return View();
                 }
                 if ((blog.File?.Length / 1024) > 10000)
                 {
-                    ModelState.AddModelError("File", "File-in olcusu 10Mb-i kece bilmez");
+                    ModelState.AddModelError("File", "File size must be max 10Mb");
                 }
 
                 FileHelper.DeleteFile(dbblog.Image, _env, "assets", "photos", "blogs");
@@ -161,7 +161,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -173,7 +173,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperAdmin,Admin")]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(Blog blog)
         {
 
@@ -185,32 +185,32 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.Blogs.AnyAsync(c => c.isDeleted == false && c.Title.ToLower() == blog.Title.Trim().ToLower()))
             {
-                ModelState.AddModelError("Title", $"{blog.Title} Adda Title Artiq movcuddur!");
+                ModelState.AddModelError("Title", $"{blog.Title} named title already exist!");
                 return View(blog);
             }
 
             if (blog.MainDescription.Length < 5)
             {
-                ModelState.AddModelError("MainDescription", "Main Descriptionda en azi 50 simvoldan ibaret cumleler omalidir");
+                ModelState.AddModelError("MainDescription", "In Main Description must be at least 50 chars!");
                 return View();
             }
 
 
             if (blog.File == null || blog.File.Length <= 0)
             {
-                ModelState.AddModelError("File", "Shekil mutleq olmalidir!");
+                ModelState.AddModelError("File", "Image is necessary!");
                 return View();
             }
 
 
-            if (blog.File?.ContentType != "image/jpeg")
+            if (blog.File?.ContentType != "image/jpeg" && blog.File?.ContentType != "image/png")
             {
-                ModelState.AddModelError("File", "Uygun Type Deyil, Yalniz JPEG/JPG type ola biler!");
+                ModelState.AddModelError("File", "File type must be JPEG/JPG?PNG");
                 return View();
             }
             if ((blog.File?.Length / 1024) > 10000)
             {
-                ModelState.AddModelError("File", "File-in olcusu 10Mb-i kece bilmez");
+                ModelState.AddModelError("File", "File size must be max 10Mb");
             }
 
 

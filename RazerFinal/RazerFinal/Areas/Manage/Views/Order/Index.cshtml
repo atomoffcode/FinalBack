@@ -37,7 +37,11 @@
                             <td>@order.Status.ToString()</td>
                             <td>
                                 <a asp-area="manage" asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id" class="btn btn-primary">Detail</a>
-                                <a asp-area="manage" asp-controller="Order" asp-action="ChangeStatus" asp-route-id="@order.Id" class="btn btn-warning">Change Status</a>
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                                {
+                                    <a asp-area="manage" asp-controller="Order" asp-action="ChangeStatus" asp-route-id="@order.Id" class="btn btn-warning">Change Status</a>
+                                }
+                                
                             </td>
                         </tr>
                     }

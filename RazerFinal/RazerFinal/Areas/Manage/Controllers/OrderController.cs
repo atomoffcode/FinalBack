@@ -41,6 +41,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> ChangeStatus(int? id)
         {
             if (id == null) return BadRequest();
@@ -59,6 +60,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(order);
 
         }
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangeStatus(int? id, Order order)

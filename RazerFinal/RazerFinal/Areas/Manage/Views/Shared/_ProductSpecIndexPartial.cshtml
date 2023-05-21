@@ -28,8 +28,12 @@
                 <td>@productSpec.CreatedAt.ToString("dd-MMM-yyyy").ToUpper()</td>
                 <td>@productSpec.CreatedBy</td>
                 <td>
-                    <a asp-area="manage" asp-controller="productspec" asp-action="update" asp-route-id="@productSpec.Id" class="btn btn-warning">Update</a>
-                    <a asp-area="manage" asp-controller="productspec" asp-action="delete" asp-route-id="@productSpec.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-area="manage" asp-controller="productspec" asp-action="update" asp-route-id="@productSpec.Id" class="btn btn-warning">Update</a>
+                        <a asp-area="manage" asp-controller="productspec" asp-action="delete" asp-route-id="@productSpec.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    }
+                    
                 </td>
             </tr>
         }

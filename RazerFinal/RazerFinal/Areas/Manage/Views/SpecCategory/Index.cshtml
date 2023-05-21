@@ -10,7 +10,11 @@
                 <h1 class="h3 mb-4 text-gray-800">Specifications Category Page</h1>
             </div>
             <div class="col-lg-2">
-                <a asp-area="manage" asp-controller="speccategory" asp-action="create" class="btn btn-primary">Create</a>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                {
+                    <a asp-area="manage" asp-controller="speccategory" asp-action="create" class="btn btn-primary">Create</a>
+                }
+                
             </div>
         </div>
     </div>

@@ -220,7 +220,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.AppUser", b =>
@@ -365,7 +365,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Basket", (string)null);
+                    b.ToTable("Basket");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Blog", b =>
@@ -419,7 +419,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blogs", (string)null);
+                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Category", b =>
@@ -465,7 +465,7 @@ namespace RazerFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.CategorySpec", b =>
@@ -515,7 +515,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategorySpecs", (string)null);
+                    b.ToTable("CategorySpecs");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Comment", b =>
@@ -574,7 +574,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Compare", b =>
@@ -633,7 +633,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Compares", (string)null);
+                    b.ToTable("Compares");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.IndexPost", b =>
@@ -667,7 +667,7 @@ namespace RazerFinal.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<string>("SubHead")
@@ -689,7 +689,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("IndexPosts", (string)null);
+                    b.ToTable("IndexPosts");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Order", b =>
@@ -784,7 +784,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.OrderItem", b =>
@@ -837,7 +837,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Product", b =>
@@ -914,7 +914,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.ProductImage", b =>
@@ -960,7 +960,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.ProductSpec", b =>
@@ -1012,7 +1012,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("SpecificationId");
 
-                    b.ToTable("ProductSpecs", (string)null);
+                    b.ToTable("ProductSpecs");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Setting", b =>
@@ -1032,12 +1032,12 @@ namespace RazerFinal.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Value")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(10000)
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings", (string)null);
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Slider", b =>
@@ -1088,7 +1088,7 @@ namespace RazerFinal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sliders", (string)null);
+                    b.ToTable("Sliders");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.Specification", b =>
@@ -1139,7 +1139,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("CategorySpecId");
 
-                    b.ToTable("Specifications", (string)null);
+                    b.ToTable("Specifications");
                 });
 
             modelBuilder.Entity("RazerFinal.Models.UserToken", b =>
@@ -1184,7 +1184,7 @@ namespace RazerFinal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserTokens", (string)null);
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1312,9 +1312,7 @@ namespace RazerFinal.Migrations
                 {
                     b.HasOne("RazerFinal.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });

@@ -46,6 +46,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(specification);
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
         {
 
@@ -55,6 +56,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(Specification specification)
         {
             ViewBag.CatSpecs = await _context.CategorySpecs.Where(c => c.isDeleted == false).ToListAsync();
@@ -66,19 +68,19 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.Specifications.AnyAsync(c => c.isDeleted == false && c.Name.ToLower() == specification.Name.Trim().ToLower()))
             {
-                ModelState.AddModelError("Name", $"{specification.Name} add specification artiq movcuddur!");
+                ModelState.AddModelError("Name", $"{specification.Name} named specification already exist!");
                 return View(specification);
             }
 
 
             if (specification.CategorySpecId == null)
             {
-                ModelState.AddModelError("CategorySpecId", "CategorySpecId mutleq secilmelidir!");
+                ModelState.AddModelError("CategorySpecId", "CategorySpecId is necessary!");
                 return View(specification);
             }
             if (!await _context.CategorySpecs.AnyAsync(c => c.isDeleted == false && c.Id == specification.CategorySpecId))
             {
-                ModelState.AddModelError("CategorySpecId", "CategorySpecId duzgun secilmelidir!");
+                ModelState.AddModelError("CategorySpecId", "CategorySpecId must be right!");
                 return View(specification);
             }
 
@@ -101,7 +103,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> Update(int? id)
         {
@@ -116,7 +118,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return View(specification);
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Specification specification)
@@ -137,7 +139,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.Specifications.AnyAsync(c => c.isDeleted == false && c.Name.ToLower() == specification.Name.Trim().ToLower() && c.Id != specification.Id))
             {
-                ModelState.AddModelError("Name", $"{specification.Name} add Specification artiq movcuddur!");
+                ModelState.AddModelError("Name", $"{specification.Name} named specification already exist!");
                 return View(specification);
             }
 
@@ -148,18 +150,18 @@ namespace RazerFinal.Areas.Manage.Controllers
             {
                 if (specification.CategorySpecId == null)
                 {
-                    ModelState.AddModelError("CategorySpecId", "CategorySpecId mutleq secilmelidir!");
+                    ModelState.AddModelError("CategorySpecId", "CategorySpecId is necessary!");
                     return View(specification);
                 }
                 if (!await _context.CategorySpecs.AnyAsync(c => c.isDeleted == false && c.Id == specification.CategorySpecId))
                 {
-                    ModelState.AddModelError("CategorySpecId", "CategorySpecId duzgun secilmelidir!");
+                    ModelState.AddModelError("CategorySpecId", "CategorySpecId must be right!");
                     return View(specification);
                 }
 
-                dbSpec.CategorySpec = specification.CategorySpec;
+                dbSpec.CategorySpecId = specification.CategorySpecId;
             }
-            if (string.IsNullOrWhiteSpace(specification.Description))
+            if (!string.IsNullOrWhiteSpace(specification.Description))
             {
                 dbSpec.Description = specification.Description;
             }
@@ -175,6 +177,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
 

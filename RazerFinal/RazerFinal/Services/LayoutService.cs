@@ -86,6 +86,16 @@ namespace RazerFinal.Services
             return new List<BasketVM>();
         }
 
+        public async Task<IDictionary<string, string>> GetSettings()
+        {
+            
+            
+                IDictionary<string, string> settings = await _context.Settings.ToDictionaryAsync(s => s.Key, s => s.Value);
+
+                return settings;
+            
+        }
+
         public async Task<AppUser> GetUser()
         {
             AppUser user = null;

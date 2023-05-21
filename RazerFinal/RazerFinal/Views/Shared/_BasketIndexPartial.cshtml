@@ -22,7 +22,7 @@
                         </div>
                         <div class="ced-title">
                             <span>@basketVM.Title</span>
-                            <a asp-controller="product" asp-action="detail" asp-route-Id="@basketVM.Id">Go to details ></a>
+                            <a asp-controller="store" asp-action="product" asp-route-id="@basketVM.Id">Go to details ></a>
                         </div>
                     </div>
                     <div class="cart-element-count">
@@ -68,6 +68,6 @@ else
 {
     <div class="cart-empty pt-100px pb-100px">
         <h1 class="padding-70px text-center" style="color:#44d62c; font-weight: 700;">Your cart is empty</h1>
-        <a class="text-center padding-70px" href="#">Do you want to fill it?</a>
+        <a asp-controller="store" asp-action="shop" class="text-center padding-70px">Do you want to fill it?</a>
     </div>
 }

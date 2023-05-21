@@ -29,8 +29,12 @@
                 <td>@categorySpec.Specifications?.Count()</td>
                 <td>
                     <a asp-area="manage" asp-controller="speccategory" asp-action="detail" asp-route-id="@categorySpec.Id" class="btn btn-primary">Detail</a>
-                    <a asp-area="manage" asp-controller="speccategory" asp-action="update" asp-route-id="@categorySpec.Id" class="btn btn-warning">Update</a>
-                    <a asp-area="manage" asp-controller="speccategory" asp-action="delete" asp-route-id="@categorySpec.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-area="manage" asp-controller="speccategory" asp-action="update" asp-route-id="@categorySpec.Id" class="btn btn-warning">Update</a>
+                        <a asp-area="manage" asp-controller="speccategory" asp-action="delete" asp-route-id="@categorySpec.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    }
+                    
                 </td>
             </tr>
         }

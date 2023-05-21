@@ -58,6 +58,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(detailVM);
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Cats = await _context.Categories.Where(c => c.isDeleted == false).ToListAsync();
@@ -66,6 +67,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(Product product)
         {
             ViewBag.Cats = await _context.Categories.Where(c => c.isDeleted == false).ToListAsync();
@@ -134,7 +136,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (product.MainFile != null)
             {
-                if (product.MainFile.CheckFileContentType("image/jpeg"))
+                if (product.MainFile.CheckFileContentType("image/jpeg") && product.MainFile.CheckFileContentType("image/png"))
                 {
                     ModelState.AddModelError("MainFile", $"{product.MainFile.FileName} named file format is not right!");
                     return View(product);
@@ -168,7 +170,7 @@ namespace RazerFinal.Areas.Manage.Controllers
                 List<ProductImage> productImages = new List<ProductImage>();
                 foreach (IFormFile file in product.Files)
                 {
-                    if (file.CheckFileContentType("image/jpeg"))
+                    if (file.CheckFileContentType("image/jpeg") && file.CheckFileContentType("image/png"))
                     {
                         ModelState.AddModelError("Files", $"{file.FileName} named file format is not right!");
                         return View(product);
@@ -220,6 +222,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> Update(int? id)
         {
@@ -231,7 +234,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return View(product);
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Product product)
@@ -313,7 +316,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             }
             if (product.MainFile != null)
             {
-                if (product.MainFile.CheckFileContentType("image/jpeg"))
+                if (product.MainFile.CheckFileContentType("image/jpeg") && product.MainFile.CheckFileContentType("image/png"))
                 {
                     ModelState.AddModelError("MainFile", $"{product.MainFile.FileName} named file is not right");
                     return View(product);
@@ -324,7 +327,10 @@ namespace RazerFinal.Areas.Manage.Controllers
                     return View(product);
                 }
 
-                FileHelper.DeleteFile(dbproduct.MainImage, _env, "assets", "photos", "products");
+                if (!string.IsNullOrWhiteSpace(dbproduct.MainImage))
+                {
+                    FileHelper.DeleteFile(dbproduct.MainImage, _env, "assets", "photos", "products");
+                }
 
 
                 dbproduct.MainImage = await product.MainFile.CreateFileAsync(_env, "assets", "photos", "products");
@@ -342,7 +348,7 @@ namespace RazerFinal.Areas.Manage.Controllers
                 List<ProductImage> productImages = new List<ProductImage>();
                 foreach (IFormFile file in product.Files)
                 {
-                    if (file.CheckFileContentType("image/jpeg"))
+                    if (file.CheckFileContentType("image/jpeg") && file.CheckFileContentType("image/png"))
                     {
                         ModelState.AddModelError("Files", $"{file.FileName} named file is not right");
                         return View(product);
@@ -393,7 +399,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> DeleteImage(int? id, int? imageId)
         {
@@ -429,6 +435,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return PartialView("_ProductImagePartial", product.ProductImages.Where(pi => pi.isDeleted == false).ToList());
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest();
@@ -463,7 +470,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
 
 
-            return View(PageNatedList<Product>.Create(query, pageIndex=1, 3, 8));
+            return PartialView("_ProductIndexPartial",PageNatedList<Product>.Create(query, pageIndex=1, 3, 8));
         }
 
     }

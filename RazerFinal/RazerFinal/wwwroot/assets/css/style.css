@@ -1372,7 +1372,7 @@ a {
 }
 
 .shop-main-filter-close-btn {
-  display: none;
+  display: none !important;
 }
 
 .shop-main-filter-open-btn {
@@ -2661,6 +2661,11 @@ a {
             cursor: default;
             opacity: 0.5;
         }
+
+    .pgic-link:hover{
+        color:#44d62c;
+        text-decoration:underline;
+    }
 @media (max-width: 991px) {
   .address-list {
     grid-template-columns: 33% 33% 33%;
@@ -2670,9 +2675,12 @@ a {
   }
 }
 @media (max-width: 767px) {
-  .orders-all {
-    padding: 48px 20px;
-  }
+    .shop-main-filter-close-btn {
+        display: inline-block !important;
+    }
+    .orders-all {
+        padding: 48px 20px;
+    }
   .account-profile-picture {
     width: 100px;
     height: 100px;

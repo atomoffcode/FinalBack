@@ -76,6 +76,9 @@ namespace RazerFinal.Controllers
 
             if (!await _context.Products.AnyAsync(p => p.isDeleted == false && p.Id == Id)) return NotFound();
 
+            Product product1 = await _context.Products.FirstOrDefaultAsync(p => p.Id == Id);
+            
+
             //Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == Id && p.isDeleted == false);
 
             //if (product == null) return NotFound();
@@ -99,7 +102,17 @@ namespace RazerFinal.Controllers
                 basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookie);
                 if (basketVMs.Exists(p => p.Id == Id))
                 {
+                    //if (basketVMs.Find(b => b.Id == Id).Count + 1 > product1.Count)
+                    //{
+                    //    basketVMs.Find(b => b.Id == Id).Count = product1.Count;
+                    //}
+                    //else
+                    //{
+                    //    basketVMs.Find(b => b.Id == Id).Count += 1;
+
+                    //}
                     basketVMs.Find(b => b.Id == Id).Count += 1;
+
                 }
                 else
                 {
@@ -208,7 +221,7 @@ namespace RazerFinal.Controllers
                 {
                     if (appUser.Baskets.Exists(b => b.ProductId == Id) && appUser.Baskets.Find(b=>b.ProductId == Id).Count > 1)
                     {
-                        appUser.Baskets.Find(b=>b.Id == Id).Count -= 1;
+                        appUser.Baskets.Find(b=>b.ProductId == Id).Count -= 1;
                     }
                     else if (appUser.Baskets.Exists(p => p.ProductId == Id))
                     {

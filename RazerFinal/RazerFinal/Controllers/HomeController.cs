@@ -15,8 +15,10 @@ namespace RazerFinal.Controllers
         }
         public async Task<IActionResult> Index()
         {
-               
-            return View();
+            List<IndexPost> posts = await _context.IndexPosts.Where(i=>!i.isDeleted).ToListAsync();
+            
+
+            return View(posts);
         }
     }
 }

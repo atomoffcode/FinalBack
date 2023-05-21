@@ -48,6 +48,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(indexPost);
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
         {
             ViewBag.Products = await _context.Products.Where(c => c.isDeleted == false).ToListAsync();
@@ -57,6 +58,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(IndexPost indexPost)
         {
             ViewBag.Products = await _context.Products.Where(c => c.isDeleted == false).ToListAsync();
@@ -75,16 +77,16 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (indexPost.File != null)
             {
-                if (indexPost.File?.ContentType != "image/jpeg")
+                if (indexPost.File?.ContentType != "image/jpeg" && indexPost.File?.ContentType != "image/png")
                 {
-                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG format!");
+                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG/PNG format!");
                     return View(indexPost);
                 }
                 if ((indexPost.File?.Length / 1024) > 300)
                 {
                     ModelState.AddModelError("File", "File size is to much, must be max 300Kb!");
                 }
-                indexPost.Image = await indexPost.File.CreateFileAsync(_env, "assets", "photos", "category");
+                indexPost.Image = await indexPost.File.CreateFileAsync(_env, "assets", "photos", "sliders");
             }
 
             if(!await _context.Products.AnyAsync(p=>p.isDeleted == false && p.Id == indexPost.ProductId))
@@ -110,6 +112,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return BadRequest();
@@ -126,6 +129,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id, IndexPost indexPost)
         {
             ViewBag.Products = await _context.Products.Where(c => c.isDeleted == false).ToListAsync();
@@ -153,9 +157,9 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (indexPost.File != null)
             {
-                if (indexPost.File.CheckFileContentType("image/jpeg"))
+                if (indexPost.File.CheckFileContentType("image/jpeg") && indexPost.File.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG format!");
+                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG/PNG format!");
                     return View();
                 }
                 if (indexPost.File.CheckFileLenght(300))
@@ -189,6 +193,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
 

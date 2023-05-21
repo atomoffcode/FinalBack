@@ -108,14 +108,19 @@
                         <span class="menu-title">Sliders</span>
                     </a>
                 </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" asp-area="manage" asp-controller="setting" asp-action="index">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-table-large"></i>
-                        </span>
-                        <span class="menu-title">Settings</span>
-                    </a>
-                </li>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                {
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" asp-area="manage" asp-controller="setting" asp-action="index">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-table-large"></i>
+                            </span>
+                            <span class="menu-title">Settings</span>
+                        </a>
+                    </li>
+
+                }
+                
                 <li class="nav-item menu-items">
                     <a class="nav-link" asp-area="manage" asp-controller="blog" asp-action="index">
                         <span class="menu-icon">
@@ -132,14 +137,19 @@
                         <span class="menu-title">Orders</span>
                     </a>
                 </li>
-                <li class="nav-item menu-items">
-                    <a class="nav-link" asp-area="manage" asp-controller="user" asp-action="index">
-                        <span class="menu-icon">
-                            <i class="mdi mdi-table-large"></i>
-                        </span>
-                        <span class="menu-title">Users</span>
-                    </a>
-                </li>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                {
+                    <li class="nav-item menu-items">
+                        <a class="nav-link" asp-area="manage" asp-controller="user" asp-action="index">
+                            <span class="menu-icon">
+                                <i class="mdi mdi-table-large"></i>
+                            </span>
+                            <span class="menu-title">Users</span>
+                        </a>
+                    </li>
+
+                }
+                
             </ul>
         </nav>
 

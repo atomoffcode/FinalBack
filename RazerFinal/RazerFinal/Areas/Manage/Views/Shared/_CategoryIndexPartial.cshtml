@@ -38,8 +38,12 @@
                 <td>@category.Products?.Count()</td>
                 <td>
                     <a asp-area="manage" asp-controller="category" asp-action="detail" asp-route-id="@category.Id" class="btn btn-primary">Detail</a>
-                    <a asp-area="manage" asp-controller="category" asp-action="update" asp-route-id="@category.Id" class="btn btn-warning">Update</a>
-                    <a asp-area="manage" asp-controller="category" asp-action="delete" asp-route-id="@category.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-area="manage" asp-controller="category" asp-action="update" asp-route-id="@category.Id" class="btn btn-warning">Update</a>
+                        <a asp-area="manage" asp-controller="category" asp-action="delete" asp-route-id="@category.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    }
+                   
                 </td>
             </tr>
         }

@@ -35,6 +35,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(PageNatedList<ProductSpec>.Create(query, pageIndex, 3, 8));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> GetCats(int productId)
         {
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
@@ -50,6 +51,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return Content(html);
         }
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> GetSpecs(int catspecId)
         {
             CategorySpec categorySpec = await _context.CategorySpecs.FirstOrDefaultAsync(p => p.Id == catspecId);
@@ -65,6 +67,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return Content(html);
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
         {
             ProductVM productVM = new ProductVM
@@ -82,6 +85,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(ProductVM productVM)
         {
             productVM.Products  = await _context.Products.Where(p => p.isDeleted == false).ToListAsync();
@@ -110,18 +114,18 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (product.CategoryId != categorySpec.CategoryId)
             {
-                ModelState.AddModelError("Spec.CategorySpecId", $"{categorySpec.Name} adli Spesifikasiya novu bu productda yoxdur");
+                ModelState.AddModelError("Spec.CategorySpecId", $"There is not any {categorySpec.Name} named Specification for this product!");
                 return View(productVM);
             }
             if (categorySpec.Id != specification.CategorySpecId)
             {
-                ModelState.AddModelError("Spec.SpecificationId", $"{categorySpec.Name} adli Spesifikasiya movcud deyil");
+                ModelState.AddModelError("Spec.SpecificationId", $"{categorySpec.Name} named Specification does not exist!");
                 return View(productVM);
             }
 
             if (await _context.ProductSpecs.AnyAsync(s => s.ProductId == productVM.Spec.ProductId && s.CategorySpecId == productVM.Spec.CategorySpecId && s.SpecificationId == productVM.Spec.SpecificationId && s.isDeleted == false))
             {
-                ModelState.AddModelError("Spec.ProductId", $"{product.Title} - {categorySpec.Name} - {specification.Name} artiq movcuddur");
+                ModelState.AddModelError("Spec.ProductId", $"{product.Title} - {categorySpec.Name} - {specification.Name} already exist!");
                 return View(productVM);
             }
 
@@ -141,6 +145,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return BadRequest();
@@ -169,6 +174,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id, ProductVM productVM)
         {
 
@@ -210,18 +216,18 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (product.CategoryId != categorySpec.CategoryId)
             {
-                ModelState.AddModelError("Spec.CategorySpecId", $"{categorySpec.Name} adli Spesifikasiya novu bu productda yoxdur");
+                ModelState.AddModelError("Spec.CategorySpecId", $"There is not any {categorySpec.Name} named Specification for this product!");
                 return View(productVM);
             }
             if (categorySpec.Id != specification.CategorySpecId)
             {
-                ModelState.AddModelError("Spec.SpecificationId", $"{categorySpec.Name} adli Spesifikasiya movcud deyil");
+                ModelState.AddModelError("Spec.SpecificationId", $"{categorySpec.Name} named Specification does not exist!");
                 return View(productVM);
             }
 
             if (await _context.ProductSpecs.AnyAsync(s => s.ProductId == productVM.Spec.ProductId && s.CategorySpecId == productVM.Spec.CategorySpecId && s.SpecificationId == productVM.Spec.SpecificationId && s.isDeleted == false))
             {
-                ModelState.AddModelError("Spec.ProductId", $"{product.Title} - {categorySpec.Name} - {specification.Name} artiq movcuddur");
+                ModelState.AddModelError("Spec.ProductId", $"{product.Title} - {categorySpec.Name} - {specification.Name} already exist!");
                 return View(productVM);
             }
 
@@ -240,6 +246,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return BadRequest();

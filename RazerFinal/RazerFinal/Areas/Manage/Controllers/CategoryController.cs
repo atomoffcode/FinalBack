@@ -47,6 +47,8 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return View(category);
         }
+        [Authorize(Roles = "SuperAdmin")]
+
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -57,6 +59,8 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
+
         public async Task<IActionResult> Create(Category category)
         {
             ViewBag.MainCategories = await _context.Categories.Where(c => c.isDeleted == false).ToListAsync();
@@ -68,21 +72,21 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.Categories.AnyAsync(c => c.isDeleted == false && c.Name.ToLower() == category.Name.Trim().ToLower()))
             {
-                ModelState.AddModelError("Name", $"{category.Name} add categoryartiq movcuddur!");
+                ModelState.AddModelError("Name", $"{category.Name} named title already exist! exist!");
                 return View(category);
             }
 
 
             if (category.File != null)
             {
-                if (category.File?.ContentType != "image/jpeg")
+                if (category.File?.ContentType != "image/jpeg" && category.File?.ContentType != "image/png")
                 {
-                    ModelState.AddModelError("File", "Uygun Type Deyil, Yalniz JPEG/JPG type ola biler!");
+                    ModelState.AddModelError("File", "File type must be JPEG/JPG/PNG!");
                     return View();
                 }
                 if ((category.File?.Length / 1024) > 300)
                 {
-                    ModelState.AddModelError("File", "File-in olcusu 300Kb-i kece bilmez");
+                    ModelState.AddModelError("File", "File size must be max 300Kb");
                 }
                 category.Image = await category.File.CreateFileAsync(_env, "assets", "photos", "category");
             }
@@ -103,7 +107,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> Update(int? id)
         {
@@ -118,7 +122,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return View(category);
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Category category)
@@ -138,7 +142,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (await _context.Categories.AnyAsync(c => c.isDeleted == false && c.Name.ToLower() == category.Name.Trim().ToLower() && c.Id != category.Id))
             {
-                ModelState.AddModelError("Name", $"{category.Name} add categoryartiq movcuddur!");
+                ModelState.AddModelError("Name", $"{category.Name} named title already exist exist!");
                 return View(category);
             }
 
@@ -147,14 +151,14 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (category.File != null)
             {
-                if (category.File.CheckFileContentType("image/jpeg"))
+                if (category.File.CheckFileContentType("image/jpeg") && category.File.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("File", "Uygun Type Deyil, Yalniz JPEG/JPG type ola biler!");
+                    ModelState.AddModelError("File", "File type must be JPEG/JPG/PNG!");
                     return View();
                 }
                 if (category.File.CheckFileLenght(300))
                 {
-                    ModelState.AddModelError("File", "File-in olcusu 300Kb-i kece bilmez");
+                    ModelState.AddModelError("File", "File size must be max 300Kb");
                     return View();
                 }
 
@@ -176,6 +180,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {

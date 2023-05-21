@@ -20,6 +20,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             _context = context;
             _env = env;
         }
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> Index(int pageIndex = 1)
         {
             IQueryable<Slider> query = _context.Sliders
@@ -33,6 +34,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(PageNatedList<Slider>.Create(query, pageIndex, 3, 8));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin,Admin")]
         public async Task<IActionResult> Detail(int? id)
         {
             if (id == null) return BadRequest();
@@ -45,6 +47,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return View(slider);
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
         {
             
@@ -54,6 +57,7 @@ namespace RazerFinal.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create(Slider slider)
         {
             
@@ -72,9 +76,9 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (slider.File != null)
             {
-                if (slider.File?.ContentType != "image/jpeg")
+                if (slider.File?.ContentType != "image/jpeg" && slider.File?.ContentType != "image/png")
                 {
-                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG format!");
+                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG/PNG format!");
                     return View(slider);
                 }
                 if ((slider.File?.Length / 1024) > 300)
@@ -102,6 +106,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return BadRequest();
@@ -113,7 +118,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             return View(slider);
         }
-
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int? id, Slider slider)
@@ -142,9 +147,9 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             if (slider.File != null)
             {
-                if (slider.File.CheckFileContentType("image/jpeg"))
+                if (slider.File.CheckFileContentType("image/jpeg") && slider.File.CheckFileContentType("image/png"))
                 {
-                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG format!");
+                    ModelState.AddModelError("File", "File format is not right, file must be JPEG/JPG/PNG format!");
                     return View();
                 }
                 if (slider.File.CheckFileLenght(300))
@@ -172,6 +177,7 @@ namespace RazerFinal.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
 

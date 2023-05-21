@@ -6,10 +6,10 @@
 {
     <div class="shop-list-item">
         <div class="sli-top">
-            <div class="sli-badge badge-orange">
+            <div class="sli-badge badge-orange d-none">
                 Gift with purchase
             </div>
-            <a href="">
+            <a asp-controller="store" asp-action="product" asp-route-id="@product.Id">
                 <img src="~/assets/photos/products/@product.MainImage" alt="">
 
             </a>
@@ -39,18 +39,18 @@
         </div>
         <div class="sli-bottom">
             <div class="sli-desc">
-                <a href="" class="sli-title">
+                <a asp-controller="store" asp-action="product" asp-route-id="@product.Id" class="sli-title">
                     @product.Title
                 </a>
                 <div class="sli-details">
                     <ul>
-                        @foreach (ProductSpec ps in product.Specifications)
+                        @foreach (ProductSpec ps in product.Specifications.Where(s=>s.CategorySpec.IsMain))
                         {
                             <li>@ps.Specification.Name</li>
                         }
                     </ul>
                 </div>
-                <a href="" class="sli-link">View details ></a>
+                <a asp-controller="store" asp-action="product" asp-route-id="@product.Id" class="sli-link">View details ></a>
             </div>
             <div class="sli-price-btn">
                 <div class="sli-price">

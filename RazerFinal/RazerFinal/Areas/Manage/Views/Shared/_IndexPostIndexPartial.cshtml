@@ -21,14 +21,18 @@
             count++;
             <tr>
                 <td>@count</td>
-                <td>@indexPost.Product.Title</td>
+                <td>@indexPost.Product?.Title</td>
                 <td>@indexPost.MainHead</td>
                 <td>@indexPost.CreatedAt.ToString("dd-MMM-yyyy").ToUpper()</td>
                 <td>@indexPost.CreatedBy</td>
                 <td>
                     <a asp-area="manage" asp-controller="indexpost" asp-action="detail" asp-route-id="@indexPost.Id" class="btn btn-primary">Detail</a>
-                    <a asp-area="manage" asp-controller="indexpost" asp-action="update" asp-route-id="@indexPost.Id" class="btn btn-warning">Update</a>
-                    <a asp-area="manage" asp-controller="indexpost" asp-action="delete" asp-route-id="@indexPost.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-area="manage" asp-controller="indexpost" asp-action="update" asp-route-id="@indexPost.Id" class="btn btn-warning">Update</a>
+                        <a asp-area="manage" asp-controller="indexpost" asp-action="delete" asp-route-id="@indexPost.Id" class="btn btn-danger deleteBtn">Delete</a>
+                    }
+                    
                 </td>
             </tr>
         }
