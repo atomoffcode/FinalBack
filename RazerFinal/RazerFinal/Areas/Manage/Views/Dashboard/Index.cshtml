@@ -1,4 +1,4 @@
-﻿
+﻿@model DashVM
 @{
     ViewData["Title"] = "Index";
 }
@@ -92,6 +92,12 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Transaction History</h4>
+                    <div class="d-none">
+                        @foreach (TrVM item in Model.Transactions)
+                        {
+                            <input class="tr_inputs" value="@item.TotalSale" data-category="@item.CategoryName" data-count="@item.OrderCount" hidden />
+                        }
+                    </div>
                     <canvas id="transaction-history" class="transaction-chart"></canvas>
                     <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
                         <div class="text-md-center text-xl-left">

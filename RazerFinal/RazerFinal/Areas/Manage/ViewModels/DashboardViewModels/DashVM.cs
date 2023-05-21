@@ -2,6 +2,8 @@
 {
     public class DashVM
     {
+        public List<TrVM> Transactions { get; set; }
 
+        
     }
 }

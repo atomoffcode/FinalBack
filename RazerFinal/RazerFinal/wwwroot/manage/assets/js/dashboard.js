@@ -61,13 +61,26 @@
         }
       });
     }
-    if ($("#transaction-history").length) {
+      if ($("#transaction-history").length) {
+          var trtotal = [];
+          var trcats = []
+          $('.tr_inputs').each(function () {
+              trtotal.push($(this).val());
+              trcats.push($(this).attr('data-category'));
+          });
+          var sum = 0;
+          $.each(trtotal, function (number) {
+              sum += parseInt(trtotal[number]);
+          });
+          console.log(sum);
       var areaData = {
-        labels: ["Paypal", "Stripe","Cash"],
+        //labels: ["Paypal", "Stripe","Cash"],
+          labels: trcats,
         datasets: [{
-            data: [55, 25, 20],
+            data: trtotal,
+            //data: [55, 25, 20],
             backgroundColor: [
-              "#111111","#00d25b","#ffab00"
+                "#111111", "#00d25b", "#ffab00", "#826C34", "#C2B078", "#256D7B","#9B111E"
             ]
           }
         ]
@@ -101,9 +114,9 @@
           ctx.textAlign = 'left';
           ctx.textBaseline = "middle";
           ctx.fillStyle = "#ffffff";
-      
-          var text = "$1200", 
-              textX = Math.round((width - ctx.measureText(text).width) / 2),
+
+              var text = `$${sum}`, 
+              textX = Math.round((width - ctx.measureText("$1200").width) / 2),
               textY = height / 2.4;
       
           ctx.fillText(text, textX, textY);
