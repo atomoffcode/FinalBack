@@ -22,6 +22,24 @@ namespace RazerFinal.Controllers
             _context = context;
             _userManager = userManager;
         }
+        public async Task<IActionResult> Search(string? name)
+        {
+            List<Product> products = null;
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                products = await _context.Products.Include(p=>p.Category).Where(p => p.isDeleted == false && (p.Title.ToLower().Contains(name.Trim().ToLower()) ||
+                p.Category.Name.ToLower().Contains(name.Trim().ToLower())))
+               .OrderByDescending(p => p.Id).ToListAsync();
+
+
+                return PartialView("_ProductSearchPartial", products);
+            }
+
+            return PartialView("_ProductSearchPartial", products);
+
+
+
+        }
         public async Task<IActionResult> Product(int? id)
         {
             if (id == null) return BadRequest();

@@ -53,7 +53,7 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <a asp-controller="Compare" asp-action="index">Compare</a>
                 <a asp-controller="blog" asp-action="index">Community</a>
                 <a asp-controller="account" asp-action="Profile">Profile</a>
-                @*<i class="fa-solid fa-magnifying-glass header-search-open-btn"></i>*@
+                <i class="fa-solid fa-magnifying-glass header-search-open-btn"></i>
 
                 <div class="header-cart">
                     <i class="fa-solid fa-cart-shopping header-cart-btn"></i>
@@ -105,10 +105,13 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                     </div>
                 </div>
             </div>
-            <div class="header-search d-none">
+            <div class="header-search d-none" style="position:relative;">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search razer.com">
+                <input type="text" id="prsearch" placeholder="Search razer.com">
                 <i class="fa-solid fa-xmark header-search-close-btn"></i>
+                <div class="prdsearch" style="width:100%;max-height:300px;background:#222222;position:absolute;top:100%;left:0;overflow-y:scroll;">
+                      
+                </div>
             </div>
             <!-- <div class="header-icons">
 
@@ -209,10 +212,12 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                 </div>
             </div>
             <div class="header-mobile-bottom">
-                <div class="header-mobile-search d-none">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="header-mobile-search" style="position:relative;">
+                    <i class="fa-solid fa-magnifying-glass" ></i>
 
-                    <input type="text" placeholder="Search razer.com">
+                    <input id="prsearch" class="innerprsearch" type="text" placeholder="Search razer.com">
+                    <div class="prdsearch" style="width:100%;max-height:300px;background:#222222;position:absolute;top:100%;left:0;overflow-y:scroll;">
+                    </div>
                 </div>
                 <div class="header-mobile-navs">
                     <a asp-controller="home" asp-action="index">Home</a>

@@ -33,7 +33,15 @@
       bar.text.style.fontSize = '1.5rem';
       bar.animate(0.4);  // Number from 0.0 to 1.0
     }
-    if($('#audience-map').length) {
+      if ($('#audience-map').length) {
+          var ord = [];
+          var ct = [];
+          $('.ordersinput').each(function () {
+              ord.push($(this).val())
+              ct.push($(this).attr('data-ct'))
+          })
+          console.log(ct);
+          console.log(ord)
       $('#audience-map').vectorMap({
         map: 'world_mill_en',
         backgroundColor: 'transparent',
@@ -50,7 +58,7 @@
             normalizeFunction: 'polynomial',
             values: {
 
-              "BZ": 75.00,
+              "AZ": 10.00,
               "US": 56.25,
               "AU": 15.45,
               "GB": 25.00,
