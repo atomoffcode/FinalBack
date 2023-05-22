@@ -53,6 +53,7 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <a asp-controller="Compare" asp-action="index">Compare</a>
                 <a asp-controller="blog" asp-action="index">Community</a>
                 <a asp-controller="account" asp-action="Profile">Profile</a>
+                <a asp-controller="contactus" asp-action="index">Contact</a>
                 <i class="fa-solid fa-magnifying-glass header-search-open-btn"></i>
 
                 <div class="header-cart">
@@ -225,6 +226,8 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                     <a asp-controller="store" asp-action="shop">Shop</a>
                     <a asp-controller="Compare" asp-action="index">Compare</a>
                     <a asp-controller="blog" asp-action="index">Community</a>
+                    <a asp-controller="contactus" asp-action="index">Contact</a>
+
                 </div>
             </div>
         </div>
@@ -279,7 +282,8 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                     <a href="">Careers</a>
                     <a href="">Press Room</a>
                     <a href="">zVentures</a>
-                    <a href="">Contact Us</a>
+                    <a asp-controller="contactus" asp-action="index">Contact Us</a>
+
                 </div>
                 <div class="footer-items-social-links">
                     <span>
@@ -360,7 +364,7 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                         <a href="">Careers</a>
                         <a href="">Press Room</a>
                         <a href="">zVentures</a>
-                        <a href="https://www.razer.com/contact-us">Contact Us</a>
+                        <a asp-controller="contactus" asp-action="index">Contact Us</a>
                     </div>
                 </div>
 

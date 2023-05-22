@@ -16,7 +16,7 @@ using System.Security.Policy;
 
 namespace RazerFinal.Controllers
 {
-    [Authorize(Roles = "Member")]
+    
     public class OrderController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -33,7 +33,7 @@ namespace RazerFinal.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            if(!User.Identity.IsAuthenticated && User.IsInRole("Member"))
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("Member"))
             {
                 return RedirectToAction("Login","Account");
             }
@@ -49,6 +49,7 @@ namespace RazerFinal.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Complete(int? id)
         {
             Order order = await _context.Orders
@@ -58,6 +59,7 @@ namespace RazerFinal.Controllers
             return View(order);
         }
         [HttpGet]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Checkout()
         {
             
@@ -139,6 +141,7 @@ namespace RazerFinal.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Checkout(Order order)
         {
             AppUser appUser = await _userManager.Users
