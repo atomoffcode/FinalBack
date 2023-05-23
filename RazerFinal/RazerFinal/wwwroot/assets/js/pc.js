@@ -155,6 +155,7 @@ $(document).ready(function () {
                             })
                             .then(data3 => {
                                 $('.header-cart-count').html(data3)
+                                $('.header-cart-count2').html(data3)
                             })
                     })
             })            

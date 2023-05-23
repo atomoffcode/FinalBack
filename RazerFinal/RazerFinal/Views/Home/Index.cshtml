@@ -2,6 +2,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    @@media (max-width: 767px) {
+  .gallery-item {
+    background-size: cover !important;
+  }
+</style>
 @foreach (IndexPost item in Model.Take(2))
 {
     <div class="product-item">

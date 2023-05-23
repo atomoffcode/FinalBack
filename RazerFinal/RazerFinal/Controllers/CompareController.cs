@@ -127,7 +127,7 @@ namespace RazerFinal.Controllers
             {
                 compares = new List<Compare>
                 {
-                    new Compare {Id = (int)id}
+                    new Compare {Id = (int)id,CategoryId = pr.CategoryId}
                 };
 
 

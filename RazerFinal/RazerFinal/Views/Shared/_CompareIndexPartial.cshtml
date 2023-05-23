@@ -91,3 +91,10 @@
         </div>
     </div>
 }
+@if (Model.Compares == null || Model.Compares.Count < 1)
+{
+            <div class="cart-empty  pt-100px pb-100px">
+                <h1 class="padding-70px text-center" style="color:#44d62c; font-weight: 700;">Get some items to compare</h1>
+                <a asp-controller="store" asp-action="shop" class="text-center padding-70px">Go Shop</a>
+            </div>
+}

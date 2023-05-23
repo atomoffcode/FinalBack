@@ -166,6 +166,9 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                 <div class="header-mobile-cart header-mobile-element">
                     <div class="header-cart">
                         <i class="fa-solid fa-cart-shopping header-cart-btn" style="color: #888888;"></i>
+                        <div class="header-cart-count header-cart-count2">
+                            @await Html.PartialAsync("_HeaderCartCountPartial",headerVM.BasketVMs.Count)
+                        </div>
                         <div class="header-cart-dropdown d-none">
                             <div class="header-cart-basket">
                                 @await Html.PartialAsync("_BasketCartPartial",headerVM.BasketVMs)
@@ -225,7 +228,7 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
                 </div>
                 <div class="header-mobile-navs">
                     <a asp-controller="home" asp-action="index">Home</a>
-                    <a asp-controller="store" asp-action="main">Store</a>
+                    <a asp-controller="store" asp-action="index">Store</a>
                     <a asp-controller="store" asp-action="shop">Shop</a>
                     <a asp-controller="Compare" asp-action="index">Compare</a>
                     <a asp-controller="blog" asp-action="index">Community</a>
