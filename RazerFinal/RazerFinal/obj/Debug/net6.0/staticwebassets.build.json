@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3jWHUO/iBAfw5WtcktZXQSF0OuS/684CXEfWFLsh5Ow=",
+  "Hash": "uZgnvVmDllU26gGxO1rWFi7NDhuuK+xHhTsGQhEYOuU=",
   "Source": "RazerFinal",
   "BasePath": "_content/RazerFinal",
   "Mode": "Default",
@@ -3383,23 +3383,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\photos\\profile\\377b21f7-9a56-4a94-af16-1a78106a20db_.png"
     },
     {
-      "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\profile\\a4a2a44a-b938-4d80-82a1-d8d580090161_.png",
-      "SourceId": "RazerFinal",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\",
-      "BasePath": "_content/RazerFinal",
-      "RelativePath": "assets/photos/profile/a4a2a44a-b938-4d80-82a1-d8d580090161_.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\photos\\profile\\a4a2a44a-b938-4d80-82a1-d8d580090161_.png"
-    },
-    {
       "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\profile\\atomoff_doomslayer_4k_hell_style_a84f7c58-4141-4f49-ac37-85c4c65cb3fb.png",
       "SourceId": "RazerFinal",
       "SourceType": "Discovered",
@@ -3449,6 +3432,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\photos\\profile\\c0c539da-7912-4d22-8a9a-95314dff15a3.png"
+    },
+    {
+      "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\profile\\d0e1c5f7-7aeb-44b6-b190-f39f9277fcc1_.jpg",
+      "SourceId": "RazerFinal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\",
+      "BasePath": "_content/RazerFinal",
+      "RelativePath": "assets/photos/profile/d0e1c5f7-7aeb-44b6-b190-f39f9277fcc1_.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\photos\\profile\\d0e1c5f7-7aeb-44b6-b190-f39f9277fcc1_.jpg"
     },
     {
       "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\profile\\header-cart-profile-picture.png",
