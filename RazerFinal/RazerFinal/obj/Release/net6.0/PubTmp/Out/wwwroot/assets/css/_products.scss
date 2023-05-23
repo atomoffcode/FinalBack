@@ -1,0 +1,121 @@
+.product-item{
+    background: $darkgrey;
+    padding: 0 0 10px 0;
+}
+.full-width{
+    width: 100%;
+}
+
+.gallery-item{
+    position: relative;
+    min-height: 700px;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 75vh;
+}
+.gallery-item-learnmore{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    text-decoration: none !important;
+}
+.gallery-item-content-holder{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.info-content{
+    padding: 0 30px;
+    text-align: center;
+    color: white;
+    a{
+        color: #fff;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+.mainhead{
+    text-transform: uppercase;
+    font-size: 56px;
+    font-weight: 600;
+}
+.subhead{
+    text-transform: uppercase;
+    font-size: 28px;
+    font-weight: 300;
+}
+.info-content-links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+    span{
+        font-size: 21px;
+        font-weight: 300;
+        line-height: normal;
+    }
+    a{
+        padding: 0 16px;
+    }
+    i{
+        padding: 5px;
+        color: $maingreen;
+    }
+}
+.half-width{
+    .mainhead{
+        font-size: 40px;
+    }
+    .subhead{
+        font-size: 21px;
+    }
+    .info-content-links{
+        a{
+            font-size: 17px;
+        }
+    }
+}
+.highlights{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    .product-item{
+        padding: 0 5px 10px;
+    }
+    .gallery-item{
+        min-height: 580px;
+        height: 580px;
+    }
+}
+@media (min-width:768px) {
+    .mainhead{
+        padding-top: 3.75rem;
+        
+    }
+    .subhead{
+        padding-top: 10px;
+    }
+}
+@media (max-width:767px) {
+    .gallery-item{
+        min-height: 75vh;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-size: 300vw;
+    }
+    .mainhead{
+        padding-top: 3.75rem;
+        
+    }
+    .subhead{
+        padding-top: 10px;
+    }
+    .highlights{
+        grid-template-columns: 100%;
+        .gallery-item{
+            background-size: 150vw;
+        }
+    }
+}

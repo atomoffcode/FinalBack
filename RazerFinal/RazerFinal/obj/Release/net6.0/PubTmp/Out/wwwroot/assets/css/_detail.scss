@@ -1,0 +1,160 @@
+.detail{
+    background: #000;
+
+}
+.detail-top{
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.detail-img{
+    position: relative;
+}
+
+.detail-pic{
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+.detail-pic img {
+    width: 80px;
+    height: 80px;
+  }
+
+  
+  
+  
+  .detail-pic.is-active {
+    border: 2px solid $maingreen !important;
+  }
+
+#thumbnail-carousel{
+    position: absolute;
+    top: 10%;
+    left: 3%;
+    .splide__list{
+        display: flex;
+        flex-direction: column;
+    }
+}
+#main-carousel{
+    .splide__slide{
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.detail-desc{
+    padding: 40px 30px;
+
+}
+.dd-desc{
+    h2{
+        font-size: 1.3125rem;
+        color: $maingreen;
+    }
+    h3{
+        margin: 8px 0;
+        font-size: 14px;
+        color: #fff;
+    }
+    span{
+        font-size: 21px;
+        text-transform: uppercase;
+        color: #fff;
+
+    }
+}
+.dd-spec{
+    padding: 20px 0;
+}
+.detail-img-mobile{
+    display: none;
+    width: 100%;
+    .splide__track{
+        img{
+            width: 100%;
+        }
+    }
+    &:hover{
+        .splide__arrow{
+            display: inline-block;
+        }
+    }
+}
+.glide-product-detail{
+    
+    .splide__pagination{
+        display: none;
+    }
+    .splide__slide{
+        img{
+            width: 100%;
+        }
+    }
+}
+.detail-bottom{
+    background: #252525;
+    padding: 50px;
+
+}
+.detail-specs{
+    padding: 0 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.detail-specs-header{
+    text-transform: uppercase;
+    font-size: 21px;
+    color: #fff;
+    margin: 0 0 24px;
+
+}
+.detail-specs-content{
+    table{
+        width: 100%;
+    }
+    tr{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 25% 75%;
+        border-bottom: 1px solid #6c757d;
+    }
+    th{
+        display: inline-block;
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 20px 25px 20px 0;
+    }
+    td{
+        display: inline-block;
+        color: $lightergrey;
+        font-size: 14px;
+        padding: 20px 25px 20px 0;
+
+        ul{
+            padding-left: 20px;
+        }
+
+    }
+}
+
+@media (max-width:1199px) {
+    .detail-img{
+        display: none;
+    }
+    .detail-img-mobile{
+        display: block;
+    }
+    .detail-top{
+        grid-template-columns: 100%;
+    }
+    .detail-specs-content{
+        tr{
+            grid-template-columns: 100%;
+        }
+    }
+}

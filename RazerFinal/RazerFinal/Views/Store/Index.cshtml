@@ -76,7 +76,7 @@
 
                             <li class="splide__slide">
                                 <div class="product-slider-item">
-                                    <a class="product-slider-item-img" href="" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
+                                    <a class="product-slider-item-img" asp-controller="store" asp-action="product" asp-route-id="@item.Id" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
                                     <div class="product-slider-item-info">
                                         <div class="psii-text">
                                             <h3 class="psii-title">@item.Title</h3>
@@ -196,7 +196,7 @@
 
                             <li class="splide__slide">
                                 <div class="product-slider-item">
-                                    <a class="product-slider-item-img" href="" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
+                                    <a class="product-slider-item-img" asp-controller="store" asp-action="product" asp-route-id="@item.Id" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
                                     <div class="product-slider-item-info">
                                         <div class="psii-text">
                                             <h3 class="psii-title">@item.Title</h3>
@@ -317,7 +317,7 @@
                            
                             <li class="splide__slide">
                                 <div class="product-slider-item">
-                                    <a class="product-slider-item-img" href="" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
+                                    <a class="product-slider-item-img" asp-controller="store" asp-action="product" asp-route-id="@item.Id" style="background-image: url('@Url.Content($"~/assets/photos/products/{item.MainImage}")');"></a>
                                     <div class="product-slider-item-info">
                                         <div class="psii-text">
                                             <h3 class="psii-title">@item.Title</h3>

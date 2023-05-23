@@ -70,6 +70,20 @@ namespace RazerFinal.Controllers
 
             return PartialView("_BasketIndexPartial", basketVMs);
         }
+        public async Task<IActionResult> MainBasket2()
+        {
+            string cookie = HttpContext.Request.Cookies["basket"];
+            List<BasketVM> basketVMs = null;
+
+            if (!string.IsNullOrEmpty(cookie))
+            {
+                basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookie);
+
+                
+            }
+
+            return PartialView("_HeaderCartCountPartial", basketVMs.Count);
+        }
         public async Task<IActionResult> AddBasket(int? Id)
         {
             if (Id == null) return BadRequest();

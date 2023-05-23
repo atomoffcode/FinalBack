@@ -58,6 +58,9 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
 
                 <div class="header-cart">
                     <i class="fa-solid fa-cart-shopping header-cart-btn"></i>
+                    <div class="header-cart-count">
+                        @await Html.PartialAsync("_HeaderCartCountPartial",headerVM.BasketVMs.Count)
+                    </div>
                     <div class="header-cart-dropdown d-none">
                         <div class="headercart">
                             @await Html.PartialAsync("_BasketCartPartial",headerVM.BasketVMs)

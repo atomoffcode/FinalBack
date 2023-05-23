@@ -1,0 +1,42 @@
+$font : 'Titillium Web', sans-serif;
+$lightgrey: #888888;
+$lightergrey: #999999;
+$darkgrey: #222;
+$grey : #555;
+$maingreen: #44D62C;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $font;
+}
+a{
+    text-decoration: none;
+    color: $lightgrey;
+    display: inline-block;
+}
+.site-body{
+    background: #000000;
+    padding: 61px 0 0;
+}
+@media (max-width:767px) {
+    .site-body{
+        padding: 48px 0 0;
+    }
+}
+
+@import "header";
+@import "footer";
+@import "products";
+@import "store";
+@import "product-slider";
+@import "product-glider";
+@import "multipanels";
+@import "pc-index";
+@import "pc-shop";
+@import "detail";
+@import "cart";
+@import "compare";
+@import "login";
+@import "blog";
+@import "account";
