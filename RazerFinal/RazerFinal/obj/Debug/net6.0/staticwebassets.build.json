@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uZgnvVmDllU26gGxO1rWFi7NDhuuK+xHhTsGQhEYOuU=",
+  "Hash": "TWxoOzR8m6RbwdRXxmgmgc2ibOjSQNk9ExmIcIRlKEg=",
   "Source": "RazerFinal",
   "BasePath": "_content/RazerFinal",
   "Mode": "Default",
@@ -3364,6 +3364,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\photos\\products\\stream-controller-x-homepage-desktop.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\profile\\12158507-73cb-47d9-b815-47e10c702be8_.jpg",
+      "SourceId": "RazerFinal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\",
+      "BasePath": "_content/RazerFinal",
+      "RelativePath": "assets/photos/profile/12158507-73cb-47d9-b815-47e10c702be8_.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\photos\\profile\\12158507-73cb-47d9-b815-47e10c702be8_.jpg"
     },
     {
       "Identity": "C:\\Users\\kml\\OneDrive\\Desktop\\FinalBack\\RazerFinal\\RazerFinal\\wwwroot\\assets\\photos\\profile\\377b21f7-9a56-4a94-af16-1a78106a20db_.png",

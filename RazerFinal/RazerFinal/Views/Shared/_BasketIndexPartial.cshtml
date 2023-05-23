@@ -1,7 +1,7 @@
 ﻿@model List<BasketVM>
 <div class="cart-total-haeder">
     <div class="cart-total-header-all">
-        <h1 class="cart-total">Your cart total is US$@(Model != null && Model.Count > 0 ? Model.Sum(m => m.Price + m.ExTax) : "0") </h1>
+        <h1 class="cart-total">Your cart total is US$@(Model != null && Model.Count > 0 ? (double)Math.Floor((decimal)Model.Sum(m => (m.Price + m.ExTax) * m.Count)*100)/100 : "0") </h1>
         @if (Model != null && Model.Count > 0)
         {
             <a asp-controller="order" asp-action="checkout" class="add-to-cart-btn">Checkout</a>
@@ -40,7 +40,7 @@
                         <a asp-controller="basket" asp-action="addbasket" asp-route-Id="@basketVM.Id" class="addbasket"><i class="fa-solid fa-plus"></i></a>
                     </div>
                     <div class="cart-element-price">
-                        US$@basketVM.Price
+                        US$@((double)Math.Floor(((decimal)(basketVM.Price * basketVM.Count))*100)/100)
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
                 <div class="cart-total-index-all">
                     <div class="subtotal">
                         <h5>Subtotal</h5>
-                        <span>US$@(Model.Sum(m => m.Price))</span>
+                        <span>US$@((double)Math.Floor((decimal)Model.Sum(m => m.Price*m.Count)*100)/100)</span>
                     </div>
                     <div class="tax-fee">
                         <h5>Tax-Fee</h5>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="total-all">
                         <h5>Your Total</h5>
-                        <span>US$@(Model.Sum(m => m.Price + m.ExTax))</span>
+                        <span>US$@((double)Math.Floor((decimal)Model.Sum(m => (m.Price + m.ExTax)*m.Count)*100)/100)</span>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@
                                 <td class="order-name">@order.Name @order.SurName</td>
                                 <td class="order-address">@order.Country , @order.City , @order.DirectAddress , @order.PostalCode</td>
                                 <td class="order-items"><a href="#" class="order-items-btn">@order.OrderItems.Count</a></td>
-                                <td class="order-price">@order.OrderItems.Sum(o=>o.Price)</td>
+                                <td class="order-price">@((double)Math.Floor((decimal)order.OrderItems.Sum(o => o.Price * o.Count)*100)/100)</td>
                                 <td class="order-status">@order.Status.ToString()</td>
                                 </tbody>
                             </table>

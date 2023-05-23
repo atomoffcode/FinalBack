@@ -12,7 +12,7 @@
                     <div class="cart-total-index-all">
                         <div class="subtotal">
                             <h5>Subtotal</h5>
-                            <span>US$@(Model.Baskets.Sum(m => m.Price))</span>
+                            <span>US$@((double)Math.Floor((decimal)Model.Baskets.Sum(m => m.Price) * 100) / 100)</span>
                         </div>
                         <div class="tax-fee">
                             <h5>Tax-Fee</h5>
@@ -20,7 +20,7 @@
                         </div>
                         <div class="total-all">
                             <h5>Your Total</h5>
-                            <span>US$@(Model.Baskets.Sum(m => m.Price + m.ExTax))</span>
+                            <span>US$@((double)Math.Floor((decimal)Model.Baskets.Sum(m => m.Price + m.ExTax) * 100) / 100)</span>
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ using RazerFinal.Models;
 using RazerFinal.ViewModels;
 using RazerFinal.ViewModels.OrderViewModels;
 using System.Data;
+using System.Net;
 using System.Security.Policy;
 
 namespace RazerFinal.Controllers
@@ -38,14 +39,17 @@ namespace RazerFinal.Controllers
                 return RedirectToAction("Login","Account");
             }
 
-            AppUser appUser = await _userManager.Users.Include(u=>u.Orders.Where(o=>!o.isDeleted)).ThenInclude(o=>o.OrderItems.Where(o=>!o.isDeleted)).ThenInclude(o=>o.Product).FirstOrDefaultAsync(u=>u.NormalizedUserName == User.Identity.Name.ToUpperInvariant());
+            AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(u=>u.NormalizedUserName == User.Identity.Name.ToUpperInvariant());
 
             if (appUser == null) return NotFound();
 
-           
+            List<Order>? orders1 = await _context.Orders.Where(o=>!o.isDeleted && o.UserId == appUser.Id)
+                .Include(o=>o.SingleAddress)
+                .ThenInclude(s=>s.User)
+                .Include(o => o.OrderItems.Where(o => !o.isDeleted))
+                .ThenInclude(o=>o.Product).ToListAsync();
 
-            List<Order> orders = appUser.Orders;
-            return View(orders);
+            return View(orders1);
         }
 
         [HttpGet]
@@ -230,7 +234,7 @@ namespace RazerFinal.Controllers
             mimeMessage.Subject = "Purschase receipt";
             mimeMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = $"<ul >\r\n                                Your Receipt\r\n                                <li >No: {order.No}</li>\r\n                                <li >Date: {order.CreatedAt.ToString("dd/mm/yyyy")}</li>\r\n                                <li >Address: {order.Country} , {order.City}, {order.DirectAddress}, {order.PostalCode}</li>\r\n                                <li >Quantity{order.OrderItems.Count}</li>\r\n                                <li >Total Price:US${order.OrderItems.Sum(o => o.Price)}</li>\r\n                                <li >{order.Status.ToString()}</li>\r\n                                \r\n                            </ul>"
+                Text = $"<ul >\r\n                                Your Receipt\r\n                                <li >No: {order.No}</li>\r\n                                <li >Date: {order.CreatedAt.ToString("dd/mm/yyyy")}</li>\r\n                                <li >Address: {order.Country} , {order.City}, {order.DirectAddress}, {order.PostalCode}</li>\r\n                                <li >Quantity: {order.OrderItems.Count}</li>\r\n                                <li >Total Price:US${(double)Math.Floor((decimal)order.OrderItems.Sum(o => o.Price*o.Count)*100)/100}</li>\r\n                                <li >{order.Status.ToString()}</li>\r\n                                \r\n                            </ul>"
 
             };
 

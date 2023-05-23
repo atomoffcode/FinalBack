@@ -298,7 +298,7 @@ https://cdn.jsdelivr.net/npm/@@splidejs/splide@4.1.4/dist/css/splide.min.css
             </div>
             <div class="footer-bottom">
                 <div class="footer-bottom-left">
-                    <div class="copyright"><span>Copyright © 2023 Razer Inc. All rights reserved.</span></div>
+                    <div class="copyright"><span>@Html.Raw(settings.FirstOrDefault(s=>s.Key == "copyright").Value)</span></div>
                     <div class="copyright-links">
                         <a href="">Site Map</a>
                         <span>l</span>

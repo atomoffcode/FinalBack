@@ -123,7 +123,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (Order item in Model.Orders.Take(5))
+                                @foreach (Order item in Model.Orders.OrderByDescending(o=>o.CreatedAt).Take(5))
                                     {
                                         <tr>
                                             <td>

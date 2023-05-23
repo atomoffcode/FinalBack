@@ -42,7 +42,7 @@ namespace RazerFinal.Areas.Manage.Controllers
 
             double? income = (double)Math.Floor((decimal)orderItems.Where(o => o.CreatedAt > oneDayBefore).Sum(o => o.Price * o.Count));
             double? yesincome = (double)Math.Floor((decimal)orderItems.Where(o => o.CreatedAt <= oneDayBefore && o.CreatedAt>twoDayBefore).Sum(o => o.Price * o.Count));
-            float? incPerc = (float)Math.Floor((decimal)(income > yesincome ? (income/yesincome*100)-100: income / yesincome * 100));
+            float? incPerc = (yesincome > 0 ? (float)Math.Floor((decimal)(income > yesincome ? (income / yesincome * 100) - 100 : income / yesincome * 100)) : 100);
 
 
 
