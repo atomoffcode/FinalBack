@@ -174,7 +174,18 @@ namespace RazerFinal.Controllers
             }
             if (!order.CustomAddress)
             {
+                if (order.SingleAddressId == null || !appUser.Addresses.Any(a=>a.Id == order.SingleAddressId))
+                {
+                    ModelState.AddModelError("CustomAddress", "You dont have any default addresses!");
+                    OrderVM ov = new OrderVM
+                    {
+                        Order = order,
+                        Baskets = baskets,
+                    };
+                    return View(ov);
+                }
                 Address address = appUser.Addresses.FirstOrDefault(a=>a.Id == order.SingleAddressId);
+
                 order.Name = address.User.Name;
                 order.SurName = address.User.SurName;
                 order.Email = address.User.Email;
